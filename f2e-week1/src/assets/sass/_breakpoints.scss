@@ -1,10 +1,29 @@
 // breakpoints
-$phone-size: 375px;
-$pad-size: 768px;
-$pc-size: 1440px;
+$media-mobile: 576px;
+$media-tablet: 768px;
+$media-desktop: 1024px;
+$media-bgScreen: 1440px;
 
-@mixin breakpoints($size) {
-  @media (min-width: $size) {
+@mixin mobile {
+  @media (min-width: $media-mobile) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: $media-tablet) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: $media-desktop) {
+    @content;
+  }
+}
+
+@mixin bgScreen {
+  @media (min-width: $media-bgScreen) {
     @content;
   }
 }
