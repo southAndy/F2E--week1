@@ -69,6 +69,7 @@ $media-bgScreen: 1440px;
 header {
   display: flex;
   justify-content: center;
+  align-items: center;
 
   position: relative;
   .logo_container {

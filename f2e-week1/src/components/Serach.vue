@@ -36,7 +36,7 @@ $primary-color: #7f977b;
 }
 .serach {
   width: 345px;
-  margin: 0px;
+  margin: 0px auto;
   .select {
     @extend %serach_input;
     padding: 15px 11px;
