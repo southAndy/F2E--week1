@@ -15,9 +15,9 @@
     <!-- 每次只想顯示四筆 -->
     <div class="container">
       <Card
-        v-for="(data, index) in filterActitivties"
+        v-for="(activitiesData, index) in apiData"
         :key="index"
-        :apiData="apiData"
+        :activitiesData="activitiesData"
       />
     </div>
     <footer>
@@ -65,7 +65,7 @@ export default {
   created() {
     //取得特定API資料
     API.getActivitiesAPI().then((response) => {
-      console.log(67, response.data);
+      console.log("web creating", response);
       return (this.apiData = response.data);
     });
   },
@@ -117,7 +117,7 @@ a {
   }
   .container {
     width: 100%;
-    height: 600px;
+    height: 312px;
 
     overflow: hidden;
   }
