@@ -10,9 +10,15 @@
       <img src="@/assets/image/menu.svg" alt="toggle button" />
     </div>
     <nav :class="['navigation', { drop: isDropNavbar }]">
-      <router-link :to="{ name: 'Activities' }">探索景點</router-link>
-      <router-link :to="{ name: 'Festival' }">節慶活動</router-link>
-      <router-link :to="{ name: 'Restaurant' }">品嚐美食</router-link>
+      <router-link :to="{ name: 'Activities' }" @click="dropMenu"
+        >探索景點</router-link
+      >
+      <router-link :to="{ name: 'Festival' }" @click="dropMenu"
+        >節慶活動</router-link
+      >
+      <router-link :to="{ name: 'Restaurant' }" @click="dropMenu"
+        >品嚐美食</router-link
+      >
     </nav>
   </header>
 </template>
@@ -70,6 +76,8 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
+
+  border-bottom: 1px solid #e5e5e5;
 
   position: relative;
   .logo_container {
