@@ -2,19 +2,20 @@
   <a href="##" class="card">
     <div class="card_image">
       <img
-        v-if="parentData.Picture.PictureUrl1 != true"
+        v-if="parentData.Picture.PictureUrl1"
         :src="parentData.Picture.PictureUrl1"
         alt="活動照片"
       />
       <img v-else src="@/assets/image/search.svg" alt="該資料沒有圖片顯示" />
     </div>
-    <div class="crad-body">
+    <div class="card_body">
       <div class="time">{{ parentData.StartTime }}</div>
       <p class="title">{{ parentData.ActivityName }}</p>
       <a href="##" class="location">{{ parentData.city }}</a>
     </div>
   </a>
 </template>
+
 <script>
 export default {
   name: "Card",
@@ -38,20 +39,37 @@ export default {
   width: 345px;
   height: 62px;
 
+  text-decoration: none;
   //card's distance
   margin-bottom: 16px;
 
   &_image {
-    width: 90px;
+    width: 100px;
     height: 100%;
+
+    img {
+      width: 100%;
+      object-fit: contain;
+
+      border-radius: 10px;
+      border: 1px solid;
+    }
   }
   &_body {
     width: 354px- 90px;
     height: 100%;
-  }
 
-  .time {
-    background-color: chocolate;
+    overflow: hidden;
+    margin-left: 20px;
+
+    .title {
+      font-weight: 700;
+      font-size: 20px;
+      color: black;
+    }
+    .time {
+      font-size: 12px;
+    }
   }
 }
 </style>
