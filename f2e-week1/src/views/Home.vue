@@ -1,6 +1,5 @@
 <template>
   <div class="home">
-    <Navbar />
     <p class="home_title">探索台灣之美 <br />讓我們更親近這片土地</p>
     <Serach />
     <div class="swiper">swiper</div>
@@ -15,12 +14,13 @@
     <!-- 每次只想顯示四筆 -->
     <div class="container">
       <Card
-        v-for="(activitiesData, index) in apiData"
+        v-for="(activitiesData, index) in filterActitivties"
         :key="index"
         :activitiesData="activitiesData"
       />
     </div>
-    <footer>
+    <router-link to="/Home/Festival">Festival</router-link>
+    <footer @click="filterActitivtiess">
       <p>#The F2E 3rd Week01 #Breakfast</p>
     </footer>
   </div>
@@ -28,7 +28,6 @@
 
 <script>
 // @ is an alias to /src
-import Navbar from "@/components/Navbar.vue";
 import Serach from "@/components/Serach.vue";
 import Card from "@/components/Card.vue";
 
@@ -38,7 +37,6 @@ import API from "@/service/getAPI";
 export default {
   name: "Home",
   components: {
-    Navbar,
     Serach,
     Card,
     // Swiper,
@@ -48,15 +46,26 @@ export default {
       apiData: null,
     };
   },
-  methods: {},
+  methods: {
+    filterActitivtiess() {
+      const x = Array.from(this.apiData);
+      console.log("57", this.apiData);
+      console.log(
+        58,
+        x.filter((data) => data.Picture.PictureUrl1 != undefined)
+      );
+      return x.filter((data) => data.Picture.PictureUrl1 != undefined);
+    },
+  },
   computed: {
     //!篩選有相片的活動
     //為何不能
     filterActitivties() {
       const x = Array.from(this.apiData);
+      console.log("57", this.apiData);
       console.log(
         58,
-        x.filter((data) => data.Picture.PictureUrl1 != undefined)
+        x.filter((data) => data.Picture != {})
       );
       return x.filter((data) => data.Picture.PictureUrl1 != undefined);
     },

@@ -1,18 +1,18 @@
 <template>
   <header>
     <h1 class="logo_container">
-      <a href="##">
+      <router-link :to="{ name: 'Home' }">
         <img src="@/assets/image/icon.svg" alt="網站logo" class="logo" />
-      </a>
+      </router-link>
       台灣走走
     </h1>
     <div class="toggle" @click="dropMenu()">
       <img src="@/assets/image/menu.svg" alt="toggle button" />
     </div>
     <nav :class="['navigation', { drop: isDropNavbar }]">
-      <a href="##" class="navigation_link">探索景點</a>
-      <a href="##" class="navigation_link">節慶活動</a>
-      <a href="##" class="navigation_link">品嚐美食</a>
+      <router-link :to="{ name: 'Activities' }">探索景點</router-link>
+      <router-link :to="{ name: 'Festival' }">節慶活動</router-link>
+      <router-link :to="{ name: 'Restaurant' }">品嚐美食</router-link>
     </nav>
   </header>
 </template>
