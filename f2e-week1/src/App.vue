@@ -1,6 +1,9 @@
 <template>
   <Navbar />
   <router-view />
+  <footer @click="filterActitivtiess">
+    <p>台灣走走 Code:南國安迪同學 /Desgin: Breakfast</p>
+  </footer>
 </template>
 <script>
 import Navbar from "@/components/Navbar.vue";
