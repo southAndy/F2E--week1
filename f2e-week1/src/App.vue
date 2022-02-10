@@ -15,6 +15,7 @@ export default {
 };
 </script>
 <style lang="scss">
+$primary-color: #7f977b;
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -33,6 +34,18 @@ export default {
     &.router-link-exact-active {
       color: #42b983;
     }
+  }
+}
+footer {
+  background-color: $primary-color;
+  color: white;
+
+  padding: 15px;
+
+  p {
+    margin: 0px;
+    font-size: 14 px;
+    font-weight: 600;
   }
 }
 </style>

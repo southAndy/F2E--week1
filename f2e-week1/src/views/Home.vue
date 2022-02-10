@@ -4,25 +4,47 @@
     <Serach />
     <div class="swiper">swiper</div>
     <!-- <Swiper /> -->
+    <div class="recent_container">
+      <div class="recent">
+        <h2 class="recent_title">近期活動</h2>
+        <router-link
+          :to="{ name: 'Festival' }"
+          class="recent_link"
+          @click="dropMenu"
+          >查看更多活動
+          <img src="@/assets/image/Vector.svg" alt="方向鍵>" />
+        </router-link>
+      </div>
+      <!-- 每次只想顯示四筆 -->
+      <div class="container">
+        <Card
+          v-for="(activitiesData, index) in filterActitivties"
+          :key="index"
+          :activitiesData="activitiesData"
+        />
+      </div>
+    </div>
+    <!-- !改寫複用性高的css -->
     <div class="recent">
-      <h2 class="recent_title">近期活動</h2>
-      <a class="recent_link" href="##">
-        查看更多活動
+      <h2 class="recent_title">熱門打卡景點</h2>
+      <router-link
+        :to="{ name: 'Activities' }"
+        class="recent_link"
+        @click="dropMenu"
+        >查看更多景點
         <img src="@/assets/image/Vector.svg" alt="方向鍵>" />
-      </a>
+      </router-link>
     </div>
-    <!-- 每次只想顯示四筆 -->
-    <div class="container">
-      <Card
-        v-for="(activitiesData, index) in filterActitivties"
-        :key="index"
-        :activitiesData="activitiesData"
-      />
+    <div class="recent">
+      <h2 class="recent_title">一再回訪的美食</h2>
+      <router-link
+        :to="{ name: 'Restaurant' }"
+        class="recent_link"
+        @click="dropMenu"
+        >查看更多美食
+        <img src="@/assets/image/Vector.svg" alt="方向鍵>" />
+      </router-link>
     </div>
-    <router-link to="/Home/Festival">Festival</router-link>
-    <footer @click="filterActitivtiess">
-      <p>#The F2E 3rd Week01 #Breakfast</p>
-    </footer>
   </div>
 </template>
 

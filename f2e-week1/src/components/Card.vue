@@ -1,5 +1,5 @@
 <template>
-  <a href="##" class="card">
+  <router-link :to="{ name: 'Content' }" class="card">
     <div class="card_image">
       <img
         v-if="parentData.Picture.PictureUrl1"
@@ -13,7 +13,7 @@
       <p class="title">{{ parentData.ActivityName }}</p>
       <a href="##" class="location">{{ parentData.city }}</a>
     </div>
-  </a>
+  </router-link>
 </template>
 
 <script>
