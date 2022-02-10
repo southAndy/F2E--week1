@@ -4,7 +4,12 @@
   <div class="serach">
     <div class="topic_container">
       <h3 class="serach_theme">熱門主題</h3>
-      <Topic v-for="topic in 6" :key="topic" class="topic" />
+      <Topic
+        v-for="topic in festivalList"
+        :key="topic"
+        :name="topic"
+        class="topic"
+      />
     </div>
   </div>
 </template>
@@ -18,6 +23,18 @@ export default {
     Topic,
     Button,
     Breadcrumb,
+  },
+  data() {
+    return {
+      festivalList: [
+        "節慶活動",
+        "自行車活動",
+        "遊憩活動",
+        "產業文化活動",
+        "年度活動",
+        "四季活動",
+      ],
+    };
   },
 };
 </script>
