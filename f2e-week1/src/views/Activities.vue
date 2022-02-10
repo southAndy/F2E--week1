@@ -5,9 +5,9 @@
     <div class="topic_container">
       <h3 class="serach_theme">熱門主題</h3>
       <Topic
-        v-for="topic in festivalList"
+        v-for="topic in festivalData"
         :key="topic"
-        :name="topic"
+        :festivalList="topic"
         class="topic"
       />
     </div>
@@ -26,13 +26,35 @@ export default {
   },
   data() {
     return {
-      festivalList: [
-        "節慶活動",
-        "自行車活動",
-        "遊憩活動",
-        "產業文化活動",
-        "年度活動",
-        "四季活動",
+      festivalData: [
+        {
+          name: "自然風景類",
+          image: require("../assets/image/activities/unsplash_pn5c-CLWGzY.png"),
+        },
+        {
+          name: "觀光工廠類",
+          image: require("../assets/image/Rectangle 93.svg"),
+        },
+        {
+          name: "遊憩活動類",
+          image: require("../assets/image/activities/Rectangle 94.png"),
+        },
+        {
+          name: "休閒農業類",
+          image: require("../assets/image/activities/Rectangle 95.svg"),
+        },
+        {
+          name: "生態類",
+          image: require("../assets/image/activities/unsplash_7tvbRQ5AKs4.png"),
+        },
+        {
+          name: "溫泉類",
+          image: require("../assets/image/activities/unsplash_I8K-lIkvqYI.png"),
+        },
+        {
+          name: "古蹟類",
+          image: require("../assets/image/activities/Rectangle 98.svg"),
+        },
       ],
     };
   },
