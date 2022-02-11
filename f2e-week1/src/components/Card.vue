@@ -9,9 +9,12 @@
       <img v-else src="@/assets/image/search.svg" alt="該資料沒有圖片顯示" />
     </div>
     <div class="card_body">
-      <div class="time">{{ parentData.StartTime }}</div>
+      <div class="time">
+        {{ convertStartTime }} -
+        {{ convertEndTime }}
+      </div>
       <p class="title">{{ parentData.ActivityName }}</p>
-      <a href="##" class="location">{{ parentData.city }}</a>
+      <a href="##" class="location">{{ parentData.City }}</a>
     </div>
   </router-link>
 </template>
@@ -30,9 +33,29 @@ export default {
   methods: {
     getRandom() {},
   },
+  computed: {
+    convertStartTime() {
+      let activitiesTime = new Date(this.parentData.StartTime);
+      let activityYear = activitiesTime.getFullYear();
+      let activityMonth = activitiesTime.getMonth();
+      let activityDate = activitiesTime.getDate();
+      console.log(activityYear, activityMonth, activityDate);
+      return `${activityYear}/${activityMonth}/${activityDate}`;
+    },
+    convertEndTime() {
+      let activitiesTime = new Date(this.parentData.EndTime);
+      let activityYear = activitiesTime.getFullYear();
+      let activityMonth = activitiesTime.getMonth();
+      let activityDate = activitiesTime.getDate();
+      console.log(activityYear, activityMonth, activityDate);
+      return `${activityYear}/${activityMonth}/${activityDate}`;
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>
+@use "../assets/sass/breakpoints.scss";
+
 .card {
   display: flex;
 
@@ -59,16 +82,31 @@ export default {
     width: 354px- 90px;
     height: 100%;
 
+    text-align: start;
+
     overflow: hidden;
     margin-left: 20px;
 
     .title {
       font-weight: 700;
-      font-size: 20px;
+      font-size: 18px;
       color: black;
+
+      margin: 0;
+      @include breakpoints.tablet {
+        font-size: 20px;
+      }
     }
     .time {
-      font-size: 12px;
+      font-size: 14px;
+      text-decoration: none;
+      color: #646464;
+    }
+    .location {
+      font-size: 14px;
+      font-weight: 400;
+      text-decoration: none;
+      color: #646464;
     }
   }
 }
