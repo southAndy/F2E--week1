@@ -5,9 +5,9 @@
     <div class="topic_container">
       <h3 class="serach_theme">熱門主題</h3>
       <Topic
-        v-for="topic in festivalList"
+        v-for="topic in festivalData"
         :key="topic"
-        :name="topic"
+        :festivalList="topic"
         class="topic"
       />
     </div>
@@ -25,6 +25,62 @@ export default {
     Button,
     Breadcrumb,
   },
+  data() {
+    return {
+      festivalData: [
+        {
+          name: "節慶活動",
+          image: require("../assets/image/unsplash_qDZ-Xd8dX6w.svg"),
+        },
+        {
+          name: "自行車活動",
+          image: require("../assets/image/unsplash_I8K-lIkvqYI.svg"),
+        },
+        //~ ok
+        {
+          name: "遊憩活動",
+          image: require("../assets/image/Rectangle 94.svg"),
+        },
+        {
+          name: "產業文化活動",
+          image: require("../assets/image/unsplash_qDBbM9Erwo4.svg"),
+        },
+        {
+          name: "年度活動",
+          image: require("../assets/image/unsplash_qDZ-Xd8dX6w.png"),
+        },
+        {
+          name: "四季活動",
+          image: require("../assets/image/unsplash_qDZ-Xd8dX6w.svg"),
+        },
+      ],
+      festivalList: [
+        "節慶活動",
+        "自行車活動",
+        "遊憩活動",
+        "產業文化活動",
+        "年度活動",
+        "四季活動",
+      ],
+    };
+  },
 };
 </script>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.serach {
+  margin: 50px 0;
+
+  &_theme {
+    font-size: 25px;
+    font-weight: 400;
+    text-align: start;
+    flex: 85%;
+    margin-left: 25px;
+  }
+}
+.topic_container {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+</style>

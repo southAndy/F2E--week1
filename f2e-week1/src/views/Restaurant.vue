@@ -5,9 +5,9 @@
     <div class="topic_container">
       <h3 class="serach_theme">熱門主題</h3>
       <Topic
-        v-for="topic in festivalList"
+        v-for="topic in festivalData"
         :key="topic"
-        :name="topic"
+        :festivalList="topic"
         class="topic"
       />
     </div>
@@ -25,6 +25,54 @@ export default {
     Button,
     Breadcrumb,
   },
+  data() {
+    return {
+      festivalData: [
+        // ~ok
+        {
+          name: "地方特產",
+          image: require("../assets/image/Rectangle 93.svg"),
+        },
+        {
+          name: "中式美食",
+          image: require("../assets/image/unsplash_qDZ-Xd8dX6w.png"),
+        },
+        {
+          name: "甜點冰品",
+          image: require("../assets/image/unsplash_pn5c-CLWGzY.svg"),
+        },
+        {
+          name: "異國料理",
+          image: require("../assets/image/unsplash_qDBbM9Erwo4.svg"),
+        },
+        {
+          name: "伴手禮",
+          image: require("../assets/image/unsplash_qDZ-Xd8dX6w.png"),
+        },
+        {
+          name: "素食",
+          image: require("../assets/image/unsplash_qDZ-Xd8dX6w.svg"),
+        },
+      ],
+    };
+  },
 };
 </script>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.serach {
+  margin: 50px 0;
+
+  &_theme {
+    font-size: 25px;
+    font-weight: 400;
+    text-align: start;
+    flex: 85%;
+    margin-left: 25px;
+  }
+}
+.topic_container {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+</style>
