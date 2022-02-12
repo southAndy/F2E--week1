@@ -1,5 +1,9 @@
 <template>
-  <router-link :to="{ name: 'Content' }" class="card">
+  <router-link
+    :to="{ name: 'Content', params: { id: changeDataType } }"
+    :test1="activityData"
+    class="card"
+  >
     <div class="card_image">
       <img
         v-if="parentData.Picture.PictureUrl1"
@@ -26,6 +30,12 @@ export default {
   data() {
     return {
       parentData: this.activitiesData,
+      test: [1, 2, 3],
+      test1: {
+        name: "andy",
+        place: "dad",
+        url: "##/local",
+      },
       //todo 亂數取得
       // randomNumber: Number(),
     };
@@ -49,6 +59,9 @@ export default {
       let activityDate = activitiesTime.getDate();
       console.log(activityYear, activityMonth, activityDate);
       return `${activityYear}/${activityMonth}/${activityDate}`;
+    },
+    changeDataType() {
+      return JSON.stringify(this.parentData);
     },
   },
 };
