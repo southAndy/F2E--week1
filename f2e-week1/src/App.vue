@@ -16,6 +16,10 @@ export default {
 </script>
 <style lang="scss">
 $primary-color: #7f977b;
+body {
+  margin: 0;
+  padding: 15px;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

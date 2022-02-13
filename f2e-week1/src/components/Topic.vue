@@ -1,18 +1,22 @@
 <template>
-  <div>
-    <p class="topic_name">自然風景類</p>
+  <router-link to="/result">
     <div>
-      <img
-        class="topic_image"
-        src="../assets/image/ScenicSpotPicture.png"
-        alt="cool"
-      />
+      <p class="topic_name">{{ festivalList.name }}</p>
+      <div>
+        <img class="topic_image" :src="festivalList.image" alt="cool" />
+      </div>
     </div>
-  </div>
+  </router-link>
 </template>
 <script>
 export default {
   name: "Topic",
+  props: ["festivalList"],
+  data() {
+    return {
+      festivalName: this.festivalList,
+    };
+  },
 };
 </script>
 <style lang="scss" scoped>
@@ -47,6 +51,8 @@ export default {
     left: 0;
     margin: 0 auto;
 
+    z-index: 2;
+
     @include breakpoints.desktop {
       font-size: 25px;
     }
@@ -56,8 +62,7 @@ export default {
     height: 100%;
 
     border-radius: 24px;
-
-    opacity: 0.5;
+    // opacity: 0.5;
   }
 }
 </style>

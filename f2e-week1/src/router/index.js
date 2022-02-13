@@ -5,7 +5,25 @@ const routes = [
   {
     path: "/",
     name: "Home",
+    props: true,
     component: Home,
+    children: [
+      {
+        path: "/activities",
+        name: "Activities",
+        component: () => import("../views/Activities.vue"),
+      },
+      {
+        path: "/festival",
+        name: "Festival",
+        component: () => import("../views/Festival.vue"),
+      },
+      {
+        path: "/restaurant",
+        name: "Restaurant",
+        component: () => import("../views/Restaurant.vue"),
+      },
+    ],
   },
   {
     path: "/activities",
@@ -25,7 +43,13 @@ const routes = [
   {
     path: "/content/:id?",
     name: "Content",
+    props: true,
     component: () => import("../views/Content.vue"),
+  },
+  {
+    path: "/result",
+    name: "Result",
+    component: () => import("../views/Result.vue"),
   },
 ];
 

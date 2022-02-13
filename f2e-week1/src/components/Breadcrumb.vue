@@ -10,5 +10,6 @@ export default {
 div {
   text-align: start;
   margin-top: 24px;
+  margin-bottom: 15px;
 }
 </style>
