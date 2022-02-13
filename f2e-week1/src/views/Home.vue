@@ -2,7 +2,7 @@
   <div class="home">
     <p class="home_title">探索台灣之美 <br />讓我們更親近這片土地</p>
     <Serach />
-    <div class="swiper">swiper</div>
+    <div class="swiper"></div>
     <!-- <Swiper /> -->
     <div class="recent_container">
       <div class="recent">
@@ -34,6 +34,9 @@
         >查看更多景點
         <img src="@/assets/image/Vector.svg" alt="方向鍵>" />
       </router-link>
+      <div class="recent_search">
+        <Screen v-for="data in 2" :key="data" />
+      </div>
     </div>
     <div class="recent">
       <h2 class="recent_title">一再回訪的美食</h2>
@@ -44,6 +47,9 @@
         >查看更多美食
         <img src="@/assets/image/Vector.svg" alt="方向鍵>" />
       </router-link>
+      <div class="recent_search">
+        <Screen v-for="data in 2" :key="data" />
+      </div>
     </div>
   </div>
 </template>
@@ -52,15 +58,17 @@
 // @ is an alias to /src
 import Serach from "@/components/Serach.vue";
 import Card from "@/components/Card.vue";
+import Screen from "@/components/Screen.vue";
 
 import API from "@/service/getAPI";
-// import Swiper from "@/components/Swiper.vue";
 
+// import Swiper from "@/components/Swiper.vue";
 export default {
   name: "Home",
   components: {
     Serach,
     Card,
+    Screen,
     // Swiper,
   },
   data() {
@@ -126,7 +134,7 @@ a {
 .swiper {
   height: 185px;
   width: 100%;
-  background-color: chocolate;
+  background-color: wheat;
 }
 
 .home {
@@ -136,14 +144,24 @@ a {
   }
 
   .recent {
+    flex-wrap: wrap;
     @extend %activtity;
     margin-top: 24px;
+
     &_title {
       @extend %activity_title;
+      flex: 50%;
+      text-align: start;
     }
     &_link {
       @extend %activity_link;
       align-self: center;
+      flex: 50%;
+      text-align: end;
+    }
+    &_search {
+      display: flex;
+      overflow: hidden;
     }
   }
   .container {
