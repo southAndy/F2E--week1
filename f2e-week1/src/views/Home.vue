@@ -1,7 +1,16 @@
 <template>
   <div class="home">
-    <p class="home_title">探索台灣之美 <br />讓我們更親近這片土地</p>
-    <Serach />
+    <div class="title_container">
+      <div>
+        <p class="home_title">探索台灣之美 <br />讓我們更親近這片土地</p>
+        <p>
+          <img src="../assets/image/icon.png" alt="地標圖示" />
+          台灣旅遊景點導覽
+          <span>Taiwan Travel Guide</span>
+        </p>
+      </div>
+      <Serach />
+    </div>
     <div class="swiper"></div>
     <!-- <Swiper /> -->
     <div class="recent_container">
@@ -35,7 +44,7 @@
         <img src="@/assets/image/Vector.svg" alt="方向鍵>" />
       </router-link>
       <div class="recent_search">
-        <Screen v-for="data in 2" :key="data" />
+        <Screen v-for="data in 4" :key="data" />
       </div>
     </div>
     <div class="recent">
@@ -48,7 +57,7 @@
         <img src="@/assets/image/Vector.svg" alt="方向鍵>" />
       </router-link>
       <div class="recent_search">
-        <Screen v-for="data in 2" :key="data" />
+        <Screen v-for="data in 4" :key="data" />
       </div>
     </div>
   </div>
@@ -111,9 +120,15 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+@use "../assets/sass/breakpoints.scss";
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300&display=swap");
 a {
   text-decoration: none;
+}
+.home {
+  @include breakpoints.desktop {
+    padding: 0 45px;
+  }
 }
 
 %activtity {
@@ -138,9 +153,21 @@ a {
 }
 
 .home {
+  .title_container {
+    @include breakpoints.desktop {
+      display: flex;
+      justify-content: center;
+      padding: 80px;
+    }
+  }
   &_title {
     font-size: 28px;
     font-family: Noto Sans TC;
+    @include breakpoints.desktop {
+      font-size: 35px;
+      text-align: start;
+      margin: 0;
+    }
   }
 
   .recent {
@@ -169,6 +196,13 @@ a {
     height: 312px;
 
     overflow: hidden;
+
+    @include breakpoints.desktop {
+      display: flex;
+      flex-wrap: wrap;
+      height: 350px;
+      justify-content: center;
+    }
   }
 }
 </style>

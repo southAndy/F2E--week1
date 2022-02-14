@@ -30,12 +30,7 @@ export default {
   data() {
     return {
       parentData: this.activitiesData,
-      test: [1, 2, 3],
-      test1: {
-        name: "andy",
-        place: "dad",
-        url: "##/local",
-      },
+
       //todo 亂數取得
       // randomNumber: Number(),
     };
@@ -78,14 +73,27 @@ export default {
   text-decoration: none;
   //card's distance
   margin-bottom: 16px;
+  @include breakpoints.desktop {
+    width: 45%;
+    height: 160px;
+    background-color: #f9f9f9;
+    margin-right: 30px;
+
+    border-radius: 16px;
+  }
 
   &_image {
     width: 100px;
     height: 100%;
+    @include breakpoints.desktop {
+      width: 160px;
+      height: 160px;
+    }
 
     img {
       width: 100%;
-      object-fit: contain;
+      height: 100%;
+      object-fit: cover;
 
       border-radius: 10px;
       border: 1px solid;
@@ -99,6 +107,9 @@ export default {
 
     overflow: hidden;
     margin-left: 20px;
+    @include breakpoints.desktop {
+      padding: 16px 0;
+    }
 
     .title {
       font-weight: 700;
