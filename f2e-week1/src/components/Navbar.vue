@@ -2,21 +2,38 @@
   <header>
     <h1 class="logo_container">
       <router-link :to="{ name: 'Home' }">
-        <img src="@/assets/image/icon.svg" alt="網站logo" class="logo" />
+        <img
+          src="@/assets/image/Logo-desktop.svg"
+          alt="網站logo"
+          class="logo logo_desktop"
+        />
+        <img
+          src="@/assets/image/Logo-mobile.svg"
+          alt="網站logo"
+          class="logo logo_mobile"
+        />
       </router-link>
-      台灣走走
     </h1>
     <div class="toggle" @click="dropMenu()">
       <img src="@/assets/image/menu.svg" alt="toggle button" />
     </div>
     <nav :class="['navigation', { drop: isDropNavbar }]">
-      <router-link :to="{ name: 'Activities' }" @click="dropMenu"
+      <router-link
+        class="navigation_link"
+        :to="{ name: 'Activities' }"
+        @click="dropMenu"
         >探索景點</router-link
       >
-      <router-link :to="{ name: 'Festival' }" @click="dropMenu"
+      <router-link
+        class="navigation_link"
+        :to="{ name: 'Festival' }"
+        @click="dropMenu"
         >節慶活動</router-link
       >
-      <router-link :to="{ name: 'Restaurant' }" @click="dropMenu"
+      <router-link
+        class="navigation_link"
+        :to="{ name: 'Restaurant' }"
+        @click="dropMenu"
         >品嚐美食</router-link
       >
     </nav>
@@ -42,35 +59,7 @@ export default {
 $navbar-link: #646464;
 $title-size: 20px;
 
-//breakpoints
-$media-mobile: 576px;
-$media-tablet: 768px;
-$media-desktop: 1024px;
-$media-bgScreen: 1440px;
-
-@mixin mobile {
-  @media (min-width: $media-mobile) {
-    @content;
-  }
-}
-
-@mixin tablet {
-  @media (min-width: $media-tablet) {
-    @content;
-  }
-}
-
-@mixin desktop {
-  @media (min-width: $media-desktop) {
-    @content;
-  }
-}
-
-@mixin bgScreen {
-  @media (min-width: $media-bgScreen) {
-    @content;
-  }
-}
+@use "../assets/sass/breakpoints.scss";
 
 header {
   display: flex;
@@ -80,22 +69,54 @@ header {
   border-bottom: 1px solid #e5e5e5;
 
   position: relative;
+  @include breakpoints.desktop {
+    position: static;
+    padding: 0 45px;
+    justify-content: space-between;
+  }
   .logo_container {
-    flex: 1;
+    flex: 50%;
+    width: 120px;
+    height: 40px;
     font-size: $title-size;
+
+    @include breakpoints.desktop {
+      flex: inherit;
+      width: 240px;
+      height: 40px;
+    }
     a {
       display: inline-block;
+      width: 100%;
+      height: 100%;
     }
     .logo {
       width: 100%;
       height: 100%;
+
+      &_desktop {
+        display: none;
+        @include breakpoints.desktop {
+          display: block;
+        }
+      }
+      &_mobile {
+        display: block;
+        @include breakpoints.desktop {
+          display: none;
+        }
+      }
     }
   }
   .drop {
-    display: none !important;
+    display: none;
+    @include breakpoints.desktop {
+      display: block;
+    }
   }
   .toggle {
-    @include tablet {
+    @include breakpoints.tablet {
+      display: none;
     }
   }
 
@@ -106,15 +127,25 @@ header {
     top: 60px;
     bottom: 0;
     right: 0;
-    @include tablet {
+    @include breakpoints.tablet {
       display: flex;
       flex-direction: row;
+
+      position: inherit;
     }
 
     &_link {
       text-decoration: none;
       margin-left: 20px;
       color: $navbar-link;
+
+      @include breakpoints.desktop {
+        width: 75px;
+        height: 25px;
+        text-decoration: none;
+        color: #646464;
+        font-weight: normal;
+      }
 
       //todo click effect
       //todo animation effect
