@@ -1,6 +1,7 @@
 <template>
   <Breadcrumb />
   <Button />
+  <!-- <Swiper /> -->
   <div class="serach">
     <div class="topic_container">
       <h3 class="serach_theme">熱門主題</h3>
@@ -17,6 +18,7 @@
 import Topic from "@/components/Topic.vue";
 import Button from "@/components/Button.vue";
 import Breadcrumb from "@/components/Breadcrumb.vue";
+// import Swiper from "@/components/Swiper.vue";
 
 export default {
   name: "Restaurant",
@@ -24,6 +26,7 @@ export default {
     Topic,
     Button,
     Breadcrumb,
+    // Swiper,
   },
   data() {
     return {

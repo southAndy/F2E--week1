@@ -1,15 +1,17 @@
 <template>
-  <Breadcrumb />
-  <Button />
-  <div class="serach">
-    <div class="topic_container">
-      <h3 class="serach_theme">熱門主題</h3>
-      <Topic
-        v-for="topic in festivalData"
-        :key="topic"
-        :festivalList="topic"
-        class="topic"
-      />
+  <div>
+    <Breadcrumb />
+    <Button />
+    <div class="serach">
+      <div class="topic_container">
+        <h3 class="serach_theme">熱門主題</h3>
+        <Topic
+          v-for="topic in festivalData"
+          :key="topic"
+          :festivalList="topic"
+          class="topic"
+        />
+      </div>
     </div>
   </div>
 </template>
