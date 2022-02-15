@@ -11,8 +11,9 @@
       </div>
       <Serach />
     </div>
-    <div class="swiper"></div>
-    <!-- <Swiper /> -->
+    <div class="swiper">
+      <Swiper />
+    </div>
     <div class="recent_container">
       <div class="recent">
         <h2 class="recent_title">近期活動</h2>
@@ -70,15 +71,14 @@ import Card from "@/components/Card.vue";
 import Screen from "@/components/Screen.vue";
 
 import API from "@/service/getAPI";
-
-// import Swiper from "@/components/Swiper.vue";
+import Swiper from "@/components/Swiper.vue";
 export default {
   name: "Home",
   components: {
     Serach,
     Card,
     Screen,
-    // Swiper,
+    Swiper,
   },
   data() {
     return {
@@ -127,7 +127,7 @@ a {
 }
 .home {
   @include breakpoints.desktop {
-    padding: 0 45px;
+    padding: 0 45px 120px 45px;
   }
 }
 
@@ -150,6 +150,10 @@ a {
   height: 185px;
   width: 100%;
   background-color: wheat;
+
+  @include breakpoints.desktop {
+    height: 400px;
+  }
 }
 
 .home {

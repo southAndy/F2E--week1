@@ -1,6 +1,8 @@
 <template>
   <header>
     <h1 class="logo_container">
+      <!-- 測試swiper的路徑 -->
+      <!-- <router-link :to="{ name: 'Test' }">swiper test</router-link> -->
       <router-link :to="{ name: 'Home' }">
         <img
           src="@/assets/image/Logo-desktop.svg"

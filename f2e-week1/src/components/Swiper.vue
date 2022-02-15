@@ -15,16 +15,12 @@
   </swiper>
 </template>
 <script>
-//
-import { Swiper, SwiperSlide } from "swiper/vue";
-import "swiper/css";
-//fixed import
-// import { Swiper } from "swiper/vue/swiper.js";
-// import { SwiperSlide } from "swiper/vue/swiper-slide.js";
-// import "swiper/swiper.min.css";
+import { Swiper } from "swiper/vue/swiper.js";
+import { SwiperSlide } from "swiper/vue/swiper-slide.js";
+import "swiper/swiper.min.css";
 
 export default {
-  name: "Swiper",
+  name: "Carousel",
   components: {
     Swiper,
     SwiperSlide,
