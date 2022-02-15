@@ -1,6 +1,6 @@
 <template>
   <div class="serach">
-    <select name="" id="" class="select">
+    <select class="select">
       <option value="">探索景點</option>
       <option value="">節慶活動</option>
       <option value="">品嚐美食</option>
@@ -29,7 +29,6 @@ $primary-color: #7f977b;
   width: 100%;
   padding: 15px;
   box-sizing: border-box;
-
   margin-bottom: 10px;
   border-radius: 6px;
   border: 1px solid #e6e6e6;
@@ -42,6 +41,7 @@ $primary-color: #7f977b;
     padding: 15px 11px;
     color: $primary-color;
     font-weight: 500;
+    background-color: #ffff;
   }
 
   &_input {

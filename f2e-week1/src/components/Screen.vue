@@ -23,7 +23,7 @@ export default {
 
   &_image {
     background-color: wheat;
-    width: 225px;
+    width: 220px;
     height: 160px;
     border-radius: 20px;
   }
