@@ -18,8 +18,13 @@
         {{ convertEndTime }}
       </div>
       <p class="title">{{ parentData.ActivityName }}</p>
-      <a href="##" class="location">{{ parentData.City }}</a>
+      <i></i>
+      <a href="##" class="location">
+        <img src="@/assets/image/Vector.png" alt="座標圖示" />
+        {{ parentData.City }}
+      </a>
     </div>
+    <p class="card_more">詳細介紹</p>
   </router-link>
 </template>
 
@@ -74,6 +79,7 @@ export default {
   //card's distance
   margin-bottom: 16px;
   @include breakpoints.desktop {
+    flex-direction: row;
     width: 45%;
     height: 160px;
     background-color: #f9f9f9;
@@ -86,6 +92,8 @@ export default {
     width: 100px;
     height: 100%;
     @include breakpoints.desktop {
+      flex: 1;
+
       width: 160px;
       height: 160px;
     }
@@ -108,6 +116,7 @@ export default {
     overflow: hidden;
     margin-left: 20px;
     @include breakpoints.desktop {
+      flex: 1.5;
       padding: 16px 0;
     }
 
@@ -118,19 +127,33 @@ export default {
 
       margin: 0;
       @include breakpoints.tablet {
-        font-size: 20px;
+        font-size: 22px;
       }
     }
     .time {
       font-size: 14px;
       text-decoration: none;
       color: #646464;
+      @include breakpoints.tablet {
+        font-size: 16px;
+      }
     }
     .location {
+      display: inline-block;
       font-size: 14px;
       font-weight: 400;
       text-decoration: none;
       color: #646464;
+      @include breakpoints.tablet {
+        font-size: 16px;
+        margin-top: 45px;
+      }
+    }
+  }
+  &_more {
+    @include breakpoints.desktop {
+      padding: 0 10px;
+      align-self: end;
     }
   }
 }
