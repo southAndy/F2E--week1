@@ -1,15 +1,17 @@
 <template>
-  <Breadcrumb />
-  <Button />
-  <div class="serach">
-    <div class="topic_container">
-      <h3 class="serach_theme">熱門主題</h3>
-      <Topic
-        v-for="topic in festivalData"
-        :key="topic"
-        :festivalList="topic"
-        class="topic"
-      />
+  <div>
+    <Breadcrumb />
+    <Button />
+    <div class="serach">
+      <div class="topic_container">
+        <h3 class="serach_theme">熱門主題</h3>
+        <Topic
+          v-for="topic in festivalData"
+          :key="topic"
+          :festivalList="topic"
+          class="topic"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -61,20 +63,29 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+@use "../assets/sass/breakpoints.scss";
 .serach {
   margin: 50px 0;
-
+  @include breakpoints.desktop {
+    padding: 0 45px;
+  }
   &_theme {
     font-size: 25px;
     font-weight: 400;
     text-align: start;
     flex: 85%;
     margin-left: 25px;
+    @include breakpoints.desktop {
+      marign: 0px;
+    }
   }
 }
 .topic_container {
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
+  @include breakpoints.desktop {
+    justify-content: start;
+  }
 }
 </style>

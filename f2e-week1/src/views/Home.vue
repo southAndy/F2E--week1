@@ -43,7 +43,7 @@
         <img src="@/assets/image/Vector.svg" alt="方向鍵>" />
       </router-link>
       <div class="recent_search">
-        <Screen v-for="data in 4" :key="data" />
+        <Screen v-for="data in 5" :key="data" />
       </div>
     </div>
     <div class="recent">
@@ -56,7 +56,7 @@
         <img src="@/assets/image/Vector.svg" alt="方向鍵>" />
       </router-link>
       <div class="recent_search">
-        <Screen v-for="data in 4" :key="data" />
+        <Screen v-for="data in 5" :key="data" />
       </div>
     </div>
   </div>
@@ -127,6 +127,8 @@ a {
   text-decoration: none;
 }
 .home {
+  display: flex;
+  flex-direction: column;
   @include breakpoints.desktop {
     padding: 0 45px 120px 45px;
   }
@@ -135,12 +137,18 @@ a {
 %activtity {
   display: flex;
   justify-content: space-between;
+  @include breakpoints.desktop {
+    justify-content: flex-start;
+  }
 }
 
 %activity_link {
   color: #ff725e;
   font-size: 15px;
   font-weight: 500;
+  @include breakpoints.desktop {
+    margin-right: 30px;
+  }
 }
 %activity_title {
   font-size: 24px;
