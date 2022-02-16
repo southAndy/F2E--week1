@@ -1,9 +1,11 @@
 <template>
-  <Navbar />
-  <router-view />
-  <footer @click="filterActitivtiess">
-    <p>台灣走走 Code:南國安迪同學 /Desgin: Breakfast</p>
-  </footer>
+  <div>
+    <Navbar />
+    <router-view />
+    <footer @click="filterActitivtiess">
+      <p>台灣走走 Code:南國安迪同學 /Desgin: Breakfast</p>
+    </footer>
+  </div>
 </template>
 <script>
 import Navbar from "@/components/Navbar.vue";
@@ -15,10 +17,16 @@ export default {
 };
 </script>
 <style lang="scss">
+@use "assets/sass/breakpoints.scss";
+
 $primary-color: #7f977b;
 body {
   margin: 0;
   padding: 15px;
+
+  @include breakpoints.desktop {
+    padding: 0;
+  }
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

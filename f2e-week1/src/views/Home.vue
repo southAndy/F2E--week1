@@ -11,20 +11,18 @@
       </div>
       <Serach />
     </div>
-    <div class="swiper">
-      <Swiper />
+    <div class="carousel">
+      <Carousel />
     </div>
-    <div class="recent_container">
-      <div class="recent">
-        <h2 class="recent_title">近期活動</h2>
-        <router-link
-          :to="{ name: 'Festival' }"
-          class="recent_link"
-          @click="dropMenu"
-          >查看更多活動
-          <img src="@/assets/image/Vector.svg" alt="方向鍵>" />
-        </router-link>
-      </div>
+    <div class="recent">
+      <h2 class="recent_title">近期活動</h2>
+      <router-link
+        :to="{ name: 'Festival' }"
+        class="recent_link"
+        @click="dropMenu"
+        >查看更多活動
+        <img src="@/assets/image/Vector.svg" alt="方向鍵>" />
+      </router-link>
       <!-- 每次只想顯示四筆 -->
       <div class="container">
         <Card
@@ -69,16 +67,19 @@
 import Serach from "@/components/Serach.vue";
 import Card from "@/components/Card.vue";
 import Screen from "@/components/Screen.vue";
+import Carousel from "@/components/Carousel.vue";
 
 import API from "@/service/getAPI";
-import Swiper from "@/components/Swiper.vue";
+// import Swiper from "@/components/Swiper.vue";
+
 export default {
   name: "Home",
   components: {
     Serach,
     Card,
     Screen,
-    Swiper,
+    // Swiper,
+    Carousel,
   },
   data() {
     return {
