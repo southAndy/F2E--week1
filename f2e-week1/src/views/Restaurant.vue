@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="restaurant">
     <Breadcrumb />
     <Button />
     <!-- <Swiper /> -->
@@ -65,28 +65,32 @@ export default {
 </script>
 <style lang="scss" scoped>
 @use "../assets/sass/breakpoints.scss";
-.serach {
-  margin: 50px 0;
-  @include breakpoints.desktop {
-    padding: 0 45px;
-  }
-  &_theme {
-    font-size: 25px;
-    font-weight: 400;
-    text-align: start;
-    flex: 85%;
-    margin-left: 25px;
-    @include breakpoints.desktop {
-      marign: 0px;
+.restaurant {
+  padding: 0 45px;
+
+  .serach {
+    margin: 50px 0;
+    // @include breakpoints.desktop {
+    //   padding: 0 45px;
+    // }
+    &_theme {
+      font-size: 25px;
+      font-weight: 400;
+      text-align: start;
+      flex: 85%;
+      margin-left: 25px;
+      @include breakpoints.desktop {
+        marign: 0px;
+      }
     }
   }
-}
-.topic_container {
-  display: flex;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
-  @include breakpoints.desktop {
-    justify-content: start;
+  .topic_container {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    @include breakpoints.desktop {
+      justify-content: start;
+    }
   }
 }
 </style>

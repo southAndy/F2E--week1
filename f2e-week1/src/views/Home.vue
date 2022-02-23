@@ -24,13 +24,19 @@
         <img src="@/assets/image/Vector.svg" alt="方向鍵>" />
       </router-link>
       <!-- 每次只想顯示四筆 -->
-      <div class="container">
+      <router-link
+        class="container"
+        :to="{
+          name: 'Content',
+          params: { id: activitiesData },
+        }"
+      >
         <Card
           v-for="(activitiesData, index) in filterActitivties"
           :key="index"
           :activitiesData="activitiesData"
         />
-      </div>
+      </router-link>
     </div>
     <!-- !改寫複用性高的css -->
     <div class="recent">
@@ -43,20 +49,25 @@
         <img src="@/assets/image/Vector.svg" alt="方向鍵>" />
       </router-link>
       <div class="recent_search">
-        <Screen v-for="data in 5" :key="data" />
+        <Screen
+          v-for="data in resturantData"
+          :key="data"
+          :resturantData="data"
+        />
       </div>
     </div>
     <div class="recent">
       <h2 class="recent_title">一再回訪的美食</h2>
-      <router-link
-        :to="{ name: 'Restaurant' }"
-        class="recent_link"
-        @click="dropMenu"
+      <router-link :to="{ name: 'Restaurant' }" class="recent_link"
         >查看更多美食
         <img src="@/assets/image/Vector.svg" alt="方向鍵>" />
       </router-link>
       <div class="recent_search">
-        <Screen v-for="data in 5" :key="data" />
+        <Screen
+          v-for="datas in resturantData"
+          :key="datas"
+          :resturantData="datas"
+        />
       </div>
     </div>
   </div>
@@ -83,13 +94,15 @@ export default {
   },
   data() {
     return {
+      allTouristData: null,
       apiData: null,
+      resturantData: null,
     };
   },
   methods: {
     filterActitivtiess() {
       const x = Array.from(this.apiData);
-      console.log("57", this.apiData);
+      // console.log("57", this.apiData);
       console.log(
         58,
         x.filter((data) => data.Picture.PictureUrl1 != undefined)
@@ -102,7 +115,7 @@ export default {
     //為何不能
     filterActitivties() {
       const x = Array.from(this.apiData);
-      console.log("57", this.apiData);
+      // console.log("57", this.apiData);
       console.log(
         58,
         x.filter((data) => data.Picture != {})
@@ -114,8 +127,13 @@ export default {
   created() {
     //取得特定API資料
     API.getActivitiesAPI().then((response) => {
-      console.log("web creating", response);
       return (this.apiData = response.data);
+    });
+    API.getRestaurantAPI().then((response) => {
+      return (this.resturantData = response.data);
+    });
+    API.getScenicSpotAPI().then((response) => {
+      return (this.allTouristData = response.data);
     });
   },
 };

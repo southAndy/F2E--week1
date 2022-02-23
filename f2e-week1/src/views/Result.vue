@@ -27,17 +27,19 @@
         </div>
       </div>
     </router-link>
+    <Pagination />
   </div>
 </template>
 <script>
 import Button from "@//components/Button.vue";
 import Breadcrumb from "../components/Breadcrumb.vue";
+import Pagination from "../components/Pagination.vue";
 export default {
   name: "Result",
-  components: { Button, Breadcrumb },
+  components: { Button, Breadcrumb, Pagination },
   data() {
     return {
-      dataAmounts: 30,
+      dataAmounts: 13,
     };
   },
 };
@@ -47,7 +49,10 @@ export default {
 @use "../assets/sass/reset.scss";
 
 .search_all {
-  padding: 0 45px;
+  width: 100%;
+  @include breakpoints.desktop {
+    padding: 0 45px;
+  }
 }
 p {
   margin: 0;
@@ -55,6 +60,9 @@ p {
 .serach_amount {
   display: flex;
   margin-top: 30px;
+  margin-bottom: 50px;
+  @include breakpoints.desktop {
+  }
 
   h2 {
     font-weight: 400;
@@ -72,6 +80,7 @@ p {
   display: flex;
   flex-direction: column;
   margin-top: 12px;
+  margin-bottom: 80px;
   @include breakpoints.desktop {
     flex-direction: row;
     flex-wrap: wrap;
@@ -79,6 +88,7 @@ p {
   .result {
     display: flex;
     flex-direction: column;
+    margin-bottom: 20px;
     text-align: start;
     @include breakpoints.desktop {
       margin-right: 30px;
