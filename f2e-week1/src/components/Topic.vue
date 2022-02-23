@@ -38,6 +38,7 @@ export default {
   @include breakpoints.desktop {
     width: 255px;
     height: 124px;
+    margin-right: 30px;
   }
 
   &_name {
