@@ -1,4 +1,4 @@
-<template>
+<template v-if="parentData">
   <router-link
     :to="{ name: 'Content', params: { id: changeDataType } }"
     :test1="activityData"
