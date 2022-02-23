@@ -17,4 +17,7 @@ export default {
   getActivitiesAPI() {
     return touristAPI.get("/Activity?%24top=30&%24format=JSON");
   },
+  getRestaurantAPI() {
+    return touristAPI.get("/Restaurant?%24top=30&%24format=JSON");
+  },
 };
