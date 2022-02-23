@@ -1,11 +1,55 @@
-## 紀錄問題
+# f2e 實作紀錄
 
 ## 邏輯問題
 
-### 如何渲染出不同頁面 -- router params
+### 根據 API 資料引入對應的地圖
 
-**reference**:
+以常見的 google map 為例，我們可以使用`<iframe>`進行設定
+
+```html
+<iframe
+width="400"
+height="300"
+frameborder="0"
+scrolling="no"
+marginheight="0"
+marginwidth="0"
+src=http://maps.google.com.tw/maps?f=q&hl=zh-TW&geocode=&q=輸入查詢的地址&z=比例大小&output=embed&t=地圖模式>
+</iframe>
+```
+
+#### 參考 stackoverflow 引入寫法
+
+**google map url**
+
+`https://maps.google.com/?ie=UTF8&t=m&ll=13.2164639,74.995161&spn=0.003381,0.017231&z=16&output=embed`
+
+**內部參數解析：**
+
+1. &ll : (南北緯,東西緯)的參數值
+2. t 內部有三種模式:
+
+   - h:衛星＋路線
+   - p:地形圖
+   - m:常規地圖
+
+3. z:地圖比例
+4. output = embed:輸出可以嵌入到第三方網站的 HTML 內容
+
+**reference**
+
+1. https://jax-work-archive.blogspot.com/2011/07/google-maps.html
+2. https://stackoverflow.com/questions/17125054/embedding-the-new-google-map-in-your-website
+
+### `params` -- 如何根據 API 資料渲染出不同頁面
+
+**原理**：
+
+#### reference:
+
 https://vueschool.io/lessons/dynamic-routes
+
+---
 
 ### 旅遊頁面的切換
 
@@ -95,9 +139,56 @@ festivalData: [
 **svg vs png**
 https://www.cool3c.com/article/146971
 
----
+### `v-if` -- 處理渲染 API 資料的方式
 
----
+下面是我們常見用來渲染 API 資料的卡片
+
+```html
+<template>
+  <div class="card">
+    <div class="card_body">
+      <p>{{api.title}}</p>
+      <p>{{api.content}}</p>
+    </div>
+    <div class="card-image">
+      <img :src="api.image" />
+    </div>
+  </div>
+</template>
+<script>
+  export default vue = {
+    name: "renderObj",
+  };
+</script>
+```
+
+因為接收 API 資料屬於非同步的處理，但渲染這些元件可能會早於接收這個行為，因此會易造成報錯
+
+**解方 -- `v-if`**
+將 API 資料作為 v-if 的條件，設定於容器層（class=card）決定是否進行渲染
+
+```html
+<template>
+  <div class="card" v-if="apiGet">
+    <div class="card_body">
+      <p>{{api.title}}</p>
+      <p>{{api.content}}</p>
+    </div>
+    <div class="card-image">
+      <img :src="api.image" />
+    </div>
+  </div>
+</template>
+<script>
+  export default vue = {
+    name: "renderObj",
+  };
+</script>
+```
+
+就能等待 API 出現才進行渲染，避免報錯。
+
+## <br>
 
 ## 畫面問題
 
@@ -189,6 +280,8 @@ import "swiper/swiper.min.css";
 
 1. navbar 的 hover 效果
 2. 各個 navbar 的下拉表單更好看（手刻）
+3. 點擊 button 的效果
+4. View's result :新增回到第一頁功能、最後一頁功能
 
 **moible**
 
