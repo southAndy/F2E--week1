@@ -1,13 +1,12 @@
-<template v-if="parentData">
+<template v-if="activities">
   <router-link
-    :to="{ name: 'Content', params: { id: changeDataType } }"
-    :test1="activityData"
+    :to="{ name: 'Content', params: { id: activities.ActivityName } }"
     class="card"
   >
     <div class="card_image">
       <img
-        v-if="parentData.Picture.PictureUrl1"
-        :src="parentData.Picture.PictureUrl1"
+        v-if="activities.Picture.PictureUrl1"
+        :src="activities.Picture.PictureUrl1"
         alt="活動照片"
       />
       <img v-else src="@/assets/image/search.svg" alt="該資料沒有圖片顯示" />
@@ -17,11 +16,11 @@
         {{ convertStartTime }} -
         {{ convertEndTime }}
       </div>
-      <p class="title">{{ parentData.ActivityName }}</p>
+      <p class="title">{{ activities.ActivityName }}</p>
       <i></i>
       <a href="##" class="location">
         <img src="@/assets/image/Vector.png" alt="座標圖示" />
-        {{ parentData.City }}
+        {{ activities.City }}
       </a>
     </div>
     <p class="card_more">詳細介紹</p>
@@ -34,35 +33,35 @@ export default {
   props: ["activitiesData"],
   data() {
     return {
-      parentData: this.activitiesData,
+      activities: this.activitiesData,
 
       //todo 亂數取得
       // randomNumber: Number(),
     };
   },
   methods: {
-    getRandom() {},
+    // getRandom() {},
   },
   computed: {
     convertStartTime() {
-      let activitiesTime = new Date(this.parentData.StartTime);
+      let activitiesTime = new Date(this.activities.StartTime);
       let activityYear = activitiesTime.getFullYear();
       let activityMonth = activitiesTime.getMonth();
       let activityDate = activitiesTime.getDate();
-      console.log(activityYear, activityMonth, activityDate);
+      // console.log(activityYear, activityMonth, activityDate);
       return `${activityYear}/${activityMonth}/${activityDate}`;
     },
     convertEndTime() {
-      let activitiesTime = new Date(this.parentData.EndTime);
+      let activitiesTime = new Date(this.activities.EndTime);
       let activityYear = activitiesTime.getFullYear();
       let activityMonth = activitiesTime.getMonth();
       let activityDate = activitiesTime.getDate();
-      console.log(activityYear, activityMonth, activityDate);
+      // console.log(activityYear, activityMonth, activityDate);
       return `${activityYear}/${activityMonth}/${activityDate}`;
     },
-    changeDataType() {
-      return JSON.stringify(this.parentData);
-    },
+    // changeDataType() {
+    //   return JSON.stringify(this.activities);
+    // },
   },
 };
 </script>
@@ -122,12 +121,12 @@ export default {
 
     .title {
       font-weight: 700;
-      font-size: 18px;
+      font-size: 17px;
       color: black;
 
       margin: 0;
       @include breakpoints.tablet {
-        font-size: 22px;
+        font-size: 19px;
       }
     }
     .time {
