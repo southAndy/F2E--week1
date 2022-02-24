@@ -2,13 +2,13 @@
   <router-link
     v-if="resturantData"
     class="activities"
-    :to="{ name: 'Content' }"
+    :to="{ name: 'Content', params: { id: resturantData.RestaurantName } }"
   >
     <div class="activities_image">
       <img :src="resturantData.Picture.PictureUrl1" alt="" />
     </div>
     <h4 class="activities_title">{{ resturantData.RestaurantName }}</h4>
-    <span class="activities_location">{{ resturantData.Address }}</span>
+    <span class="activities_location">{{ resturantData.City }}</span>
   </router-link>
 </template>
 <script>
@@ -43,7 +43,7 @@ export default {
   &_title {
     text-align: start;
     font-weight: 700;
-    font-size: 18px;
+    font-size: 16px;
     color: black;
     margin: 0;
   }
