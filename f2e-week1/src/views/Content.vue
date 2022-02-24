@@ -2,12 +2,10 @@
   <div class="content">
     <Breadcrumb />
     <Carousel />
-    <!-- 寫死的假資料 -->
-    <h2 class="description_title">{{ event.ActivityName }}</h2>
     <article class="description">
       <h4>景點介紹：</h4>
       <p>
-        {{ event.Description }}
+        {{ filterEvent[0].Description }}
       </p>
     </article>
     <div class="detail_container">
@@ -22,11 +20,11 @@
         </p>
         <p class="detail_title">
           主辦單位：
-          <span class="detail_content">{{ event.Organizer }}</span>
+          <span class="detail_content">{{ filterEvent[0].Organizer }}</span>
         </p>
         <p class="detail_title">
           活動地點：
-          <a href="##" class="detail_content">{{ event.Address }}</a>
+          <a href="##" class="detail_content">{{ filterEvent[0].Address }}</a>
         </p>
         <p class="detail_title">
           官方網站：
@@ -70,6 +68,7 @@
         </div>
       </div>
     </div>
+    -->
   </div>
 </template>
 <script>
@@ -80,11 +79,11 @@ import API from "@/service/getAPI";
 
 export default {
   name: "Content",
-  props: ["id"],
+  props: ["placeDetails"],
   data() {
     return {
-      event: JSON.parse(this.id),
-      // apiData: null,
+      event: null,
+      eventName: this.$route.params.id,
     };
   },
   components: {
@@ -95,16 +94,24 @@ export default {
     getMap() {
       const mapPosition = {};
       //南北緯
-      mapPosition.positionLat = this.event.Position.PositionLat;
+      mapPosition.positionLat = this.filterEvent[0].Position.PositionLat;
       //東西緯
-      mapPosition.positionLon = this.event.Position.PositionLon;
+      mapPosition.positionLon = this.filterEvent[0].Position.PositionLon;
       //&ll:儲存緯度座標參數
       return `https://maps.google.com/?ie=UTF8&t=m&ll=${mapPosition.positionLat},${mapPosition.positionLon}&spn=0.003381,0.017231&z=16&output=embed`;
     },
+    filterEvent() {
+      let detail = Array.from(this.event);
+      return detail.filter((data) => {
+        if (data.ActivityName === this.eventName) {
+          return data;
+        }
+      });
+    },
   },
   created() {
-    API.getScenicSpotAPI().then((response) => {
-      return (this.apiData = response.data);
+    API.getActivitiesAPI().then((response) => {
+      return (this.event = response.data);
     });
   },
 };
