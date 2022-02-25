@@ -1,6 +1,13 @@
 <template v-if="activities">
   <router-link
-    :to="{ name: 'Content', params: { id: activities.ActivityName } }"
+    :to="{
+      name: 'Content',
+      params: {
+        city: activities.City,
+        id: activities.ActivityID,
+        name: activities.ActivityName,
+      },
+    }"
     class="card"
   >
     <div class="card_image">

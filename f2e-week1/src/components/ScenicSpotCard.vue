@@ -2,7 +2,14 @@
   <router-link
     v-if="scenicSpotData"
     class="activities"
-    :to="{ name: 'Content', params: { id: scenicSpotData.ScenicSpotName } }"
+    :to="{
+      name: 'Content',
+      params: {
+        city: scenicSpotAPI.City,
+        id: scenicSpotData.ScenicSpotID,
+        name: scenicSpotAPI.ScenicSpotName,
+      },
+    }"
   >
     <div class="activities_image">
       <img :src="scenicSpotData.Picture.PictureUrl1" alt="" />

@@ -2,7 +2,14 @@
   <router-link
     v-if="resturantData"
     class="activities"
-    :to="{ name: 'Content', params: { id: resturantData.RestaurantName } }"
+    :to="{
+      name: 'Content',
+      params: {
+        city: resturantData.City,
+        id: resturantData.RestaurantID,
+        name: resturantData.RestaurantName,
+      },
+    }"
   >
     <div class="activities_image">
       <img :src="resturantData.Picture.PictureUrl1" alt="" />
