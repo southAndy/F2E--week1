@@ -1,6 +1,60 @@
-# f2e 實作紀錄
+# f2e week1 實作紀錄
 
 ## 邏輯問題
+
+### 如何選擇發哪個 API
+
+動機：
+不想發所有 API，浪費記憶體執行
+
+1. 原始做法：用 router params's data = Name 作為判斷依據
+   但這個做法較難判斷活動類別（飲食、觀光、活動）
+
+```javaScript
+let dataID = this.$route.params.name;//陽明山
+
+function getAPI(){
+  if(dataID=== API){
+    //....
+  }
+}
+//但不發API無法進行比較
+```
+
+2. 修改做法：用 router params's data = id 作為判斷依據。因為 API 資料 ID 依據類別可以區分
+
+```javaScript
+let dataID = this.$route.params.id;
+    if (dataID.includes("C1")) {
+      API.getScenicSpotAPI().then((response) => {
+        return (this.contentData = response.data);
+      });
+    }
+    if (dataID.includes("C2")) {
+      API.getActivitiesAPI().then((response) => {
+        return (this.contentData = response.data);
+      });
+    }
+    if (dataID.includes("C3")) {
+      API.getRestaurantAPI().then((response) => {
+        return (this.contentData = response.data);
+      });
+    }
+```
+
+### router 傳值 / component 傳值
+
+#### router 傳值：
+
+1. 透過`this.$route.params`傳值，作為判斷 API 資料的依據
+2. route.push()
+
+#### component 傳值：
+
+透過 props 傳值
+傳遞層：透過 v-bind:被傳名字 = 傳遞參數名
+p.s:沒加 v-bind，數值會是純字串而非動態的值
+接收層：props:['被傳名字']
 
 ### 根據 API 資料引入對應的地圖
 
