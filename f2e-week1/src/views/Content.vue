@@ -1,7 +1,7 @@
 <template v-if="event">
   <div class="content">
     <Breadcrumb />
-    <!-- <Carousel /> -->
+    <Carousel :placeData="contentData" />
     <article class="description">
       <h4>景點介紹：</h4>
       <p>
@@ -74,7 +74,7 @@
 </template>
 <script>
 import Breadcrumb from "../components/Breadcrumb.vue";
-// import Carousel from "@/components/Carousel.vue";
+import Carousel from "@/components/Carousel.vue";
 
 import API from "@/service/getAPI";
 
@@ -90,7 +90,7 @@ export default {
   },
   components: {
     Breadcrumb,
-    // Carousel,
+    Carousel,
   },
   computed: {
     getMap() {

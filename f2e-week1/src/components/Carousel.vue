@@ -34,7 +34,13 @@
           }"
           class="carousel-item w-100 h-100 active"
         >
-          <p class="carousel_title">{{ placeData[0].ScenicSpotName }}</p>
+          <p class="carousel_title">
+            {{
+              placeData[0].ScenicSpotName ||
+              placeData[0].ActivityName ||
+              placeData[0].RestaurantName
+            }}
+          </p>
           <img
             :src="placeData[0].Picture.PictureUrl1"
             class="d-block w-100"
@@ -95,6 +101,7 @@ export default {
   props: ["placeData"],
   data() {
     return {
+      placeDetail: this.placeDetail,
       fakeImage: "@/assets/image/ScenicSpotPicture.png",
     };
   },
