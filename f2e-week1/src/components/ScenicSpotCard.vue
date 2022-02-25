@@ -1,6 +1,5 @@
 <template>
   <router-link
-    v-if="scenicSpotData"
     class="activities"
     :to="{
       name: 'Content',

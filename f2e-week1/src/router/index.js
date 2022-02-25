@@ -41,7 +41,7 @@ const routes = [
     component: () => import("../views/Restaurant.vue"),
   },
   {
-    path: "/content/:id?",
+    path: "/content/:city?/:name?",
     name: "Content",
     props: true,
     component: () => import("../views/Content.vue"),

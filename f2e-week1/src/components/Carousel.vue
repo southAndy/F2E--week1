@@ -31,17 +31,12 @@
         <router-link
           :to="{
             name: 'Content',
-            params: {
-              city: placeData[24].City,
-              id: placeData[24].ActivityID,
-              name: placeData[24].ActivityName,
-            },
           }"
           class="carousel-item w-100 h-100 active"
         >
-          <p class="carousel_title">{{ placeData[24].ScenicSpotName }}</p>
+          <p class="carousel_title">{{ placeData[0].ScenicSpotName }}</p>
           <img
-            :src="placeData[24].Picture.PictureUrl1"
+            :src="placeData[0].Picture.PictureUrl1"
             class="d-block w-100"
             alt="..."
           />
@@ -49,11 +44,6 @@
         <router-link
           :to="{
             name: 'Content',
-            params: {
-              city: placeData[24].City,
-              id: placeData[24].ActivityID,
-              name: placeData[24].ActivityName,
-            },
           }"
           class="carousel-item h-100 w-100"
         >
@@ -67,11 +57,6 @@
         <router-link
           :to="{
             name: 'Content',
-            params: {
-              city: placeData[24].City,
-              id: placeData[24].ActivityID,
-              name: placeData[24].ActivityName,
-            },
           }"
           class="carousel-item h-100"
         >

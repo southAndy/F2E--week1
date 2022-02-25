@@ -1,13 +1,14 @@
 <template v-if="event">
   <div class="content">
     <Breadcrumb />
-    <Carousel />
+    <!-- <Carousel /> -->
     <article class="description">
       <h4>景點介紹：</h4>
       <p>
-        {{ filterEvent[0].Description }}
+        {{ contentData[0].Description }}
       </p>
     </article>
+
     <div class="detail_container">
       <div class="detail">
         <p class="detail_title">
@@ -20,11 +21,11 @@
         </p>
         <p class="detail_title">
           主辦單位：
-          <span class="detail_content">{{ filterEvent[0].Organizer }}</span>
+          <span class="detail_content">{{ contentData[0].Organizer }}</span>
         </p>
         <p class="detail_title">
           活動地點：
-          <a href="##" class="detail_content">{{ filterEvent[0].Address }}</a>
+          <a href="##" class="detail_content">{{ contentData[0].Address }}</a>
         </p>
         <p class="detail_title">
           官方網站：
@@ -73,7 +74,7 @@
 </template>
 <script>
 import Breadcrumb from "../components/Breadcrumb.vue";
-import Carousel from "@/components/Carousel.vue";
+// import Carousel from "@/components/Carousel.vue";
 
 import API from "@/service/getAPI";
 
@@ -84,19 +85,20 @@ export default {
     return {
       event: null,
       eventName: this.$route.params.id,
+      contentData: null,
     };
   },
   components: {
     Breadcrumb,
-    Carousel,
+    // Carousel,
   },
   computed: {
     getMap() {
       const mapPosition = {};
       //南北緯
-      mapPosition.positionLat = this.filterEvent[0].Position.PositionLat;
+      mapPosition.positionLat = this.contentData[0].Position.PositionLat;
       //東西緯
-      mapPosition.positionLon = this.filterEvent[0].Position.PositionLon;
+      mapPosition.positionLon = this.contentData[0].Position.PositionLon;
       //&ll:儲存緯度座標參數
       return `https://maps.google.com/?ie=UTF8&t=m&ll=${mapPosition.positionLat},${mapPosition.positionLon}&spn=0.003381,0.017231&z=16&output=embed`;
     },
@@ -110,9 +112,22 @@ export default {
     },
   },
   created() {
-    API.getActivitiesAPI().then((response) => {
-      return (this.event = response.data);
-    });
+    let dataID = this.$route.params.id;
+    if (dataID.includes("C1")) {
+      API.getScenicSpotAPI().then((response) => {
+        return (this.contentData = response.data);
+      });
+    }
+    if (dataID.includes("C2")) {
+      API.getActivitiesAPI().then((response) => {
+        return (this.contentData = response.data);
+      });
+    }
+    if (dataID.includes("C3")) {
+      API.getRestaurantAPI().then((response) => {
+        return (this.contentData = response.data);
+      });
+    }
   },
 };
 </script>
