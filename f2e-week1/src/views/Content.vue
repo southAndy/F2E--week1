@@ -5,7 +5,7 @@
     <article class="description">
       <h4>景點介紹：</h4>
       <p>
-        {{ contentData[0].Description }}
+        {{ filterEvent[0].Description }}
       </p>
     </article>
 
@@ -21,11 +21,11 @@
         </p>
         <p class="detail_title">
           主辦單位：
-          <span class="detail_content">{{ contentData[0].Organizer }}</span>
+          <span class="detail_content">{{ filterEvent[0].Organizer }}</span>
         </p>
         <p class="detail_title">
           活動地點：
-          <a href="##" class="detail_content">{{ contentData[0].Address }}</a>
+          <a href="##" class="detail_content">{{ filterEvent[0].Address }}</a>
         </p>
         <p class="detail_title">
           官方網站：
@@ -84,7 +84,7 @@ export default {
   data() {
     return {
       event: null,
-      eventName: this.$route.params.id,
+      eventName: this.$route.params.name,
       contentData: null,
     };
   },
@@ -96,16 +96,22 @@ export default {
     getMap() {
       const mapPosition = {};
       //南北緯
-      mapPosition.positionLat = this.contentData[0].Position.PositionLat;
+      mapPosition.positionLat = this.filterEvent[0].Position.PositionLat;
       //東西緯
-      mapPosition.positionLon = this.contentData[0].Position.PositionLon;
+      mapPosition.positionLon = this.filterEvent[0].Position.PositionLon;
       //&ll:儲存緯度座標參數
       return `https://maps.google.com/?ie=UTF8&t=m&ll=${mapPosition.positionLat},${mapPosition.positionLon}&spn=0.003381,0.017231&z=16&output=embed`;
     },
     filterEvent() {
-      let detail = Array.from(this.event);
+      let detail = Array.from(this.contentData);
       return detail.filter((data) => {
         if (data.ActivityName === this.eventName) {
+          return data;
+        }
+        if (data.ScenicSpotName === this.eventName) {
+          return data;
+        }
+        if (data.RestaurantName === this.eventName) {
           return data;
         }
       });

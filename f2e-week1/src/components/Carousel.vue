@@ -53,7 +53,13 @@
           }"
           class="carousel-item h-100 w-100"
         >
-          <p class="carousel_title">{{ placeData[19].ScenicSpotName }}</p>
+          <p class="carousel_title">
+            {{
+              placeData[0].ScenicSpotName ||
+              placeData[0].ActivityName ||
+              placeData[0].RestaurantName
+            }}
+          </p>
           <img
             :src="placeData[19].Picture.PictureUrl1"
             class="d-block w-100"
@@ -66,7 +72,13 @@
           }"
           class="carousel-item h-100"
         >
-          <p class="carousel_title">{{ placeData[26].ScenicSpotName }}</p>
+          <p class="carousel_title">
+            {{
+              placeData[0].ScenicSpotName ||
+              placeData[0].ActivityName ||
+              placeData[0].RestaurantName
+            }}
+          </p>
           <img
             :src="placeData[26].Picture.PictureUrl1"
             class="d-block w-100 h-100"
