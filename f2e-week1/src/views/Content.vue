@@ -2,6 +2,14 @@
   <div class="content">
     <Breadcrumb />
     <Carousel :placeData="contentData" />
+    <h2>
+      {{
+        filterEvent[0].ActivityName ||
+        filterEvent[0].ScenicSpotName ||
+        filterEvent[0].RestaurantName
+      }}
+    </h2>
+    <Category :category="filterEvent" />
     <article class="description">
       <h4>景點介紹：</h4>
       <p>
@@ -77,6 +85,7 @@ import Breadcrumb from "../components/Breadcrumb.vue";
 import Carousel from "@/components/Carousel.vue";
 
 import API from "@/service/getAPI";
+import Category from "../components/Category.vue";
 
 export default {
   name: "Content",
@@ -91,6 +100,7 @@ export default {
   components: {
     Breadcrumb,
     Carousel,
+    Category,
   },
   computed: {
     getMap() {
