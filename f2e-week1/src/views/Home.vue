@@ -12,9 +12,9 @@
       <Serach />
     </div>
     <div class="carousel">
-      <Carousel />
+      <Carousel :placeData="allTouristData" />
     </div>
-    <div class="recent">
+    <div class="recent" v-if="apiData">
       <h2 class="recent_title">近期活動</h2>
       <router-link
         :to="{ name: 'Festival' }"
@@ -24,35 +24,26 @@
         <img src="@/assets/image/Vector.svg" alt="方向鍵>" />
       </router-link>
       <!-- 每次只想顯示四筆 -->
-      <router-link
-        class="container"
-        :to="{
-          name: 'Content',
-          params: { id: activitiesData },
-        }"
-      >
+      <div class="container">
         <Card
           v-for="(activitiesData, index) in filterActitivties"
           :key="index"
           :activitiesData="activitiesData"
         />
-      </router-link>
+      </div>
     </div>
     <!-- !改寫複用性高的css -->
     <div class="recent">
       <h2 class="recent_title">熱門打卡景點</h2>
-      <router-link
-        :to="{ name: 'Activities' }"
-        class="recent_link"
-        @click="dropMenu"
+      <router-link :to="{ name: 'Activities' }" class="recent_link"
         >查看更多景點
         <img src="@/assets/image/Vector.svg" alt="方向鍵>" />
       </router-link>
       <div class="recent_search">
-        <Screen
-          v-for="data in resturantData"
+        <ScenicSpotCard
+          v-for="data in getScenicSpotCity"
           :key="data"
-          :resturantData="data"
+          :scenicSpotAPI="data"
         />
       </div>
     </div>
@@ -63,7 +54,7 @@
         <img src="@/assets/image/Vector.svg" alt="方向鍵>" />
       </router-link>
       <div class="recent_search">
-        <Screen
+        <RestaurantCard
           v-for="datas in resturantData"
           :key="datas"
           :resturantData="datas"
@@ -77,7 +68,8 @@
 // @ is an alias to /src
 import Serach from "@/components/Serach.vue";
 import Card from "@/components/Card.vue";
-import Screen from "@/components/Screen.vue";
+import ScenicSpotCard from "@/components/ScenicSpotCard.vue";
+import RestaurantCard from "@/components/RestaurantCard.vue";
 import Carousel from "@/components/Carousel.vue";
 
 import API from "@/service/getAPI";
@@ -88,9 +80,10 @@ export default {
   components: {
     Serach,
     Card,
-    Screen,
+    RestaurantCard,
     // Swiper,
     Carousel,
+    ScenicSpotCard,
   },
   data() {
     return {
@@ -121,6 +114,15 @@ export default {
         x.filter((data) => data.Picture != {})
       );
       return x.filter((data) => data.Picture.PictureUrl1 != undefined);
+    },
+    getScenicSpotCity() {
+      const x = Array.from(this.allTouristData);
+      // console.log("57", this.apiData);
+      console.log(
+        58,
+        x.filter((data) => data.City != undefined)
+      );
+      return x.filter((data) => data.City != undefined);
     },
   },
 

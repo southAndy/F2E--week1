@@ -29,28 +29,55 @@
       </div>
       <div class="carousel-inner container p-0 carousel_mobile">
         <router-link
-          :to="{ name: 'Content' }"
-          class="carousel-item h-100 active"
+          :to="{
+            name: 'Content',
+            params: {
+              city: placeData[24].City,
+              id: placeData[24].ActivityID,
+              name: placeData[24].ActivityName,
+            },
+          }"
+          class="carousel-item w-100 h-100 active"
         >
-          <p class="carousel_title">{{ "新北市 | 不厭亭" }}</p>
+          <p class="carousel_title">{{ placeData[24].ScenicSpotName }}</p>
           <img
-            src="@/assets/image/ScenicSpotPicture.png"
-            class="d-block w-100 h-100"
+            :src="placeData[24].Picture.PictureUrl1"
+            class="d-block w-100"
             alt="..."
           />
         </router-link>
-        <router-link :to="{ name: 'Content' }" class="carousel-item h-100">
-          <p class="carousel_title">{{ "新北市 | 不厭亭" }}</p>
+        <router-link
+          :to="{
+            name: 'Content',
+            params: {
+              city: placeData[24].City,
+              id: placeData[24].ActivityID,
+              name: placeData[24].ActivityName,
+            },
+          }"
+          class="carousel-item h-100 w-100"
+        >
+          <p class="carousel_title">{{ placeData[19].ScenicSpotName }}</p>
           <img
-            src="@/assets/image/ScenicSpotPicture.png"
-            class="d-block w-100 h-100"
+            :src="placeData[19].Picture.PictureUrl1"
+            class="d-block w-100"
             alt="..."
           />
         </router-link>
-        <router-link :to="{ name: 'Content' }" class="carousel-item h-100">
-          <p class="carousel_title">{{ "新北市 | 不厭亭" }}</p>
+        <router-link
+          :to="{
+            name: 'Content',
+            params: {
+              city: placeData[24].City,
+              id: placeData[24].ActivityID,
+              name: placeData[24].ActivityName,
+            },
+          }"
+          class="carousel-item h-100"
+        >
+          <p class="carousel_title">{{ placeData[26].ScenicSpotName }}</p>
           <img
-            src="@/assets/image/ScenicSpotPicture.png"
+            :src="placeData[26].Picture.PictureUrl1"
             class="d-block w-100 h-100"
             alt="..."
           />
@@ -80,6 +107,7 @@
 <script>
 export default {
   name: "Carousel",
+  props: ["placeData"],
   data() {
     return {
       fakeImage: "@/assets/image/ScenicSpotPicture.png",
@@ -92,6 +120,10 @@ export default {
 
 .container {
   position: relative;
+  @include breakpoints.desktop {
+    width: 960px;
+    height: 345px;
+  }
 }
 .carousel_title {
   font-size: 23px;
@@ -110,8 +142,5 @@ export default {
 }
 div.carousel_mobile {
   height: 300px;
-  @include breakpoints.desktop {
-    height: auto;
-  }
 }
 </style>
