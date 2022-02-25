@@ -41,7 +41,7 @@
       </router-link>
       <div class="recent_search">
         <ScenicSpotCard
-          v-for="data in getScenicSpotCity"
+          v-for="data in allTouristData"
           :key="data"
           :scenicSpotAPI="data"
         />
