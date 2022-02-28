@@ -5,7 +5,7 @@
       class="carousel slide"
       data-bs-ride="carousel"
     >
-      <div class="carousel-indicators justify-content-end me-5">
+      <div class="carousel-indicators justify-content-end me-6">
         <button
           type="button"
           data-bs-target="#carouselExampleIndicators"
@@ -87,7 +87,7 @@
         </router-link>
       </div>
       <button
-        class="carousel-control-prev"
+        class="carousel-control-prev mx-5"
         type="button"
         data-bs-target="#carouselExampleIndicators"
         data-bs-slide="prev"
@@ -96,7 +96,7 @@
         <span class="visually-hidden">Previous</span>
       </button>
       <button
-        class="carousel-control-next"
+        class="carousel-control-next me-5"
         type="button"
         data-bs-target="#carouselExampleIndicators"
         data-bs-slide="next"
