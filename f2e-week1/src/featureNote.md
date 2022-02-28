@@ -2,6 +2,22 @@
 
 ## 邏輯問題
 
+### 首頁的按鈕跳轉方式 --- `this.$router.push`
+
+在 select 物件上，可用`change`事件來處理：
+
+```javaScript
+getTest(selected) {
+      console.log("loading", selected.target.value);
+      this.selectClass = selected.target.value;
+},
+```
+
+順便複習，在 vue 框架內，若觸發事件沒有自訂參數，預設參數就是指向$event（原生的事件）
+
+**reference**
+https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/change_event
+
 ### 如何選擇發哪個 API
 
 動機：
