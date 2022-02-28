@@ -2,6 +2,7 @@
   <div class="search_all">
     <Breadcrumb />
     <Button />
+    {{ eventDatas }}
     <div class="serach_amount">
       <h2>搜尋結果</h2>
       <span>共有{{ dataAmounts }}筆結果</span>
@@ -37,6 +38,7 @@ import Pagination from "../components/Pagination.vue";
 export default {
   name: "Result",
   components: { Button, Breadcrumb, Pagination },
+  props: ["eventDatas"],
   data() {
     return {
       dataAmounts: 13,
