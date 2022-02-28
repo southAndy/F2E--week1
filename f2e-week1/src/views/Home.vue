@@ -15,14 +15,16 @@
       <Carousel :placeData="allTouristData" />
     </div>
     <div class="recent" v-if="apiData">
-      <h2 class="recent_title">近期活動</h2>
-      <router-link
-        :to="{ name: 'Festival' }"
-        class="recent_link"
-        @click="dropMenu"
-        >查看更多活動
-        <img src="@/assets/image/Vector.svg" alt="方向鍵>" />
-      </router-link>
+      <div>
+        <h2 class="recent_title">近期活動</h2>
+        <router-link
+          :to="{ name: 'Festival' }"
+          class="recent_link"
+          @click="dropMenu"
+          >查看更多活動
+          <img src="@/assets/image/Vector.svg" alt="方向鍵>" />
+        </router-link>
+      </div>
       <!-- 每次只想顯示四筆 -->
       <div class="container">
         <Card
@@ -34,11 +36,13 @@
     </div>
     <!-- !改寫複用性高的css -->
     <div class="recent">
-      <h2 class="recent_title">熱門打卡景點</h2>
-      <router-link :to="{ name: 'Activities' }" class="recent_link"
-        >查看更多景點
-        <img src="@/assets/image/Vector.svg" alt="方向鍵>" />
-      </router-link>
+      <div>
+        <h2 class="recent_title">熱門打卡景點</h2>
+        <router-link :to="{ name: 'Activities' }" class="recent_link"
+          >查看更多景點
+          <img src="@/assets/image/Vector.svg" alt="方向鍵>" />
+        </router-link>
+      </div>
       <div class="recent_search">
         <ScenicSpotCard
           v-for="data in allTouristData"
@@ -48,11 +52,13 @@
       </div>
     </div>
     <div class="recent">
-      <h2 class="recent_title">一再回訪的美食</h2>
-      <router-link :to="{ name: 'Restaurant' }" class="recent_link"
-        >查看更多美食
-        <img src="@/assets/image/Vector.svg" alt="方向鍵>" />
-      </router-link>
+      <div>
+        <h2 class="recent_title">一再回訪的美食</h2>
+        <router-link :to="{ name: 'Restaurant' }" class="recent_link"
+          >查看更多美食
+          <img src="@/assets/image/Vector.svg" alt="方向鍵>" />
+        </router-link>
+      </div>
       <div class="recent_search">
         <RestaurantCard
           v-for="datas in resturantData"
@@ -207,6 +213,13 @@ a {
     flex-wrap: wrap;
     @extend %activtity;
     margin-top: 24px;
+
+    & > div {
+      display: flex;
+      margin-bottom: 12px;
+      width: 100%;
+      // color: red;
+    }
 
     &_title {
       @extend %activity_title;
