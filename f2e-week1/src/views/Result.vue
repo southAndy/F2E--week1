@@ -1,48 +1,96 @@
 <template>
-  <div class="search_all">
+  <div class="search_all" v-if="searchDatas">
     <Breadcrumb />
     <Button />
-    {{ eventDatas }}
     <div class="serach_amount">
       <h2>搜尋結果</h2>
-      <span>共有{{ dataAmounts }}筆結果</span>
+      <span
+        >共有<strong>{{ getTotalAmounts }}</strong
+        >筆結果
+      </span>
     </div>
-    <router-link :to="{ name: 'Content' }" class="result_container">
-      <div class="result" v-for="amount in dataAmounts" :key="amount">
-        <div class="result_image">
-          <img
-            class="mobile"
-            src="../assets/image/RestaurantPicture＿mobile.png"
-            alt="景點圖片"
-          />
-          <img
-            class="desktop"
-            src="../assets/image/RestaurantPicture.png"
-            alt="景點圖片"
-          />
+    <div class="result_container">
+      <router-link
+        :to="{ name: 'Content' }"
+        v-for="amount in searchDatas"
+        :key="amount"
+        class="result_content"
+      >
+        <div class="result">
+          <div class="result_image">
+            <img
+              class="mobile"
+              src="../assets/image/RestaurantPicture＿mobile.png"
+              alt="景點圖片"
+            />
+            <img
+              class="desktop"
+              :src="
+                amount.Picture.PictureUrl1 ||
+                amount.Picture.PictureUrl ||
+                amount.Picture.PictureUrl2
+              "
+              alt="景點圖片"
+            />
+            <!-- <img src="../assets/image/RestaurantPicture＿desktop.png" alt="" /> -->
+          </div>
+          <p class="result_name">
+            {{
+              amount.ActivityName ||
+              amount.ScenicSpotName ||
+              amount.RestaurantName
+            }}
+          </p>
+          <div class="result_location">
+            <img src="@/assets/image/Vector.png" alt="座標圖示" />
+            <p>{{ amount.Address }}</p>
+          </div>
         </div>
-        <p class="result_name">{{ "景點名稱" }}</p>
-        <div class="result_location">
-          <img src="@/assets/image/Vector.png" alt="座標圖示" />
-          <p>{{ "景點位置" }}</p>
-        </div>
-      </div>
-    </router-link>
-    <Pagination />
+      </router-link>
+    </div>
+    <!-- <Pagination /> -->
   </div>
 </template>
 <script>
 import Button from "@//components/Button.vue";
 import Breadcrumb from "../components/Breadcrumb.vue";
 import Pagination from "../components/Pagination.vue";
+
+import API from "@/service/getAPI";
+
 export default {
   name: "Result",
   components: { Button, Breadcrumb, Pagination },
-  props: ["eventDatas"],
   data() {
     return {
-      dataAmounts: 13,
+      searchAmounts: 13,
+      searchDatas: null,
     };
+  },
+  computed: {
+    getTotalAmounts() {
+      let arrayDatas = Array.from(this.searchDatas);
+      console.log(this.searchDatas.length);
+      return (this.searchAmounts = arrayDatas.length);
+    },
+  },
+  created() {
+    let dataID = this.$route.params.type;
+    if (dataID.includes("C1")) {
+      API.getScenicSpotAPI().then((response) => {
+        return (this.searchDatas = response.data);
+      });
+    }
+    if (dataID.includes("C2")) {
+      API.getActivitiesAPI().then((response) => {
+        return (this.searchDatas = response.data);
+      });
+    }
+    if (dataID.includes("C3")) {
+      API.getRestaurantAPI().then((response) => {
+        return (this.searchDatas = response.data);
+      });
+    }
   },
 };
 </script>
@@ -81,11 +129,21 @@ p {
 .result_container {
   display: flex;
   flex-direction: column;
+
+  width: 100%;
+  height: 75%;
+
   margin-top: 12px;
   margin-bottom: 80px;
   @include breakpoints.desktop {
     flex-direction: row;
     flex-wrap: wrap;
+  }
+  .result_content {
+    @include breakpoints.desktop {
+      // width: 250px;
+      // height: 200px;
+    }
   }
   .result {
     display: flex;
@@ -97,9 +155,14 @@ p {
       margin-bottom: 30px;
     }
     &_image {
-      height: 100%;
-      width: 100%;
+      width: 250px;
+      height: 150px;
       flex: 100%;
+
+      img {
+        height: 100%;
+        width: 100%;
+      }
     }
     &_name {
       font-size: 18px;
