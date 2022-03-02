@@ -14,37 +14,36 @@
         :to="{ name: 'Content' }"
         v-for="amount in searchDatas"
         :key="amount"
-        class="result_content"
+        class="result"
       >
-        <div class="result">
-          <div class="result_image">
-            <img
-              class="mobile"
-              src="../assets/image/RestaurantPicture＿mobile.png"
-              alt="景點圖片"
-            />
-            <img
-              class="desktop"
-              :src="
-                amount.Picture.PictureUrl1 ||
-                amount.Picture.PictureUrl ||
-                amount.Picture.PictureUrl2
-              "
-              alt="景點圖片"
-            />
-            <!-- <img src="../assets/image/RestaurantPicture＿desktop.png" alt="" /> -->
-          </div>
-          <p class="result_name">
-            {{
-              amount.ActivityName ||
-              amount.ScenicSpotName ||
-              amount.RestaurantName
-            }}
-          </p>
-          <div class="result_location">
-            <img src="@/assets/image/Vector.png" alt="座標圖示" />
-            <p>{{ amount.Address }}</p>
-          </div>
+        <div class="result_image">
+          <img
+            class="mobile"
+            src="../assets/image/RestaurantPicture＿mobile.png"
+            alt="景點圖片"
+          />
+          <img
+            class="desktop"
+            :src="
+              amount.Picture.PictureUrl1 ||
+              amount.Picture.PictureUrl ||
+              amount.Picture.PictureUrl2 ||
+              `../assets/image/RestaurantPicture＿desktop.png`
+            "
+            alt="景點圖片"
+          />
+          <!-- <img src="../assets/image/RestaurantPicture＿desktop.png" alt="" /> -->
+        </div>
+        <p class="result_name">
+          {{
+            amount.ActivityName ||
+            amount.ScenicSpotName ||
+            amount.RestaurantName
+          }}
+        </p>
+        <div class="result_location">
+          <img src="@/assets/image/Vector.png" alt="座標圖示" />
+          <p>{{ amount.Address }}</p>
         </div>
       </router-link>
     </div>
@@ -138,19 +137,17 @@ p {
   @include breakpoints.desktop {
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: center;
   }
-  .result_content {
-    @include breakpoints.desktop {
-      // width: 250px;
-      // height: 200px;
-    }
-  }
+
   .result {
     display: flex;
     flex-direction: column;
     margin-bottom: 20px;
     text-align: start;
     @include breakpoints.desktop {
+      width: 250px;
+
       margin-right: 30px;
       margin-bottom: 30px;
     }
