@@ -9,14 +9,16 @@
     </div>
     <ul class="pagination_group">
       <li
-        class="pagination_group_numbers"
+        :class="['pagination_group_numbers', { current: currentPage === page }]"
         v-for="page in totalPage"
         :key="page"
+        :aria-page="page"
+        @click="switchPage(page)"
       >
         {{ page }}
       </li>
     </ul>
-    <div class="pagination_next">
+    <div class="pagination_next" @click="switchToNextPage">
       <img src="@/assets/image/master.png" alt="下一頁按鈕" />
     </div>
     <!-- <div class="pagination_final">
@@ -29,8 +31,24 @@ export default {
   name: "Pagination",
   data() {
     return {
-      totalPage: 10,
+      totalPage: 9,
+      currentPage: 1,
+      test: 1,
     };
+  },
+  methods: {
+    switchPage(page) {
+      console.log("換頁", page, typeof page);
+      this.currentPage = page;
+      console.log(this.currentPage);
+      // console.log(this.currentPage === 4);
+    },
+    switchToNextPage() {
+      console.log("switching");
+      //頁數加一
+      this.currentPage++;
+      console.log(this.currentPage);
+    },
   },
 };
 </script>
@@ -44,13 +62,28 @@ export default {
 
   width: 270px;
   height: 32px;
+  margin: 0 auto;
   @include breakpoints.desktop {
     height: 32px;
     width: 90%;
   }
 
+  &_previous {
+    margin-right: 5px;
+    cursor: pointer;
+  }
+  &_next {
+    cursor: pointer;
+  }
+
   &_group {
     display: flex;
+
+    // 當前頁面的effect
+    .current {
+      background-color: #7f977b;
+      color: #fff;
+    }
 
     &_numbers {
       display: flex;
