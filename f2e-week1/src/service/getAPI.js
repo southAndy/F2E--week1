@@ -12,12 +12,12 @@ const touristAPI = axios.create({
 
 export default {
   getScenicSpotAPI() {
-    return touristAPI.get("/ScenicSpot?%24top=30&%24format=JSON");
+    return touristAPI.get("/ScenicSpot?%24top=300&%24format=JSON");
   },
   getActivitiesAPI() {
-    return touristAPI.get("/Activity?%24top=30&%24format=JSON");
+    return touristAPI.get("/Activity?%24top=300&%24format=JSON");
   },
   getRestaurantAPI() {
-    return touristAPI.get("/Restaurant?%24top=30&%24format=JSON");
+    return touristAPI.get("/Restaurant?%24top=300&%24format=JSON");
   },
 };
