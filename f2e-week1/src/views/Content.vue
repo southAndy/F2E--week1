@@ -1,7 +1,7 @@
 <template v-if="event">
   <div class="content">
     <Breadcrumb />
-    <Carousel :placeData="contentData" />
+    <CarouselContent :placeData="filterEvent" />
     <h2>
       {{
         filterEvent[0].ActivityName ||
@@ -82,14 +82,15 @@
 </template>
 <script>
 import Breadcrumb from "../components/Breadcrumb.vue";
-import Carousel from "@/components/Carousel.vue";
+// import Carousel from "@/components/Carousel.vue";
+import CarouselContent from "@/components/CarouselContent.vue";
 
 import API from "@/service/getAPI";
 import Category from "../components/Category.vue";
 
 export default {
   name: "Content",
-  props: ["placeDetails"],
+  // props: ["placeDetails"],
   data() {
     return {
       event: null,
@@ -99,7 +100,8 @@ export default {
   },
   components: {
     Breadcrumb,
-    Carousel,
+    // Carousel,
+    CarouselContent,
     Category,
   },
   computed: {
