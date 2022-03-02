@@ -1,11 +1,10 @@
 <template>
   <div class="serach">
-    {{ selectClass }}
-    <select class="select">
-      <option value=""></option>
-      <option value="" @change="getTest('探索景點')">探索景點</option>
-      <option value="" @change="getTest('節慶活動')">節慶活動</option>
-      <option value="" @change="getTest('品嚐美食')">品嚐美食</option>
+    <select class="select" @change="getTest">
+      <option value="">請選擇活動類型</option>
+      <option value="探索景點">探索景點</option>
+      <option value="節慶活動">節慶活動</option>
+      <option value="品嚐美食">品嚐美食</option>
     </select>
     <input
       class="serach_input"
@@ -22,41 +21,57 @@
   </div>
 </template>
 <script>
-// import router from "./router";
+import API from "@/service/getAPI";
+
 export default {
   name: "Serach",
   data() {
     return {
       selectClass: "",
-      test: "",
+      eventDatas: null,
     };
   },
   methods: {
     getTest(selected) {
-      this.selectClass = selected;
+      console.log("loading", selected.target.value);
+      this.selectClass = selected.target.value;
     },
-    searchResult() {
+    async searchResult() {
       console.log("seraching");
-
-      //!test
       if (this.selectClass === "") {
         console.log("沒指定，全部搜尋");
         this.$router.push({ name: "Result" });
       }
       if (this.selectClass === "探索景點") {
         console.log("探索景點");
-        this.$router.push({ name: "Result" });
+        await API.getScenicSpotAPI().then((response) => {
+          return (this.eventDatas = response.data);
+        });
+        this.$router.push({
+          name: "Result",
+          params: { city: "hi", type: this.eventDatas[0].ScenicSpotID },
+        });
       }
       if (this.selectClass === "節慶活動") {
         console.log("節慶活動");
-        this.$router.push({ name: "Result" });
+        await API.getActivitiesAPI().then((response) => {
+          return (this.eventDatas = response.data);
+        });
+        this.$router.push({
+          name: "Result",
+          params: { city: "hi", type: this.eventDatas[0].ActivityID },
+        });
       }
       if (this.selectClass === "品嚐美食") {
         console.log("品嚐美食");
-        this.$router.push({ name: "Result" });
+        await API.getRestaurantAPI().then((response) => {
+          return (this.eventDatas = response.data);
+        });
+        this.$router.push({
+          name: "Result",
+          params: { city: "hi", type: this.eventDatas[0].RestaurantID },
+        });
       }
-
-      //!根據發的API決定傳送的畫面
     },
   },
   computed: {},
