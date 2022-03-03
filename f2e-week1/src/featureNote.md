@@ -2,6 +2,12 @@
 
 ## 邏輯問題
 
+### pagination 切換分頁
+
+點擊頁碼時：
+
+1. 回傳對應的 API data
+
 ### 首頁的按鈕跳轉方式 --- `this.$router.push`
 
 在 select 物件上，可用`change`事件來處理：
