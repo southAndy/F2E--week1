@@ -1,5 +1,6 @@
 <template>
   <div class="search_all" v-if="searchDatas">
+    {{ testDatas }}
     <Breadcrumb />
     <Button />
     <div class="serach_amount">
@@ -12,7 +13,7 @@
     <div class="result_container">
       <router-link
         :to="{ name: 'Content' }"
-        v-for="amount in searchDatas"
+        v-for="amount in recivedDatas"
         :key="amount"
         class="result"
       >
@@ -47,7 +48,7 @@
         </div>
       </router-link>
     </div>
-    <!-- <Pagination /> -->
+    <Pagination @getss="getSearchDatas" />
   </div>
 </template>
 <script>
@@ -64,13 +65,25 @@ export default {
     return {
       searchAmounts: 13,
       searchDatas: null,
+      recivedDatas: null,
     };
+  },
+  methods: {
+    getSearchDatas(searchDatas) {
+      console.log("get emit?", searchDatas);
+      this.recivedDatas = searchDatas;
+    },
   },
   computed: {
     getTotalAmounts() {
       let arrayDatas = Array.from(this.searchDatas);
       console.log(this.searchDatas.length);
       return (this.searchAmounts = arrayDatas.length);
+    },
+    showDataAmounts() {
+      let arrayDatas = Array.from(this.searchDatas);
+      let x = 0;
+      return arrayDatas.slice(x, 28);
     },
   },
   created() {
@@ -154,7 +167,7 @@ p {
     &_image {
       width: 250px;
       height: 150px;
-      flex: 100%;
+      // flex: 100%;
 
       img {
         height: 100%;
@@ -169,6 +182,9 @@ p {
 
       @include breakpoints.desktop {
         font-size: 22px;
+        height: 35px;
+        //多餘的文字隱藏
+        overflow: hidden;
       }
     }
     &_location {
