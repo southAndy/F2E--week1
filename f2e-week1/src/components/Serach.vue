@@ -94,7 +94,9 @@ $primary-color: #7f977b;
     @extend %serach_input;
     padding: 15px 11px;
     color: $primary-color;
+
     font-weight: 500;
+    text-align: center;
     background-color: #ffff;
   }
 
@@ -102,8 +104,10 @@ $primary-color: #7f977b;
     @extend %serach_input;
     background-color: #f9f9f9;
     padding: 15px;
-    font-weight: 400;
+
     font-size: 15px;
+    font-weight: 400;
+    text-align: center;
   }
   &_click {
     display: flex;
