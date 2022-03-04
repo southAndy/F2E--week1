@@ -12,8 +12,15 @@
     </div>
     <div class="result_container">
       <router-link
-        :to="{ name: 'Content' }"
-        v-for="amount in recivedDatas"
+        :to="{
+          name: 'Content',
+          params: {
+            city: 'fake',
+            id: amount.ActivityID || amount.ScenicSpotID || amount.RestaurantID,
+            name: 'fake',
+          },
+        }"
+        v-for="amount in showDataAmounts"
         :key="amount"
         class="result"
       >
@@ -48,7 +55,7 @@
         </div>
       </router-link>
     </div>
-    <Pagination @getss="getSearchDatas" />
+    <Pagination :dataLength="searchDatas" @getss="getSearchDatas" />
   </div>
 </template>
 <script>
@@ -63,27 +70,35 @@ export default {
   components: { Button, Breadcrumb, Pagination },
   data() {
     return {
-      searchAmounts: 13,
       searchDatas: null,
       recivedDatas: null,
+      //每頁資料
+      dataPerPage: 20,
+      currentPage: 1,
     };
+  },
+  computed: {
+    showDataAmounts() {
+      //討論的解法
+      const start = this.dataPerPage * (this.currentPage - 1);
+      const end = this.dataPerPage * this.currentPage;
+      let arrayDatas = Array.from(this.searchDatas);
+      return arrayDatas.slice(start, end);
+    },
+    getPageNumber() {
+      let arrayDatas = Array.from(this.searchDatas);
+      return arrayDatas.length / 20;
+    },
+    getTotalAmounts() {
+      let arrayDatas = Array.from(this.searchDatas);
+      console.log(`此次取得的資料為${this.searchDatas.length}筆`);
+      return arrayDatas.length;
+    },
   },
   methods: {
     getSearchDatas(searchDatas) {
       console.log("get emit?", searchDatas);
-      this.recivedDatas = searchDatas;
-    },
-  },
-  computed: {
-    getTotalAmounts() {
-      let arrayDatas = Array.from(this.searchDatas);
-      console.log(this.searchDatas.length);
-      return (this.searchAmounts = arrayDatas.length);
-    },
-    showDataAmounts() {
-      let arrayDatas = Array.from(this.searchDatas);
-      let x = 0;
-      return arrayDatas.slice(x, 28);
+      this.currentPage = searchDatas;
     },
   },
   created() {

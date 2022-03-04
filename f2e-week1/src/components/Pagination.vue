@@ -1,14 +1,10 @@
 <template>
   <div class="pagination">
-    <!-- <div class="pagination_first">
-      <img src="" alt="回到第一頁按鈕" />
-    </div> -->
     <button
       class="pagination_previous"
       @click="switchToPreviousPage"
       :disabled="currentPage <= 1 ? true : false"
     >
-      <!-- <i class="fa-solid fa-square-right"></i> -->
       <img src="@/assets/image/disabled.png" alt="上一頁按鈕" />
     </button>
     <ul class="pagination_group" v-if="searchDatas">
@@ -28,36 +24,22 @@
     >
       <img src="@/assets/image/master.png" alt="下一頁按鈕" />
     </button>
-    <!-- <div class="pagination_final">
-      <img src="" alt="到最後一頁按鈕" />
-    </div> -->
   </div>
-
-  <!-- 用來顯示data資料 -->
-  <!-- <pre>{{ currentPage }}</pre> -->
 </template>
 <script>
-import API from "@/service/getAPI";
-
 export default {
   name: "Pagination",
+  props: ["dataLength"],
   data() {
     return {
       totalPage: 9,
       currentPage: 1,
       testArr: null,
-      searchDatas: null,
+      searchDatas: this.dataLength,
       dataPerPage: 20,
     };
   },
   computed: {
-    showDataAmounts() {
-      const start = this.dataPerPage * (this.currentPage - 1);
-      const end = this.dataPerPage * this.currentPage;
-      let arrayDatas = Array.from(this.searchDatas);
-      console.log(53, this.dataIndex);
-      return arrayDatas.slice(start, end);
-    },
     getPageNumber() {
       let arrayDatas = Array.from(this.searchDatas);
       return arrayDatas.length / 20;
@@ -65,54 +47,22 @@ export default {
   },
   methods: {
     switchPage(page) {
-      console.log(63, page, this.currentPage);
+      console.log(`當前頁數為 第${page}頁`);
       this.currentPage = page;
 
-      // this.dataIndex = this.dataIndex + 20 * page;
-      //將頁面的資料回傳
-      this.$emit("getss", this.showDataAmounts);
-      this.dataIndex = 0;
+      this.$emit("getss", this.currentPage);
     },
-    //todo fix
     switchToNextPage() {
-      console.log("往下一頁");
-      //頁數加一
+      console.log(`現在當前頁面為${this.currentPage}，往下一頁`);
       this.currentPage++;
-      // this.dataIndex = this.dataIndex + 20;
-      this.$emit("getss", this.showDataAmounts);
-
-      console.log(this.currentPage);
+      this.$emit("getss", this.currentPage);
     },
-    //todo fix
 
     switchToPreviousPage() {
-      console.log("往上一頁");
+      console.log(`現在當前頁面為${this.currentPage}，往上一頁`);
       this.currentPage--;
-      console.log(this.currentPage);
-      // if (this.dataIndex > 0) {
-      //   this.dataIndex = this.dataIndex - 20;
-      // }
-      this.$emit("getss", this.showDataAmounts);
+      this.$emit("getss", this.currentPage);
     },
-  },
-  created() {
-    let dataID = this.$route.params.type;
-    console.log(dataID, 77);
-    if (dataID.includes("C1")) {
-      API.getScenicSpotAPI().then((response) => {
-        return (this.searchDatas = response.data);
-      });
-    }
-    if (dataID.includes("C2")) {
-      API.getActivitiesAPI().then((response) => {
-        return (this.searchDatas = response.data);
-      });
-    }
-    if (dataID.includes("C3")) {
-      API.getRestaurantAPI().then((response) => {
-        return (this.searchDatas = response.data);
-      });
-    }
   },
 };
 </script>
