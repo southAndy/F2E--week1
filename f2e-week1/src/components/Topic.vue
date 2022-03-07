@@ -1,12 +1,10 @@
 <template>
-  <router-link to="/result">
+  <div @click="switchSpecificPage">
+    <p class="topic_name">{{ festivalList.name }}</p>
     <div>
-      <p class="topic_name">{{ festivalList.name }}</p>
-      <div>
-        <img class="topic_image" :src="festivalList.image" alt="cool" />
-      </div>
+      <img class="topic_image" :src="festivalList.image" alt="cool" />
     </div>
-  </router-link>
+  </div>
 </template>
 <script>
 export default {
@@ -16,6 +14,15 @@ export default {
     return {
       festivalName: this.festivalList,
     };
+  },
+  methods: {
+    switchSpecificPage() {
+      console.log("hi");
+      this.$router.push({
+        name: "Result",
+        params: { city: "fake", class: "fake", id: "fake" },
+      });
+    },
   },
 };
 </script>
@@ -53,6 +60,7 @@ export default {
     margin: 0 auto;
 
     z-index: 2;
+    cursor: pointer;
 
     @include breakpoints.desktop {
       font-size: 25px;
@@ -64,6 +72,9 @@ export default {
 
     border-radius: 24px;
     // opacity: 0.5;
+  }
+  div {
+    cursor: pointer;
   }
 }
 </style>

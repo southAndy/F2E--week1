@@ -1,7 +1,7 @@
 <template v-if="event">
   <div class="content">
     <Breadcrumb />
-    <!-- <CarouselContent :placeData="filterEvent" /> -->
+    <CarouselContent :placeData="filterEvent" />
     <h2>
       {{
         filterEvent.ActivityName ||
@@ -82,10 +82,10 @@
 <script>
 import Breadcrumb from "../components/Breadcrumb.vue";
 // import Carousel from "@/components/Carousel.vue";
-// import CarouselContent from "@/components/CarouselContent.vue";
+import CarouselContent from "@/components/CarouselContent.vue";
+import Category from "../components/Category.vue";
 
 import API from "@/service/getAPI";
-// import Category from "../components/Category.vue";
 
 export default {
   name: "Content",
@@ -100,8 +100,8 @@ export default {
   components: {
     Breadcrumb,
     // Carousel,
-    // CarouselContent,
-    // Category,
+    CarouselContent,
+    Category,
   },
   computed: {
     getMap() {

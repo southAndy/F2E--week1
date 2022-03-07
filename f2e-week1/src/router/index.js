@@ -47,8 +47,9 @@ const routes = [
     component: () => import("../views/Content.vue"),
   },
   {
-    path: "/result",
+    path: "/result/:city/:type?",
     name: "Result",
+    props: true,
     component: () => import("../views/Result.vue"),
   },
 ];

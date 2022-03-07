@@ -20,6 +20,10 @@ export default {
 @use "assets/sass/breakpoints.scss";
 
 $primary-color: #7f977b;
+
+* {
+  // outline: 1px solid red;
+}
 body {
   margin: 0;
   padding: 15px;
