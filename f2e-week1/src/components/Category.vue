@@ -1,6 +1,6 @@
-<template v-if="category[0].Class || category[0].Class1 || category[0].Class2">
+<template v-if="category.Class || category.Class1 || category.Class2">
   <div class="category">
-    <div class="category_items"># {{ category[0].Class1 }}</div>
+    <div class="category_items"># {{ category.Class1 }}</div>
   </div>
 </template>
 
