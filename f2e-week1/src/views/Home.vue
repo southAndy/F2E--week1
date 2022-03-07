@@ -12,7 +12,7 @@
       <Serach />
     </div>
     <div class="carousel">
-      <Carousel :placeData="allTouristData" />
+      <Carousel :placeData="getScenicSpotCity" />
     </div>
     <div class="recent" v-if="apiData">
       <div>
@@ -61,7 +61,7 @@
       </div>
       <div class="recent_search">
         <RestaurantCard
-          v-for="datas in resturantData"
+          v-for="datas in getResturantCity"
           :key="datas"
           :resturantData="datas"
         />
@@ -125,6 +125,15 @@ export default {
     },
     getScenicSpotCity() {
       const x = Array.from(this.allTouristData);
+      // console.log("57", this.apiData);
+      console.log(
+        58,
+        x.filter((data) => data.City != undefined)
+      );
+      return x.filter((data) => data.City != undefined);
+    },
+    getResturantCity() {
+      const x = Array.from(this.resturantData);
       // console.log("57", this.apiData);
       console.log(
         58,

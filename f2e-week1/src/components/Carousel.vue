@@ -1,5 +1,5 @@
 <template>
-  <div class="cool">
+  <div class="cool" v-if="placeData">
     <div
       id="carouselExampleIndicators"
       class="carousel slide"
@@ -31,15 +31,16 @@
         <router-link
           :to="{
             name: 'Content',
+            params: {
+              city: placeData[0].City,
+              id: placeData[0].ScenicSpotID,
+              name: placeData[0].ScenicSpotName,
+            },
           }"
           class="carousel-item w-100 h-100 active"
         >
           <p class="carousel_title">
-            {{
-              placeData[0].ScenicSpotName ||
-              placeData[0].ActivityName ||
-              placeData[0].RestaurantName
-            }}
+            {{ placeData[0].ScenicSpotName }}
           </p>
           <img
             :src="placeData[0].Picture.PictureUrl1"
@@ -50,15 +51,16 @@
         <router-link
           :to="{
             name: 'Content',
+            params: {
+              city: placeData[19].City,
+              id: placeData[19].ScenicSpotID,
+              name: placeData[19].ScenicSpotName,
+            },
           }"
           class="carousel-item h-100 w-100"
         >
           <p class="carousel_title">
-            {{
-              placeData[0].ScenicSpotName ||
-              placeData[0].ActivityName ||
-              placeData[0].RestaurantName
-            }}
+            {{ placeData[19].ScenicSpotName }}
           </p>
           <img
             :src="placeData[19].Picture.PictureUrl1"
@@ -69,15 +71,16 @@
         <router-link
           :to="{
             name: 'Content',
+            params: {
+              city: placeData[26].City,
+              id: placeData[26].ScenicSpotID,
+              name: placeData[26].ScenicSpotName,
+            },
           }"
           class="carousel-item h-100"
         >
           <p class="carousel_title">
-            {{
-              placeData[0].ScenicSpotName ||
-              placeData[0].ActivityName ||
-              placeData[0].RestaurantName
-            }}
+            {{ placeData[26].ScenicSpotName }}
           </p>
           <img
             :src="placeData[26].Picture.PictureUrl1"
