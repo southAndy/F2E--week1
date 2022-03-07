@@ -1,22 +1,21 @@
 <template v-if="event">
   <div class="content">
     <Breadcrumb />
-    <CarouselContent :placeData="filterEvent" />
+    <!-- <CarouselContent :placeData="filterEvent" /> -->
     <h2>
       {{
-        filterEvent[0].ActivityName ||
-        filterEvent[0].ScenicSpotName ||
-        filterEvent[0].RestaurantName
+        filterEvent.ActivityName ||
+        filterEvent.ScenicSpotName ||
+        filterEvent.RestaurantName
       }}
     </h2>
     <Category :category="filterEvent" />
     <article class="description">
       <h4>景點介紹：</h4>
       <p>
-        {{ filterEvent[0].Description }}
+        {{ filterEvent.Description }}
       </p>
     </article>
-
     <div class="detail_container">
       <div class="detail">
         <p class="detail_title">
@@ -29,11 +28,11 @@
         </p>
         <p class="detail_title">
           主辦單位：
-          <span class="detail_content">{{ filterEvent[0].Organizer }}</span>
+          <span class="detail_content">{{ filterEvent.Organizer }}</span>
         </p>
         <p class="detail_title">
           活動地點：
-          <a href="##" class="detail_content">{{ filterEvent[0].Address }}</a>
+          <a href="##" class="detail_content">{{ filterEvent.Address }}</a>
         </p>
         <p class="detail_title">
           官方網站：
@@ -83,10 +82,10 @@
 <script>
 import Breadcrumb from "../components/Breadcrumb.vue";
 // import Carousel from "@/components/Carousel.vue";
-import CarouselContent from "@/components/CarouselContent.vue";
+// import CarouselContent from "@/components/CarouselContent.vue";
 
 import API from "@/service/getAPI";
-import Category from "../components/Category.vue";
+// import Category from "../components/Category.vue";
 
 export default {
   name: "Content",
@@ -94,43 +93,46 @@ export default {
   data() {
     return {
       event: null,
-      eventName: this.$route.params.name,
+      eventID: this.$route.params.id,
       contentData: null,
     };
   },
   components: {
     Breadcrumb,
     // Carousel,
-    CarouselContent,
-    Category,
+    // CarouselContent,
+    // Category,
   },
   computed: {
     getMap() {
       const mapPosition = {};
       //南北緯
-      mapPosition.positionLat = this.filterEvent[0].Position.PositionLat;
+      mapPosition.positionLat = this.filterEvent.Position.PositionLat;
       //東西緯
-      mapPosition.positionLon = this.filterEvent[0].Position.PositionLon;
+      mapPosition.positionLon = this.filterEvent.Position.PositionLon;
       //&ll:儲存緯度座標參數
       return `https://maps.google.com/?ie=UTF8&t=m&ll=${mapPosition.positionLat},${mapPosition.positionLon}&spn=0.003381,0.017231&z=16&output=embed`;
     },
     filterEvent() {
       let detail = Array.from(this.contentData);
-      return detail.filter((data) => {
-        if (data.ActivityName === this.eventName) {
-          return data;
-        }
-        if (data.ScenicSpotName === this.eventName) {
-          return data;
-        }
-        if (data.RestaurantName === this.eventName) {
+
+      let filteredData = detail.filter((data) => {
+        if (
+          data.ActivityID === this.eventID ||
+          data.ScenicSpotID === this.eventID ||
+          data.RestaurantID === this.eventID
+        ) {
           return data;
         }
       });
+      let apiContent = null;
+      [apiContent] = filteredData;
+      return apiContent;
     },
   },
   created() {
     let dataID = this.$route.params.id;
+    console.log(dataID);
     if (dataID.includes("C1")) {
       API.getScenicSpotAPI().then((response) => {
         return (this.contentData = response.data);
