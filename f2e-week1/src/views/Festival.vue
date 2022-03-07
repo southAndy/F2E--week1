@@ -10,6 +10,7 @@
           :key="topic"
           :festivalList="topic"
           class="topic"
+          @click="getDataByClass(topic.name)"
         />
       </div>
     </div>
@@ -19,6 +20,8 @@
 import Topic from "@/components/Topic.vue";
 import Button from "@/components/Button.vue";
 import Breadcrumb from "@/components/Breadcrumb.vue";
+
+import API from "@/service/getAPI";
 
 export default {
   name: "Festival",
@@ -64,7 +67,21 @@ export default {
         "年度活動",
         "四季活動",
       ],
+      apiDataByClass: null,
     };
+  },
+  methods: {
+    async getDataByClass(className) {
+      console.log(className);
+      await API.activities.getDataByClass(className).then((response) => {
+        return (this.apiDataByClass = response.data);
+      });
+      console.log(this.apiDataByClass);
+      this.$router.push({
+        name: "Result",
+        params: { id: this.apiDataByClass[0].ActivityID },
+      });
+    },
   },
 };
 </script>

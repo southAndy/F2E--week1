@@ -108,6 +108,11 @@ export default {
       );
       return x.filter((data) => data.Picture.PictureUrl1 != undefined);
     },
+    test(className) {
+      API.scenicSport.getDataByClass(className).then((response) => {
+        console.log(response);
+      });
+    },
     // searchResult() {
     //   router.push({ name: "Result" });
     // },

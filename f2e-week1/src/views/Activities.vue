@@ -10,6 +10,7 @@
           :key="topic"
           :festivalList="topic"
           class="topic"
+          @click="getDataByClass(topic.name)"
         />
       </div>
     </div>
@@ -19,6 +20,9 @@
 import Topic from "@/components/Topic.vue";
 import Button from "@/components/Button.vue";
 import Breadcrumb from "@/components/Breadcrumb.vue";
+
+import API from "@/service/getAPI";
+
 export default {
   name: "Activities",
   components: {
@@ -58,7 +62,20 @@ export default {
           image: require("../assets/image/activities/Rectangle 98.svg"),
         },
       ],
+      apiDataByClass: null,
     };
+  },
+  methods: {
+    async getDataByClass(className) {
+      console.log(className);
+      await API.scenicSport.getDataByClass(className).then((response) => {
+        return (this.apiDataByClass = response.data);
+      });
+      this.$router.push({
+        name: "Result",
+        params: { id: this.apiDataByClass[0].ScenicSpotID },
+      });
+    },
   },
 };
 </script>

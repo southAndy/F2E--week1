@@ -11,6 +11,7 @@
           :key="topic"
           :festivalList="topic"
           class="topic"
+          @click="getDataByClass(topic.name)"
         />
       </div>
     </div>
@@ -21,6 +22,8 @@ import Topic from "@/components/Topic.vue";
 import Button from "@/components/Button.vue";
 import Breadcrumb from "@/components/Breadcrumb.vue";
 // import Swiper from "@/components/Swiper.vue";
+
+import API from "@/service/getAPI";
 
 export default {
   name: "Restaurant",
@@ -59,7 +62,21 @@ export default {
           image: require("../assets/image/unsplash_qDZ-Xd8dX6w.svg"),
         },
       ],
+      apiDataByClass: null,
     };
+  },
+  methods: {
+    async getDataByClass(className) {
+      console.log(className);
+      await API.restaurant.getDataByClass(className).then((response) => {
+        return (this.apiDataByClass = response.data);
+      });
+      console.log(this.apiDataByClass);
+      this.$router.push({
+        name: "Result",
+        params: { id: this.apiDataByClass[0].RestaurantID },
+      });
+    },
   },
 };
 </script>
