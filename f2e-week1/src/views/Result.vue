@@ -103,18 +103,19 @@ export default {
   },
   created() {
     let dataID = this.$route.params.id;
+    let dataClass = this.$route.params.name;
     if (dataID.includes("C1")) {
-      API.getScenicSpotAPI().then((response) => {
+      API.activities.getDataByClass(dataClass).then((response) => {
         return (this.searchDatas = response.data);
       });
     }
     if (dataID.includes("C2")) {
-      API.getActivitiesAPI().then((response) => {
+      API.scenicSpot.getDataByClass(dataClass).then((response) => {
         return (this.searchDatas = response.data);
       });
     }
     if (dataID.includes("C3")) {
-      API.getRestaurantAPI().then((response) => {
+      API.restaurant.getDataByClass(dataClass).then((response) => {
         return (this.searchDatas = response.data);
       });
     }
