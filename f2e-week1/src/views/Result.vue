@@ -102,7 +102,7 @@ export default {
     },
   },
   created() {
-    let dataID = this.$route.params.type;
+    let dataID = this.$route.params.id;
     if (dataID.includes("C1")) {
       API.getScenicSpotAPI().then((response) => {
         return (this.searchDatas = response.data);

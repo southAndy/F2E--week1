@@ -49,7 +49,7 @@ export default {
         });
         this.$router.push({
           name: "Result",
-          params: { city: "hi", type: this.eventDatas[0].ScenicSpotID },
+          params: { id: this.eventDatas[0].ScenicSpotID },
         });
       }
       if (this.selectClass === "節慶活動") {
@@ -59,7 +59,7 @@ export default {
         });
         this.$router.push({
           name: "Result",
-          params: { city: "hi", type: this.eventDatas[0].ActivityID },
+          params: { id: this.eventDatas[0].ActivityID },
         });
       }
       if (this.selectClass === "品嚐美食") {
@@ -69,7 +69,7 @@ export default {
         });
         this.$router.push({
           name: "Result",
-          params: { city: "hi", type: this.eventDatas[0].RestaurantID },
+          params: { id: this.eventDatas[0].RestaurantID },
         });
       }
     },
