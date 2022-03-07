@@ -7,23 +7,6 @@ const routes = [
     name: "Home",
     props: true,
     component: Home,
-    children: [
-      {
-        path: "/activities",
-        name: "Activities",
-        component: () => import("../views/Activities.vue"),
-      },
-      {
-        path: "/festival",
-        name: "Festival",
-        component: () => import("../views/Festival.vue"),
-      },
-      {
-        path: "/restaurant",
-        name: "Restaurant",
-        component: () => import("../views/Restaurant.vue"),
-      },
-    ],
   },
   {
     path: "/activities",
@@ -47,7 +30,7 @@ const routes = [
     component: () => import("../views/Content.vue"),
   },
   {
-    path: "/result/:city/:type?",
+    path: "/result/:id?",
     name: "Result",
     props: true,
     component: () => import("../views/Result.vue"),
