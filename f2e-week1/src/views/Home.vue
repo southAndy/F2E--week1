@@ -45,7 +45,7 @@
       </div>
       <div class="recent_search">
         <ScenicSpotCard
-          v-for="data in allTouristData"
+          v-for="data in getScenicSpotCity"
           :key="data"
           :scenicSpotAPI="data"
         />
@@ -108,10 +108,12 @@ export default {
       );
       return x.filter((data) => data.Picture.PictureUrl1 != undefined);
     },
+    // searchResult() {
+    //   router.push({ name: "Result" });
+    // },
   },
   computed: {
     //!篩選有相片的活動
-    //為何不能
     filterActitivties() {
       const x = Array.from(this.apiData);
       // console.log("57", this.apiData);
