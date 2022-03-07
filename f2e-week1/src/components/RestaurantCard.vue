@@ -50,15 +50,15 @@ export default {
   &_title {
     text-align: start;
     font-weight: 700;
-    font-size: 16px;
+    font-size: 17px;
     color: black;
     margin: 0;
   }
   &_location {
     text-align: start;
     font-weight: 400;
-    font-size: 18px;
-    color: black;
+    font-size: 16px;
+    color: #646464;
   }
 }
 </style>

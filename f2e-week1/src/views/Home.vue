@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="home" v-if="apiData || resturantData || allTouristData">
     <div class="title_container">
       <div>
         <p class="home_title">探索台灣之美 <br />讓我們更親近這片土地</p>
@@ -11,7 +11,7 @@
       </div>
       <Serach />
     </div>
-    <div class="carousel">
+    <div class="carousel" v-if="getScenicSpotCity">
       <Carousel :placeData="getScenicSpotCity" />
     </div>
     <div class="recent" v-if="apiData">
@@ -35,7 +35,7 @@
       </div>
     </div>
     <!-- !改寫複用性高的css -->
-    <div class="recent">
+    <div class="recent" v-if="getScenicSpotCity">
       <div>
         <h2 class="recent_title">熱門打卡景點</h2>
         <router-link :to="{ name: 'Activities' }" class="recent_link"
@@ -51,7 +51,7 @@
         />
       </div>
     </div>
-    <div class="recent">
+    <div class="recent" v-if="getResturantCity">
       <div>
         <h2 class="recent_title">一再回訪的美食</h2>
         <router-link :to="{ name: 'Restaurant' }" class="recent_link"

@@ -66,9 +66,6 @@ export default {
       // console.log(activityYear, activityMonth, activityDate);
       return `${activityYear}/${activityMonth}/${activityDate}`;
     },
-    // changeDataType() {
-    //   return JSON.stringify(this.activities);
-    // },
   },
 };
 </script>
@@ -158,6 +155,7 @@ export default {
   }
   &_more {
     @include breakpoints.desktop {
+      color: #333;
       padding: 0 10px;
       align-self: end;
     }

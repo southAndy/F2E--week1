@@ -140,6 +140,9 @@ header {
       text-decoration: none;
       margin-left: 20px;
       color: $navbar-link;
+      &:hover {
+        border-bottom: 3px solid #7f977b;
+      }
 
       @include breakpoints.desktop {
         width: 75px;
