@@ -1,6 +1,5 @@
 <template>
   <div class="search_all" v-if="searchDatas">
-    {{ testDatas }}
     <Breadcrumb />
     <Button />
     <div class="serach_amount">
@@ -40,7 +39,6 @@
             "
             alt="景點圖片"
           />
-          <!-- <img src="../assets/image/RestaurantPicture＿desktop.png" alt="" /> -->
         </div>
         <p class="result_name">
           {{
@@ -85,10 +83,12 @@ export default {
       let arrayDatas = Array.from(this.searchDatas);
       return arrayDatas.slice(start, end);
     },
-    getPageNumber() {
-      let arrayDatas = Array.from(this.searchDatas);
-      return arrayDatas.length / 20;
-    },
+    // getPageNumber() {
+    //   //依據資料決定共有幾頁
+    //   let arrayDatas = Array.from(this.searchDatas);
+    //   console.log(89, Math.ceil(arrayDatas.length / 20));
+    //   return Math.ceil(arrayDatas.length / 20);
+    // },
     getTotalAmounts() {
       let arrayDatas = Array.from(this.searchDatas);
       console.log(`此次取得的資料為${this.searchDatas.length}筆`);
@@ -96,25 +96,49 @@ export default {
     },
   },
   methods: {
+    //取得當前的頁數
     getSearchDatas(searchDatas) {
       console.log("get emit?", searchDatas);
       this.currentPage = searchDatas;
     },
-  },
-  created() {
-    let dataID = this.$route.params.id;
-    let dataClass = this.$route.params.name;
-    if (dataID.includes("C1")) {
-      API.activities.getDataByClass(dataClass).then((response) => {
+    async getAPIDatas(className) {
+      await API.activities.getDataByClass(className).then((response) => {
         return (this.searchDatas = response.data);
       });
-    }
-    if (dataID.includes("C2")) {
+    },
+  },
+  created() {
+    //檢查透過router傳入的物件內容
+    console.log("router data", this.$route);
+    let dataID = this.$route.params.id;
+    let dataClass = this.$route.params.type;
+    console.log("資料類別：", dataClass);
+    if (dataID.includes("C1")) {
+      console.log("旅遊類型：spenicSpot");
+      //spenicSpot
+      // API.getScenicSpotAPI().then((response) => {
+      //   return (this.searchDatas = response.data);
+      // });
+      // this.getAPIDatas(dataClass);
       API.scenicSpot.getDataByClass(dataClass).then((response) => {
         return (this.searchDatas = response.data);
       });
     }
+    if (dataID.includes("C2")) {
+      //activities
+      console.log("旅遊類型：activities");
+      // API.getActivitiesAPI().then((response) => {
+      //   return (this.searchDatas = response.data);
+      // });
+      API.activities.getDataByClass(dataClass).then((response) => {
+        return (this.searchDatas = response.data);
+      });
+    }
     if (dataID.includes("C3")) {
+      //restaurant
+      // API.getRestaurantAPI().then((response) => {
+      //   return (this.searchDatas = response.data);
+      // });
       API.restaurant.getDataByClass(dataClass).then((response) => {
         return (this.searchDatas = response.data);
       });

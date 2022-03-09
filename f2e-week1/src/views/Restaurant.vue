@@ -74,7 +74,10 @@ export default {
       console.log(this.apiDataByClass);
       this.$router.push({
         name: "Result",
-        params: { id: this.apiDataByClass[0].RestaurantID },
+        params: {
+          id: this.apiDataByClass[0].RestaurantID,
+          type: this.apiDataByClass[1].Class,
+        },
       });
     },
   },

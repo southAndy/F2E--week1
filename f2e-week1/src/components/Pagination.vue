@@ -42,7 +42,7 @@ export default {
   computed: {
     getPageNumber() {
       let arrayDatas = Array.from(this.searchDatas);
-      return arrayDatas.length / 20;
+      return Math.ceil(arrayDatas.length / 20);
     },
   },
   methods: {

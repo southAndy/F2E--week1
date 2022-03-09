@@ -79,7 +79,10 @@ export default {
       console.log(this.apiDataByClass);
       this.$router.push({
         name: "Result",
-        params: { id: this.apiDataByClass[0].ActivityID },
+        params: {
+          id: this.apiDataByClass[0].ActivityID,
+          type: this.apiDataByClass[1].Class1,
+        },
       });
     },
   },

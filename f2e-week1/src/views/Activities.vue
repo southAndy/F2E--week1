@@ -68,12 +68,19 @@ export default {
   methods: {
     async getDataByClass(className) {
       console.log(className);
-      await API.scenicSport.getDataByClass(className).then((response) => {
+      await API.scenicSpot.getDataByClass(className).then((response) => {
         return (this.apiDataByClass = response.data);
       });
+      console.log(74, this.apiDataByClass);
+
       this.$router.push({
         name: "Result",
-        params: { id: this.apiDataByClass[0].ScenicSpotID },
+        params: {
+          id: this.apiDataByClass[0].ScenicSpotID,
+          //景點類別
+          type: this.apiDataByClass[1].Class1,
+          // data: JSON.stringify(this.apiDataByClass),
+        },
       });
     },
   },
