@@ -1,6 +1,8 @@
 <template v-if="category.Class || category.Class1 || category.Class2">
   <div class="category">
-    <div class="category_items"># {{ category.Class1 }}</div>
+    <div class="category_items">
+      # {{ category.Class1 || category.Class || category.Class3 }}
+    </div>
   </div>
 </template>
 

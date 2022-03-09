@@ -1,5 +1,5 @@
 <template>
-  <div @click="switchSpecificPage">
+  <div>
     <p class="topic_name">{{ festivalList.name }}</p>
     <div>
       <img class="topic_image" :src="festivalList.image" alt="cool" />
@@ -14,15 +14,6 @@ export default {
     return {
       festivalName: this.festivalList,
     };
-  },
-  methods: {
-    switchSpecificPage() {
-      console.log("hi");
-      this.$router.push({
-        name: "Result",
-        params: { city: "fake", class: "fake", id: "fake" },
-      });
-    },
   },
 };
 </script>

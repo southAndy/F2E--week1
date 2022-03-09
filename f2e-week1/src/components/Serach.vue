@@ -50,6 +50,7 @@ export default {
         this.$router.push({
           name: "Result",
           params: { id: this.eventDatas[0].ScenicSpotID },
+          query: { serach: this.selectClass },
         });
       }
       if (this.selectClass === "節慶活動") {
