@@ -79,7 +79,9 @@ export default {
           id: this.apiDataByClass[0].ScenicSpotID,
           //景點類別
           type: this.apiDataByClass[1].Class1,
-          // data: JSON.stringify(this.apiDataByClass),
+        },
+        query: {
+          type: this.apiDataByClass[1].Class1,
         },
       });
     },

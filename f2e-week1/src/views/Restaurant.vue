@@ -78,6 +78,9 @@ export default {
           id: this.apiDataByClass[0].RestaurantID,
           type: this.apiDataByClass[1].Class,
         },
+        query: {
+          type: this.apiDataByClass[1].Class,
+        },
       });
     },
   },

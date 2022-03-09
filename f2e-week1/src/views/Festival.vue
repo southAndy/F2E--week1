@@ -83,6 +83,9 @@ export default {
           id: this.apiDataByClass[0].ActivityID,
           type: this.apiDataByClass[1].Class1,
         },
+        query: {
+          type: this.apiDataByClass[1].Class1,
+        },
       });
     },
   },

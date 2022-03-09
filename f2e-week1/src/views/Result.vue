@@ -14,9 +14,12 @@
         :to="{
           name: 'Content',
           params: {
-            city: 'fake',
+            city: amount.City,
             id: amount.ActivityID || amount.ScenicSpotID || amount.RestaurantID,
-            name: 'fake',
+            name:
+              amount.ActivityName ||
+              amount.ScenicSpotName ||
+              amount.RestaurantName,
           },
         }"
         v-for="amount in showDataAmounts"
@@ -73,6 +76,9 @@ export default {
       //每頁資料
       dataPerPage: 20,
       currentPage: 1,
+
+      //
+      // dataClassName: this.$$route.params.type,
     };
   },
   computed: {
@@ -108,18 +114,15 @@ export default {
     },
   },
   created() {
-    //檢查透過router傳入的物件內容
+    //!檢查透過router傳入的物件內容
     console.log("router data", this.$route);
     let dataID = this.$route.params.id;
-    let dataClass = this.$route.params.type;
+    let dataClass = this.$route.query.type;
+
     console.log("資料類別：", dataClass);
     if (dataID.includes("C1")) {
       console.log("旅遊類型：spenicSpot");
       //spenicSpot
-      // API.getScenicSpotAPI().then((response) => {
-      //   return (this.searchDatas = response.data);
-      // });
-      // this.getAPIDatas(dataClass);
       API.scenicSpot.getDataByClass(dataClass).then((response) => {
         return (this.searchDatas = response.data);
       });
@@ -127,18 +130,13 @@ export default {
     if (dataID.includes("C2")) {
       //activities
       console.log("旅遊類型：activities");
-      // API.getActivitiesAPI().then((response) => {
-      //   return (this.searchDatas = response.data);
-      // });
+
       API.activities.getDataByClass(dataClass).then((response) => {
         return (this.searchDatas = response.data);
       });
     }
     if (dataID.includes("C3")) {
       //restaurant
-      // API.getRestaurantAPI().then((response) => {
-      //   return (this.searchDatas = response.data);
-      // });
       API.restaurant.getDataByClass(dataClass).then((response) => {
         return (this.searchDatas = response.data);
       });
