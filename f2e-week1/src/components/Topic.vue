@@ -24,7 +24,7 @@ export default {
   display: flex;
   background: black;
   height: 80px;
-  width: 165px;
+  width: 160px;
 
   text-align: center;
   border-radius: 24px;

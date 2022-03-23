@@ -72,7 +72,7 @@ export default {
   },
   methods: {
     async getDataByClass(className) {
-      console.log('此次搜尋類別為：',className);
+      console.log("此次搜尋類別為：",className);
       await API.activities.getDataByClass(className).then((response) => {
         return (this.apiDataByClass = response.data);
       });
@@ -94,7 +94,12 @@ export default {
 <style lang="scss" scoped>
 @use "../assets/sass/breakpoints.scss";
 .festival {
-  padding: 0 45px;
+    padding: 0 25px;
+
+  @include breakpoints.desktop{
+    padding: 0 45px;
+
+  }
 
   .serach {
     margin: 50px 0;

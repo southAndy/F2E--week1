@@ -91,7 +91,12 @@ export default {
 <style lang="scss" scoped>
 @use "../assets/sass/breakpoints.scss";
 .activities {
-  padding: 0 45px;
+  padding: 0 25px;
+
+  @include breakpoints.desktop{
+    padding: 0 45px;
+
+  }
 
   .serach {
     margin: 50px 0;
