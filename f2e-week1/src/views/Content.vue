@@ -61,22 +61,26 @@
         </div>
         <div class="nearby">
           <h4>周邊資訊：</h4>
-          <router-link :to="{ name: 'Result' }">
-            <img src="../assets/image/content/vertical-style1.png" alt="" />
-          </router-link>
-          <router-link :to="{ name: 'Result' }">
-            <img src="../assets/image/content/vertical-style1拷貝.png" alt="" />
-          </router-link>
-          <router-link :to="{ name: 'Result' }">
-            <img
-              src="../assets/image/content/vertical-style1拷貝2.png"
-              alt=""
-            />
-          </router-link>
+          <div>
+            <router-link class="near_link" :to="{ name: 'Result' }">
+              <img src="../assets/image/content/vertical-style1.png" alt="" />
+            </router-link>
+            <router-link class="near_link" :to="{ name: 'Result' }">
+              <img
+                src="../assets/image/content/vertical-style1拷貝.png"
+                alt=""
+              />
+            </router-link>
+            <router-link class="near_link" :to="{ name: 'Result' }">
+              <img
+                src="../assets/image/content/vertical-style1拷貝2.png"
+                alt=""
+              />
+            </router-link>
+          </div>
         </div>
       </div>
     </div>
-    -->
   </div>
 </template>
 <script>
@@ -155,7 +159,9 @@ export default {
 @use "../assets/sass/breakpoints.scss";
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300&display=swap");
 .content {
-  padding: 0 60px;
+  @include breakpoints.desktop {
+    padding: 0 60px;
+  }
   .content_image {
     height: 185px;
     width: 345px;
@@ -183,10 +189,10 @@ export default {
     }
 
     h4 {
-      margin: 0;
+      font-weight: 700;
+      margin-bottom: 10px;
       @include breakpoints.desktop {
         font-weight: 700;
-        margin-bottom: 10px;
       }
     }
     p {
@@ -212,8 +218,16 @@ export default {
     }
 
     &_title {
-      font-weight: 700;
-      font-size: 18px;
+      font-weight: 500;
+      line-height: 10px;
+      @include breakpoints.desktop {
+        font-weight: 700;
+        font-size: 18px;
+      }
+      a {
+        text-decoration: none;
+        color: #2c3e50;
+      }
     }
     &_content {
       font-weight: 400;
@@ -222,11 +236,19 @@ export default {
   }
 
   .other {
-    margin-left: 60px;
+    @include breakpoints.desktop {
+      margin-left: 60px;
+    }
     .location {
+      width: 100%;
+      margin-top: 30px;
       @include breakpoints.desktop {
         width: 540px;
         height: 250px;
+      }
+      // 針對google map的尺寸調整
+      iframe {
+        width: 100%;
       }
     }
     .nearby {
@@ -241,7 +263,7 @@ export default {
           margin-bottom: 20px;
           flex: 100%;
         }
-        a {
+        .near_link {
           display: inline-block;
           width: 170px;
           height: 110px;
