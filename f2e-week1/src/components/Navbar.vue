@@ -16,10 +16,10 @@
         />
       </router-link>
     </h1>
-    <div class="toggle" @click="dropMenu()">
+    <div class="toggle" @click="dropMenu">
       <img src="@/assets/image/menu.svg" alt="toggle button" />
     </div>
-    <nav :class="['navigation', { drop: isDropNavbar }]">
+    <nav class="navigation" :class="{ drop: isDropNavbar }">
       <router-link
         class="navigation_link"
         :to="{ name: 'Activities' }"
@@ -110,14 +110,10 @@ header {
       }
     }
   }
-  .drop {
-    display: none;
-    @include breakpoints.desktop {
-      display: block;
-    }
-  }
+
   .toggle {
-    @include breakpoints.tablet {
+    margin-bottom: 10px;
+    @include breakpoints.desktop {
       display: none;
     }
   }
@@ -154,6 +150,12 @@ header {
 
       //todo click effect
       //todo animation effect
+    }
+  }
+  .drop {
+    display: none;
+    @include breakpoints.desktop {
+      display: block;
     }
   }
 }
