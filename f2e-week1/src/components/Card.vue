@@ -74,20 +74,22 @@ export default {
 
 .card {
   display: flex;
-
+  flex-direction: row;
   width: 345px;
-  height: 62px;
+  height: 70px;
 
   text-decoration: none;
   //card's distance
   margin-bottom: 16px;
+
+  border:none;
   @include breakpoints.desktop {
     flex-direction: row;
     width: 45%;
     height: 160px;
     background-color: #f9f9f9;
     margin-right: 30px;
-
+    border:1px solid #646464;
     border-radius: 16px;
   }
 
@@ -154,8 +156,10 @@ export default {
     }
   }
   &_more {
+    display: none;
     @include breakpoints.desktop {
-      color: #333;
+      display: block;
+      color: rgb(153, 150, 150);
       padding: 0 10px;
       align-self: end;
     }

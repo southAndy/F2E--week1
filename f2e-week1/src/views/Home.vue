@@ -262,13 +262,14 @@ a {
     }
   }
   .container {
+    display: flex;
+    flex-direction: column;
     width: 100%;
-    height: 312px;
+    height: 340px;
 
     overflow: hidden;
 
     @include breakpoints.desktop {
-      display: flex;
       flex-wrap: wrap;
       height: 350px;
       justify-content: center;
