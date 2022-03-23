@@ -67,7 +67,7 @@ export default {
   },
   methods: {
     async getDataByClass(className) {
-      console.log(className);
+      console.log("此次搜尋類別為：",className);
       await API.scenicSpot.getDataByClass(className).then((response) => {
         return (this.apiDataByClass = response.data);
       });
