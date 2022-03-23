@@ -1,7 +1,7 @@
 <template>
   <div class="home" v-if="apiData || resturantData || allTouristData">
     <div class="title_container">
-      <div>
+      <div >
         <p class="home_title">探索台灣之美 <br />讓我們更親近這片土地</p>
         <p>
           <img src="../assets/image/icon.png" alt="地標圖示" />
@@ -101,7 +101,6 @@ export default {
   methods: {
     filterActitivtiess() {
       const x = Array.from(this.apiData);
-      // console.log("57", this.apiData);
       console.log(
         58,
         x.filter((data) => data.Picture.PictureUrl1 != undefined)
@@ -120,13 +119,14 @@ export default {
   computed: {
     //!篩選有相片的活動
     filterActitivties() {
-      const x = Array.from(this.apiData);
-      // console.log("57", this.apiData);
-      console.log(
-        58,
-        x.filter((data) => data.Picture != {})
-      );
-      return x.filter((data) => data.Picture.PictureUrl1 != undefined);
+      return this.$store.getters.withPictureActivities;
+      // const x = Array.from(this.apiData);
+      // // console.log("57", this.apiData);
+      // console.log(
+      //   58,
+      //   x.filter((data) => data.Picture != {})
+      // );
+      // return x.filter((data) => data.Picture.PictureUrl1 != undefined);
     },
     getScenicSpotCity() {
       const x = Array.from(this.allTouristData);
@@ -138,6 +138,8 @@ export default {
       return x.filter((data) => data.City != undefined);
     },
     getResturantCity() {
+      // return this.$store.getters.withCityData;
+
       const x = Array.from(this.resturantData);
       // console.log("57", this.apiData);
       console.log(
@@ -149,6 +151,10 @@ export default {
   },
 
   created() {
+    this.$store.dispatch("getActivitiesAPI");
+    // let x = this.$store.getters.withPictureActivities;
+    // this.$store.actions.getAPI();
+    // console.log(157, x);
     //取得特定API資料
     API.getActivitiesAPI().then((response) => {
       return (this.apiData = response.data);
@@ -216,8 +222,10 @@ a {
     }
   }
   &_title {
-    font-size: 28px;
+    font-size: 20px;
     font-family: Noto Sans TC;
+
+    margin:20px 0;
     @include breakpoints.desktop {
       font-size: 35px;
       text-align: start;
