@@ -29,7 +29,12 @@
         <div class="result_image">
           <img
             class="mobile"
-            src="../assets/image/RestaurantPicture＿mobile.png"
+            :src="
+              amount.Picture.PictureUrl1 ||
+              amount.Picture.PictureUrl ||
+              amount.Picture.PictureUrl2 ||
+              `../assets/image/RestaurantPicture＿mobile.png`
+            "
             alt="景點圖片"
           />
           <img
@@ -203,9 +208,13 @@ p {
       margin-bottom: 30px;
     }
     &_image {
-      width: 250px;
-      height: 150px;
-      // flex: 100%;
+      width:100%;
+      height:100%;
+      @include breakpoints.desktop{
+        width: 250px;
+        height: 150px;
+
+      }
 
       img {
         height: 100%;
@@ -227,7 +236,9 @@ p {
     }
     &_location {
       display: flex;
-      height: 16px;
+      height: 20px;
+
+      overflow: hidden;
       img {
         height: 100%;
         margin-right: 5px;
