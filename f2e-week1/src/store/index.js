@@ -1,6 +1,9 @@
 import { createStore } from "vuex";
 import API from "@/service/getAPI";
 
+import { restaurantDatas } from "./restaurant/index.js";
+import { festivalDatas } from "./festival/index.js";
+import { activitiesDatas } from "./activities/index.js";
 export default createStore({
   state: {
     //接收API的容器
@@ -57,5 +60,9 @@ export default createStore({
       });
     },
   },
-  // modules: {},
+  modules: {
+    restaurantDatas,
+    festivalDatas,
+    activitiesDatas,
+  },
 });
