@@ -6,7 +6,7 @@
       <div class="topic_container">
         <h3 class="serach_theme">熱門主題</h3>
         <Topic
-          v-for="topic in festivalData"
+          v-for="topic in getActivitiyNames"
           :key="topic"
           :festivalList="topic"
           class="topic"
@@ -21,8 +21,6 @@ import Topic from "@/components/Topic.vue";
 import Button from "@/components/Button.vue";
 import Breadcrumb from "@/components/Breadcrumb.vue";
 
-import API from "@/service/getAPI";
-
 export default {
   name: "Activities",
   components: {
@@ -32,56 +30,33 @@ export default {
   },
   data() {
     return {
-      festivalData: [
-        {
-          name: "自然風景類",
-          image: require("../assets/image/activities/unsplash_pn5c-CLWGzY.png"),
-        },
-        {
-          name: "觀光工廠類",
-          image: require("../assets/image/Rectangle 93.svg"),
-        },
-        {
-          name: "遊憩活動類",
-          image: require("../assets/image/activities/Rectangle 94.png"),
-        },
-        {
-          name: "休閒農業類",
-          image: require("../assets/image/activities/Rectangle 95.svg"),
-        },
-        {
-          name: "生態類",
-          image: require("../assets/image/activities/unsplash_7tvbRQ5AKs4.png"),
-        },
-        {
-          name: "溫泉類",
-          image: require("../assets/image/activities/unsplash_I8K-lIkvqYI.png"),
-        },
-        {
-          name: "古蹟類",
-          image: require("../assets/image/activities/Rectangle 98.svg"),
-        },
-      ],
       apiDataByClass: null,
     };
   },
+  computed: {
+    getActivitiyNames() {
+      return this.$store.state.activitiesDatas.activitiesData;
+    },
+  },
   methods: {
     async getDataByClass(className) {
-      console.log("此次搜尋類別為：",className);
-      await API.scenicSpot.getDataByClass(className).then((response) => {
-        return (this.apiDataByClass = response.data);
-      });
-      console.log(74, this.apiDataByClass);
-
+      this.apiDataByClass = await this.$store.dispatch(
+        "activitiesDatas/sendData",
+        className
+      );
+      console.log(this.apiDataByClass);
+      this.changeRouter(this.apiDataByClass);
+    },
+    changeRouter(apiData) {
       this.$router.push({
         name: "Result",
         params: {
-          id: this.apiDataByClass[0].ScenicSpotID,
+          id: apiData[0].ScenicSpotID,
           //景點類別
-          type: this.apiDataByClass[1].Class1,
+          type: apiData[1].Class1,
         },
         query: {
-          type: this.apiDataByClass[1].Class1,
+          type: apiData[1].Class1,
         },
       });
     },
@@ -93,9 +68,8 @@ export default {
 .activities {
   padding: 0 25px;
 
-  @include breakpoints.desktop{
+  @include breakpoints.desktop {
     padding: 0 45px;
-
   }
 
   .serach {
