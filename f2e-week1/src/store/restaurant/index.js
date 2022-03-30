@@ -1,7 +1,7 @@
 import API from "@/service/getAPI";
 
 export const restaurantDatas = {
-  namescaped: true,
+  namespaced: true,
   state: {
     restaurantData: [
       {
@@ -54,7 +54,7 @@ export const restaurantDatas = {
       //將值存入state
       commit("storeAPI", apiData);
 
-      //把值傳出去
+      //! 討論：在action回傳值？
       return state.apiDataByClass;
     },
   },

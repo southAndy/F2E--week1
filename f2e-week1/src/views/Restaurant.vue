@@ -23,7 +23,6 @@ import Button from "@/components/Button.vue";
 import Breadcrumb from "@/components/Breadcrumb.vue";
 // import Swiper from "@/components/Swiper.vue";
 // import API from "@/service/getAPI";
-
 export default {
   name: "Restaurant",
   components: {
@@ -46,7 +45,10 @@ export default {
   methods: {
     async getAPI(className) {
       //沒加上async的話，同步程式碼會先執行，造成取不到資料
-      this.apiDataByClass = await this.$store.dispatch("sendData", className);
+      this.apiDataByClass = await this.$store.dispatch(
+        "restaurantDatas/sendData",
+        className
+      );
       console.log(this.apiDataByClass);
       this.changeRouter(this.apiDataByClass);
     },
