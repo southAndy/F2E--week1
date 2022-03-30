@@ -6,7 +6,7 @@
       <div class="topic_container">
         <h3 class="serach_theme">熱門主題</h3>
         <Topic
-          v-for="topic in festivalData"
+          v-for="topic in getFestivalNames"
           :key="topic"
           :festivalList="topic"
           class="topic"
@@ -21,7 +21,7 @@ import Topic from "@/components/Topic.vue";
 import Button from "@/components/Button.vue";
 import Breadcrumb from "@/components/Breadcrumb.vue";
 
-import API from "@/service/getAPI";
+// import API from "@/service/getAPI";
 
 export default {
   name: "Festival",
@@ -32,59 +32,48 @@ export default {
   },
   data() {
     return {
-      festivalData: [
-        {
-          name: "節慶活動",
-          image: require("../assets/image/unsplash_qDZ-Xd8dX6w.svg"),
-        },
-        {
-          name: "自行車活動",
-          image: require("../assets/image/unsplash_I8K-lIkvqYI.svg"),
-        },
-        //~ ok
-        {
-          name: "遊憩活動",
-          image: require("../assets/image/Rectangle 94.svg"),
-        },
-        {
-          name: "產業文化活動",
-          image: require("../assets/image/unsplash_qDBbM9Erwo4.svg"),
-        },
-        {
-          name: "年度活動",
-          image: require("../assets/image/unsplash_qDZ-Xd8dX6w.png"),
-        },
-        {
-          name: "四季活動",
-          image: require("../assets/image/unsplash_qDZ-Xd8dX6w.svg"),
-        },
-      ],
-      festivalList: [
-        "節慶活動",
-        "自行車活動",
-        "遊憩活動",
-        "產業文化活動",
-        "年度活動",
-        "四季活動",
-      ],
       apiDataByClass: null,
     };
   },
+  computed: {
+    getFestivalNames() {
+      return this.$store.state.festivalDatas.festivalData;
+    },
+  },
   methods: {
     async getDataByClass(className) {
-      console.log("此次搜尋類別為：",className);
-      await API.activities.getDataByClass(className).then((response) => {
-        return (this.apiDataByClass = response.data);
-      });
+      this.apiDataByClass = await this.$store.dispatch(
+        "festivalDatas/sendData",
+        className
+      );
       console.log(this.apiDataByClass);
+      this.changeRouter(this.apiDataByClass);
+
+      // 在元件呼叫API版
+      // await API.activities.getDataByClass(className).then((response) => {
+      //   return (this.apiDataByClass = response.data);
+      // });
+      // console.log(this.apiDataByClass);
+      // this.$router.push({
+      //   name: "Result",
+      //   params: {
+      //     id: this.apiDataByClass[0].ActivityID,
+      //     type: this.apiDataByClass[1].Class1,
+      //   },
+      //   query: {
+      //     type: this.apiDataByClass[1].Class1,
+      //   },
+      // });
+    },
+    changeRouter(apiData) {
       this.$router.push({
         name: "Result",
         params: {
-          id: this.apiDataByClass[0].ActivityID,
-          type: this.apiDataByClass[1].Class1,
+          id: apiData[0].ActivityID,
+          type: apiData[1].Class1,
         },
         query: {
-          type: this.apiDataByClass[1].Class1,
+          type: apiData[1].Class1,
         },
       });
     },
@@ -94,11 +83,10 @@ export default {
 <style lang="scss" scoped>
 @use "../assets/sass/breakpoints.scss";
 .festival {
-    padding: 0 25px;
+  padding: 0 25px;
 
-  @include breakpoints.desktop{
+  @include breakpoints.desktop {
     padding: 0 45px;
-
   }
 
   .serach {
