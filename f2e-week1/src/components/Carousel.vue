@@ -27,7 +27,7 @@
           aria-label="Slide 3"
         ></button>
       </div>
-      <div class="carousel-inner container p-0 carousel_mobile">
+      <div class="carousel-inner container p-0 carousel_layout">
         <router-link
           :to="{
             name: 'Content',
@@ -127,6 +127,8 @@ export default {
 
 .container {
   position: relative;
+  height: 300px;
+
   @include breakpoints.desktop {
     width: 100%;
     height: 345px;
@@ -147,7 +149,9 @@ export default {
     top: 50%;
   }
 }
-div.carousel_mobile {
-  height: 300px;
+div.carousel_layout {
+  // height: 300px;
+  border: 1px solid;
+  border-radius: 20px;
 }
 </style>
