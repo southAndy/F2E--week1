@@ -33,7 +33,7 @@
               amount.Picture.PictureUrl1 ||
               amount.Picture.PictureUrl ||
               amount.Picture.PictureUrl2 ||
-              `../assets/image/RestaurantPicture＿mobile.png`
+              noPicAPIMobileSize
             "
             alt="景點圖片"
           />
@@ -43,7 +43,7 @@
               amount.Picture.PictureUrl1 ||
               amount.Picture.PictureUrl ||
               amount.Picture.PictureUrl2 ||
-              `../assets/image/RestaurantPicture＿desktop.png`
+              noPictureImageUrl
             "
             alt="景點圖片"
           />
@@ -82,6 +82,8 @@ export default {
       dataPerPage: 20,
       currentPage: 1,
 
+      noPictureImageUrl: require("@/assets/image/RestaurantPicture.png"),
+      noPicAPIMobileSize: require("@/assets/image/RestaurantPicture＿mobile.png"),
       //
       // dataClassName: this.$$route.params.type,
     };
@@ -202,18 +204,17 @@ p {
     margin-bottom: 20px;
     text-align: start;
     @include breakpoints.desktop {
-      width: 250px;
+      width: 235px;
 
       margin-right: 30px;
       margin-bottom: 30px;
     }
     &_image {
-      width:100%;
-      height:100%;
-      @include breakpoints.desktop{
+      width: 100%;
+      height: 100%;
+      @include breakpoints.desktop {
         width: 250px;
         height: 150px;
-
       }
 
       img {
