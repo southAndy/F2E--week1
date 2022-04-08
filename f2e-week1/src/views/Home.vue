@@ -1,7 +1,7 @@
 <template>
   <div class="home" v-if="apiData || resturantData || allTouristData">
     <div class="title_container">
-      <div >
+      <div>
         <p class="home_title">探索台灣之美 <br />讓我們更親近這片土地</p>
         <p>
           <img src="../assets/image/icon.png" alt="地標圖示" />
@@ -11,10 +11,13 @@
       </div>
       <Serach />
     </div>
+
+    <!-- fix -->
     <div class="carousel" v-if="getScenicSpotCity">
       <Carousel :placeData="getScenicSpotCity" />
     </div>
-    <div class="recent" v-if="apiData">
+
+    <!-- <div class="recent" v-if="apiData">
       <div>
         <h2 class="recent_title">近期活動</h2>
         <router-link
@@ -25,16 +28,14 @@
           <img src="@/assets/image/Vector.svg" alt="方向鍵>" />
         </router-link>
       </div>
-      <!-- 每次只想顯示四筆 -->
-      <div class="container">
+      <!<div class="container">
         <Card
           v-for="(activitiesData, index) in filterActitivties"
           :key="index"
           :activitiesData="activitiesData"
         />
-      </div>
-    </div>
-    <!-- !改寫複用性高的css -->
+      </div> -->
+    <!-- </div>  -->
     <div class="recent" v-if="getScenicSpotCity">
       <div>
         <h2 class="recent_title">熱門打卡景點</h2>
@@ -43,7 +44,7 @@
           <img src="@/assets/image/Vector.svg" alt="方向鍵>" />
         </router-link>
       </div>
-      <div class="recent_search">
+      <div class="recent_search" v-if="getScenicSpotCity">
         <ScenicSpotCard
           v-for="data in getScenicSpotCity"
           :key="data"
@@ -73,7 +74,7 @@
 <script>
 // @ is an alias to /src
 import Serach from "@/components/Serach.vue";
-import Card from "@/components/Card.vue";
+// import Card from "@/components/Card.vue";
 import ScenicSpotCard from "@/components/ScenicSpotCard.vue";
 import RestaurantCard from "@/components/RestaurantCard.vue";
 import Carousel from "@/components/Carousel.vue";
@@ -85,7 +86,7 @@ export default {
   name: "Home",
   components: {
     Serach,
-    Card,
+    // Card,
     RestaurantCard,
     // Swiper,
     Carousel,
@@ -93,7 +94,7 @@ export default {
   },
   data() {
     return {
-      allTouristData: null,
+      allTouristData: [],
       apiData: null,
       resturantData: null,
     };
@@ -112,14 +113,12 @@ export default {
         console.log(response);
       });
     },
-    // searchResult() {
-    //   router.push({ name: "Result" });
-    // },
   },
   computed: {
-    //!篩選有相片的活動
     filterActitivties() {
       return this.$store.getters.withPictureActivities;
+
+      //元件寫法
       // const x = Array.from(this.apiData);
       // // console.log("57", this.apiData);
       // console.log(
@@ -129,42 +128,53 @@ export default {
       // return x.filter((data) => data.Picture.PictureUrl1 != undefined);
     },
     getScenicSpotCity() {
-      const x = Array.from(this.allTouristData);
-      // console.log("57", this.apiData);
-      console.log(
-        58,
-        x.filter((data) => data.City != undefined)
-      );
-      return x.filter((data) => data.City != undefined);
+      return this.$store.getters.scenicSpotDataWithCity;
+
+      //元件篩選
+
+      // const x = Array.from(this.allTouristData);
+      // console.log(
+      //   "有城市的資料為",
+      //   this.allTouristData.filter((data) => data.City != undefined)
+      // );
+      // return this.allTouristData.filter((data) => data.City != undefined);
     },
     getResturantCity() {
+      return this.$store.getters.restaurantDataWithCity;
+
+      //元件篩選
+
       // return this.$store.getters.withCityData;
 
-      const x = Array.from(this.resturantData);
-      // console.log("57", this.apiData);
-      console.log(
-        58,
-        x.filter((data) => data.City != undefined)
-      );
-      return x.filter((data) => data.City != undefined);
+      // const x = Array.from(this.resturantData);
+      // // console.log("57", this.apiData);
+      // console.log(
+      //   58,
+      //   x.filter((data) => data.City != undefined)
+      // );
+      // return x.filter((data) => data.City != undefined);
     },
   },
 
   created() {
     this.$store.dispatch("getActivitiesAPI");
+    this.$store.dispatch("getScenicSpotAPI");
+    console.log(151, this.apiData);
+    this.resturantData = this.$store.dispatch("getRestaurantAPI");
+
     // let x = this.$store.getters.withPictureActivities;
     // this.$store.actions.getAPI();
     // console.log(157, x);
     //取得特定API資料
-    API.getActivitiesAPI().then((response) => {
-      return (this.apiData = response.data);
-    });
-    API.getRestaurantAPI().then((response) => {
-      return (this.resturantData = response.data);
-    });
-    API.getScenicSpotAPI().then((response) => {
-      return (this.allTouristData = response.data);
-    });
+    // API.getActivitiesAPI().then((response) => {
+    //   return (this.apiData = response.data);
+    // });
+    // API.getRestaurantAPI().then((response) => {
+    //   return (this.resturantData = response.data);
+    // });
+    // API.getScenicSpotAPI().then((response) => {
+    //   return (this.allTouristData = response.data);
+    // });
   },
 };
 </script>
@@ -225,7 +235,7 @@ a {
     font-size: 20px;
     font-family: Noto Sans TC;
 
-    margin:20px 0;
+    margin: 20px 0;
     @include breakpoints.desktop {
       font-size: 35px;
       text-align: start;

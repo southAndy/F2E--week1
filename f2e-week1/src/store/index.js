@@ -22,6 +22,13 @@ export default createStore({
       const arrAPI = Array.from(state.activitiesData);
       return arrAPI.filter((data) => data.City != undefined);
     },
+    scenicSpotDataWithCity(state) {
+      console.log("array?", state);
+      return state.scenicSpotData.filter((data) => data.City != undefined);
+    },
+    restaurantDataWithCity(state) {
+      return state.resturantData.filter((data) => data.City != undefined);
+    },
   },
   mutations: {
     ensureActivitiesAPI(state, apiData) {
@@ -38,26 +45,31 @@ export default createStore({
     },
   },
   actions: {
-    getActivitiesAPI({ commit }) {
-      API.getActivitiesAPI().then((response) => {
-        let apiData = response.data;
-        //呼叫mutation修改state
-        commit("ensureActivitiesAPI", apiData);
+    async getActivitiesAPI({ commit }) {
+      let apiData = await API.getActivitiesAPI().then((response) => {
+        console.log("23", response.data);
+        return response.data;
       });
+      console.log("23", apiData);
+      //呼叫mutation修改state
+      commit("ensureActivitiesAPI", apiData);
+      // return state.activitiesData;
     },
-    getRestaurantAPI({ commit }) {
-      API.getRestaurantAPI().then((response) => {
-        let apiData = response.data;
-        //呼叫mutation修改state
-        commit("ensureRestaurantAPI", apiData);
+    async getRestaurantAPI({ commit, state }) {
+      let apiData = await API.getRestaurantAPI().then((response) => {
+        return response.data;
       });
+      //呼叫mutation修改state
+      commit("ensureRestaurantAPI", apiData);
+      return state.resturantData;
     },
-    getScenicSpotAPI({ commit }) {
-      API.getScenicSpotAPI().then((response) => {
-        let apiData = response.data;
-        //呼叫mutation修改state
-        commit("ensureScenicSpotAPI", apiData);
+    async getScenicSpotAPI({ commit }) {
+      let apiData = await API.getScenicSpotAPI().then((response) => {
+        return response.data;
       });
+      //呼叫mutation修改state
+      commit("ensureScenicSpotAPI", apiData);
+      // return state.scenicSpotData;
     },
   },
   modules: {
