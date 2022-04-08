@@ -128,7 +128,7 @@ export default {
 .container {
   position: relative;
   @include breakpoints.desktop {
-    width: 960px;
+    width: 100%;
     height: 345px;
   }
 }
