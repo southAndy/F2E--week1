@@ -1,8 +1,60 @@
 # f2e week1 實作紀錄
 
 ## 邏輯問題
+### 當資料還沒抵達時，如何避免報錯 -- `串連運算子`
+**情境**
+當今天載入套件(carousel)時，圖片來源是API資料，但因為時間差的問題，在最初載入時尚未取到資料
+```html
+ <router-link
+          :to="{
+            name: 'Content',
+            params: {
+              city: placeData?.[1]?.City,
+              id: placeData?.[1]?.ScenicSpotID,
+              name: placeData?.[1]?.ScenicSpotName,
+            },
+          }"
+          class="carousel-item w-100 h-100 active"
+        >
+          <p class="carousel_title">
+            {{ placeData?.[1]?.ScenicSpotName }}
+          </p>
+          <img
+            :src="placeData?.[1]?.Picture.PictureUrl1"
+            class="d-block w-100"
+            alt="..."
+          />
+```
+會因為取不到API（物件），而出現
+>Uncaught TypeError: Cannot read properties of undefined (reading 'City')
+    at <anonymous>:...
 
-### 可用來檢查 data 值狀況 -- `<prev>`
+可以透過**串連運算子** `?` 判斷資料是否為`undefined`或是`null`，決定是否要繼續執行，若是`true`，會回傳`undefined`並暫停執行。
+
+修改後：
+```html
+ <router-link
+          :to="{
+            name: 'Content',
+            params: {
+              city: placeData?.[1]?.City,
+              id: placeData?.[1]?.ScenicSpotID,
+              name: placeData?.[1]?.ScenicSpotName,
+            },
+          }"
+          class="carousel-item w-100 h-100 active"
+        >
+          <p class="carousel_title">
+            {{ placeData?.[1]?.ScenicSpotName }}
+          </p>
+          <img
+            :src="placeData?.[1]?.Picture.PictureUrl1"
+            class="d-block w-100"
+            alt="..."
+          />
+```
+
+### 可用來預覽 data 值狀況 -- `<prev>`（不會佔據一個空間）
 
 ```html
 <prev>{{data}}</prev>
@@ -372,3 +424,4 @@ import "swiper/swiper.min.css";
 
 1. navbar 下拉造型修改
 2.
+
