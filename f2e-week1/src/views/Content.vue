@@ -1,19 +1,25 @@
 <template v-if="event">
   <div class="content">
     <Breadcrumb />
-    <CarouselContent :placeData="filterEvent" />
+    <div style="width: 460px; height: 215px">
+      <img
+        :src="filterEvent?.Picture?.PictureUrl1"
+        style="width: 100%; height: 100%"
+      />
+    </div>
+    <!-- <CarouselContent :placeData="filterEvent" /> -->
     <h2>
       {{
-        filterEvent.ActivityName ||
-        filterEvent.ScenicSpotName ||
-        filterEvent.RestaurantName
+        filterEvent?.ActivityName ||
+        filterEvent?.ScenicSpotName ||
+        filterEvent?.RestaurantName
       }}
     </h2>
     <Category :category="filterEvent" />
     <article class="description">
       <h4>景點介紹：</h4>
       <p>
-        {{ filterEvent.Description }}
+        {{ filterEvent?.Description }}
       </p>
     </article>
     <div class="detail_container">
@@ -28,11 +34,11 @@
         </p>
         <p class="detail_title">
           主辦單位：
-          <span class="detail_content">{{ filterEvent.Organizer }}</span>
+          <span class="detail_content">{{ filterEvent?.Organizer }}</span>
         </p>
         <p class="detail_title">
           活動地點：
-          <a href="##" class="detail_content">{{ filterEvent.Address }}</a>
+          <a href="##" class="detail_content">{{ filterEvent?.Address }}</a>
         </p>
         <p class="detail_title">
           官方網站：
@@ -59,7 +65,7 @@
             scrolling="no"
           ></iframe>
         </div>
-        <div class="nearby">
+        <!-- <div class="nearby">
           <h4>周邊資訊：</h4>
           <div>
             <router-link class="near_link" :to="{ name: 'Result' }">
@@ -78,15 +84,14 @@
               />
             </router-link>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
 </template>
 <script>
 import Breadcrumb from "../components/Breadcrumb.vue";
-// import Carousel from "@/components/Carousel.vue";
-import CarouselContent from "@/components/CarouselContent.vue";
+// import CarouselContent from "@/components/CarouselContent.vue";
 import Category from "../components/Category.vue";
 
 import API from "@/service/getAPI";
@@ -104,23 +109,26 @@ export default {
   components: {
     Breadcrumb,
     // Carousel,
-    CarouselContent,
+    // CarouselContent,
     Category,
   },
   computed: {
     getMap() {
       const mapPosition = {};
       //南北緯
-      mapPosition.positionLat = this.filterEvent.Position.PositionLat;
+      mapPosition.positionLat = this.filterEvent?.Position.PositionLat;
       //東西緯
-      mapPosition.positionLon = this.filterEvent.Position.PositionLon;
+      mapPosition.positionLon = this.filterEvent?.Position.PositionLon;
       //&ll:儲存緯度座標參數
-      return `https://maps.google.com/?ie=UTF8&t=m&ll=${mapPosition.positionLat},${mapPosition.positionLon}&spn=0.003381,0.017231&z=16&output=embed`;
+      return `https://maps.google.com/?ie=UTF8&t=m&ll=${mapPosition?.positionLat},${mapPosition?.positionLon}&spn=0.003381,0.017231&z=16&output=embed`;
+
+      // return `https://maps.google.com/?ie=UTF8&t=m&ll=${mapPosition.PositionLat},${mapPosition.PositionLon}&spn=0.003381,0.017231&z=18&output=embed`;
     },
     filterEvent() {
-      let detail = Array.from(this.contentData);
+      // let detail = Array.from(this.contentData);
+      // console.log("cool", typeof detail);
 
-      let filteredData = detail.filter((data) => {
+      let filteredData = this.contentData?.filter((data) => {
         if (
           data.ActivityID === this.eventID ||
           data.ScenicSpotID === this.eventID ||
@@ -129,14 +137,17 @@ export default {
           return data;
         }
       });
-      let apiContent = null;
-      [apiContent] = filteredData;
-      return apiContent;
+      // let apiContent = null;
+      //todo 最初API資料還沒到，卻嘗試解構
+      // [apiContent] = filteredData;
+      // console.log(apiContent);
+      // return apiContent;
+      return filteredData?.[0];
     },
   },
   created() {
     let dataID = this.$route.params.id;
-    console.log(dataID);
+    console.log("array?", dataID, typeof dataID);
     if (dataID.includes("C1")) {
       API.getScenicSpotAPI().then((response) => {
         return (this.contentData = response.data);

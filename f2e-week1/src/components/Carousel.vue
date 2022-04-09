@@ -1,4 +1,5 @@
 <template>
+  <!-- <pre>{{ placeData[1] }}</pre> -->
   <div class="cool" v-if="placeData">
     <div
       id="carouselExampleIndicators"
@@ -27,23 +28,26 @@
           aria-label="Slide 3"
         ></button>
       </div>
-      <div class="carousel-inner container p-0 carousel_layout">
+      <div
+        class="carousel-inner container p-0 carousel_layout"
+        v-if="placeData"
+      >
         <router-link
           :to="{
             name: 'Content',
             params: {
-              city: placeData[0].City,
-              id: placeData[0].ScenicSpotID,
-              name: placeData[0].ScenicSpotName,
+              city: placeData?.[1]?.City,
+              id: placeData?.[1]?.ScenicSpotID,
+              name: placeData?.[1]?.ScenicSpotName,
             },
           }"
           class="carousel-item w-100 h-100 active"
         >
           <p class="carousel_title">
-            {{ placeData[0].ScenicSpotName }}
+            {{ placeData?.[1]?.ScenicSpotName }}
           </p>
           <img
-            :src="placeData[0].Picture.PictureUrl1"
+            :src="placeData?.[1]?.Picture.PictureUrl1"
             class="d-block w-100"
             alt="..."
           />
@@ -52,18 +56,18 @@
           :to="{
             name: 'Content',
             params: {
-              city: placeData[19].City,
-              id: placeData[19].ScenicSpotID,
-              name: placeData[19].ScenicSpotName,
+              city: placeData?.[19]?.City,
+              id: placeData?.[19]?.ScenicSpotID,
+              name: placeData?.[19]?.ScenicSpotName,
             },
           }"
           class="carousel-item h-100 w-100"
         >
           <p class="carousel_title">
-            {{ placeData[19].ScenicSpotName }}
+            {{ placeData?.[19]?.ScenicSpotName }}
           </p>
           <img
-            :src="placeData[19].Picture.PictureUrl1"
+            :src="placeData?.[19]?.Picture.PictureUrl1"
             class="d-block w-100"
             alt="..."
           />
@@ -72,18 +76,18 @@
           :to="{
             name: 'Content',
             params: {
-              city: placeData[26].City,
-              id: placeData[26].ScenicSpotID,
-              name: placeData[26].ScenicSpotName,
+              city: placeData?.[26]?.City,
+              id: placeData?.[26]?.ScenicSpotID,
+              name: placeData?.[26]?.ScenicSpotName,
             },
           }"
           class="carousel-item h-100"
         >
           <p class="carousel_title">
-            {{ placeData[26].ScenicSpotName }}
+            {{ placeData?.[26]?.ScenicSpotName }}
           </p>
           <img
-            :src="placeData[26].Picture.PictureUrl1"
+            :src="placeData?.[26]?.Picture.PictureUrl1"
             class="d-block w-100 h-100"
             alt="..."
           />
@@ -116,7 +120,7 @@ export default {
   props: ["placeData"],
   data() {
     return {
-      placeDetail: this.placeDetail,
+      placeDetail: this.$store.state.scenicSpotData || [],
       fakeImage: "@/assets/image/ScenicSpotPicture.png",
     };
   },
@@ -150,8 +154,6 @@ export default {
   }
 }
 div.carousel_layout {
-  // height: 300px;
-  border: 1px solid;
   border-radius: 20px;
 }
 </style>

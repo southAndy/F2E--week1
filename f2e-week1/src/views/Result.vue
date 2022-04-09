@@ -210,8 +210,12 @@ p {
       margin-bottom: 30px;
     }
     &_image {
+      border-radius: 20px;
       width: 100%;
-      height: 100%;
+      height: 115px;
+      @include breakpoints.tablet {
+        height: 340px;
+      }
       @include breakpoints.desktop {
         width: 250px;
         height: 150px;
@@ -220,6 +224,7 @@ p {
       img {
         height: 100%;
         width: 100%;
+        border-radius: 20px;
       }
     }
     &_name {
@@ -229,7 +234,7 @@ p {
       margin-top: 10px;
 
       @include breakpoints.desktop {
-        font-size: 22px;
+        font-size: 18px;
         height: 35px;
         //多餘的文字隱藏
         overflow: hidden;
