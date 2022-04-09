@@ -11,9 +11,7 @@ export default {
   name: "Topic",
   props: ["festivalList"],
   data() {
-    return {
-      festivalName: this.festivalList,
-    };
+    return {};
   },
 };
 </script>

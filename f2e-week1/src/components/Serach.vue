@@ -116,6 +116,9 @@ $primary-color: #7f977b;
     background-color: $primary-color;
     @extend %serach_input;
     text-decoration: none;
+    &:hover {
+      background-color: #65895f;
+    }
 
     img {
       margin-right: 10px;

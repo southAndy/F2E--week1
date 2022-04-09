@@ -212,13 +212,17 @@ p {
     &_image {
       border-radius: 20px;
       width: 100%;
-      height: 115px;
+      height: 140px;
       @include breakpoints.tablet {
         height: 340px;
       }
       @include breakpoints.desktop {
         width: 250px;
         height: 150px;
+      }
+      opacity: 0.5;
+      &:hover {
+        opacity: 1.5;
       }
 
       img {
@@ -235,7 +239,7 @@ p {
 
       @include breakpoints.desktop {
         font-size: 18px;
-        height: 35px;
+        height: 30px;
         //多餘的文字隱藏
         overflow: hidden;
       }
@@ -248,6 +252,7 @@ p {
       img {
         height: 100%;
         margin-right: 5px;
+        object-fit: scale-down;
       }
       p {
         font-size: 15px;

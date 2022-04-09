@@ -1,12 +1,12 @@
 <template>
   <div class="pagination">
-    <button
+    <div
       class="pagination_previous"
       @click="switchToPreviousPage"
       :disabled="currentPage <= 1 ? true : false"
     >
       <img src="@/assets/image/disabled.png" alt="上一頁按鈕" />
-    </button>
+    </div>
     <ul class="pagination_group" v-if="searchDatas">
       <li
         :class="['pagination_group_numbers', { current: currentPage === page }]"
@@ -17,13 +17,13 @@
         {{ page }}
       </li>
     </ul>
-    <button
+    <div
       class="pagination_next"
       @click="switchToNextPage"
       :disabled="currentPage >= 15 ? true : false"
     >
       <img src="@/assets/image/master.png" alt="下一頁按鈕" />
-    </button>
+    </div>
   </div>
 </template>
 <script>
@@ -79,12 +79,13 @@ export default {
   display: flex;
   justify-content: center;
 
-  width: 270px;
   height: 32px;
   margin: 0 auto;
   @include breakpoints.desktop {
     height: 32px;
     width: 90%;
+
+    margin-bottom: 10px;
   }
 
   &_previous {
@@ -108,6 +109,7 @@ export default {
 
   &_group {
     display: flex;
+    overflow: hidden;
 
     // 當前頁面的effect
     .current {

@@ -10,7 +10,7 @@
       },
     }"
   >
-    <div class="activities_image">
+    <div class="activities_imagebox">
       <img :src="scenicSpotData.Picture.PictureUrl1" alt="" />
     </div>
     <h4 class="activities_title">{{ scenicSpotData.ScenicSpotName }}</h4>
@@ -36,11 +36,16 @@ export default {
 
   margin-right: 16px;
 
-  &_image {
+  &_imagebox {
     background-color: wheat;
     width: 220px;
     height: 160px;
     border-radius: 20px;
+
+    opacity: 0.5;
+    &:hover {
+      opacity: 1;
+    }
     img {
       width: 100%;
       height: 100%;

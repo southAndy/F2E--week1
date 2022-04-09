@@ -1,11 +1,8 @@
 <template v-if="event">
   <div class="content">
     <Breadcrumb />
-    <div style="width: 460px; height: 215px">
-      <img
-        :src="filterEvent?.Picture?.PictureUrl1"
-        style="width: 100%; height: 100%"
-      />
+    <div class="content_image">
+      <img :src="filterEvent?.Picture?.PictureUrl1" />
     </div>
     <!-- <CarouselContent :placeData="filterEvent" /> -->
     <h2>
@@ -176,10 +173,23 @@ export default {
   .content_image {
     height: 185px;
     width: 345px;
+    object-fit: cover;
+    @include breakpoints.desktop {
+      width: 100%;
+      height: 250px;
+    }
 
     img {
       height: 100%;
       width: 100%;
+    }
+  }
+  h2 {
+    text-align: center;
+    margin: 20px 0;
+
+    @include breakpoints.desktop {
+      text-align: start;
     }
   }
   .description_title {
@@ -256,6 +266,7 @@ export default {
       @include breakpoints.desktop {
         width: 540px;
         height: 250px;
+        margin-top: unset;
       }
       // 針對google map的尺寸調整
       iframe {
