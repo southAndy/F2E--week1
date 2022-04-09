@@ -30,7 +30,7 @@ ing ...
 
 **修正紀錄**
 
-[網站功能/修正紀錄]("/f2e-week1/src/featureNote.md")
+[網站功能/修正紀錄]("blob/main/f2e-week1/src/featureNote.md")
 
 ### 網站設計稿來源
 - F2e 參賽設計師：早餐
