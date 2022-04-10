@@ -173,7 +173,11 @@ export default {
   .content_image {
     height: 185px;
     width: 345px;
+    margin: 30px auto;
     object-fit: cover;
+    @include breakpoints.tablet {
+      width: 700px;
+    }
     @include breakpoints.desktop {
       width: 100%;
       height: 250px;

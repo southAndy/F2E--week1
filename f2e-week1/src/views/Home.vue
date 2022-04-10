@@ -2,8 +2,9 @@
   <div class="home" v-if="apiData || resturantData || allTouristData">
     <div class="title_container">
       <div>
-        <p class="home_title">探索台灣之美 <br />讓我們更親近這片土地</p>
-        <p>
+        <p class="home_title decorate_line">探索台灣之美</p>
+        <p class="home_title">讓我們更親近這片土地</p>
+        <p class="home_locate">
           <img src="../assets/image/icon.png" alt="地標圖示" />
           台灣旅遊景點導覽
           <span>Taiwan Travel Guide</span>
@@ -140,6 +141,7 @@ export default {
       // return this.allTouristData.filter((data) => data.City != undefined);
     },
     getResturantCity() {
+      console.log("get resturant city .....");
       return this.$store.getters.restaurantDataWithCity;
 
       //元件篩選
@@ -156,11 +158,10 @@ export default {
     },
   },
 
-  created() {
-    this.$store.dispatch("getActivitiesAPI");
-    this.$store.dispatch("getScenicSpotAPI");
-    console.log(151, this.apiData);
-    this.resturantData = this.$store.dispatch("getRestaurantAPI");
+  async created() {
+    await this.$store.dispatch("getActivitiesAPI");
+    await this.$store.dispatch("getScenicSpotAPI");
+    await this.$store.dispatch("getRestaurantAPI");
 
     // let x = this.$store.getters.withPictureActivities;
     // this.$store.actions.getAPI();
@@ -225,21 +226,42 @@ a {
 
 .home {
   .title_container {
+    margin: 20px 0;
     @include breakpoints.desktop {
       display: flex;
       justify-content: center;
       padding: 80px;
     }
+    &:first-child {
+      &::after {
+        padding: 5px 0;
+        height: 1px;
+        width: 30px;
+        display: block;
+      }
+    }
   }
   &_title {
     font-size: 20px;
-    font-family: Noto Sans TC;
+    font-weight: 600;
+    margin: 0;
 
-    margin: 20px 0;
     @include breakpoints.desktop {
       font-size: 35px;
       text-align: start;
-      margin: 0;
+    }
+  }
+  p.decorate_line::after {
+    padding: 5px 0;
+    height: 1px;
+    width: 30px;
+    display: block;
+  }
+  &_locate {
+    margin-top: 20px;
+    text-align: center;
+    @include breakpoints.desktop {
+      text-align: start;
     }
   }
 

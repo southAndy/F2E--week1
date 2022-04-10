@@ -32,7 +32,7 @@ export default {
   position: relative;
 
   @include breakpoints.desktop {
-    width: 255px;
+    width: 235px;
     height: 124px;
     margin-right: 30px;
   }
