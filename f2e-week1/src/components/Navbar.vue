@@ -113,6 +113,7 @@ header {
 
   .toggle {
     margin-bottom: 10px;
+    cursor: pointer;
     @include breakpoints.desktop {
       display: none;
     }
@@ -121,31 +122,50 @@ header {
   .navigation {
     display: flex;
     flex-direction: column;
+    width: 100%;
+
     position: absolute;
     top: 60px;
     bottom: 0;
     right: 0;
-    @include breakpoints.tablet {
+
+    // animation: ease-in 1s 2 reverse both paused slidein;
+    @include breakpoints.desktop {
       display: flex;
       flex-direction: row;
-
+      justify-content: flex-end;
       position: inherit;
     }
 
     &_link {
       text-decoration: none;
-      margin-left: 20px;
+      display: inline-block;
+
+      padding: 15px 0;
+      border-bottom: 1px solid rgb(100, 100, 100);
+      background-color: #a8b8a5;
       color: $navbar-link;
       &:hover {
-        border-bottom: 3px solid #7f977b;
+        background-color: #7f977b;
+        color: white;
+      }
+      &:last-child {
+        border-radius: 0 0 20px 20px;
       }
 
       @include breakpoints.desktop {
         width: 75px;
-        height: 25px;
         text-decoration: none;
         color: #646464;
         font-weight: normal;
+
+        text-align: center;
+        background-color: unset;
+        border-bottom: unset;
+
+        &:last-child {
+          border-radius: unset;
+        }
       }
 
       //todo click effect
@@ -154,8 +174,8 @@ header {
   }
   .drop {
     display: none;
-    @include breakpoints.desktop {
-      display: block;
+    @include breakpoints.tablet {
+      display: flex;
     }
   }
 }
