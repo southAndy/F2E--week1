@@ -9,14 +9,14 @@ const routes = [
     component: Home,
   },
   {
-    path: "/activities",
-    name: "Activity",
-    component: () => import("../views/Activities.vue"),
-  },
-  {
     path: "/scenicSpot",
     name: "ScenicSpot",
     component: () => import("../views/Festival.vue"),
+  },
+  {
+    path: "/activities",
+    name: "Activity",
+    component: () => import("../views/Activities.vue"),
   },
   {
     path: "/restaurant",
