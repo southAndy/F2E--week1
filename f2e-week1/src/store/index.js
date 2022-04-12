@@ -13,9 +13,7 @@ export default createStore({
   },
   getters: {
     withPictureActivities(state) {
-      //...
       const arrAPI = Array.from(state.activitiesData);
-      console.log(arrAPI);
       return arrAPI.filter((data) => data.Picture.PictureUrl1 != undefined);
     },
     withCityData(state) {
@@ -23,34 +21,54 @@ export default createStore({
       return arrAPI.filter((data) => data.City != undefined);
     },
     scenicSpotDataWithCity(state) {
-      console.log("array?", state);
-      return state.scenicSpotData.filter((data) => data.City != undefined);
+      let data = state.scenicSpotData || [];
+      return data.filter((data) => data.City != undefined);
     },
     restaurantDataWithCity(state) {
-      return state.resturantData.filter((data) => data.City != undefined);
+      let data = state.resturantData || [];
+      return data.filter((data) => data.City != undefined);
+    },
+    //? (module) activities
+    filterRepeatCity(state) {
+      //[]:等待3種API資料回來前避免報錯
+      let data =
+        state?.activitiesData ||
+        state?.scenicSpotData ||
+        state?.resturantData ||
+        [];
+
+      //todo：map會回傳全部的資料（包括undefined的資料
+      let cityDatas = data?.map((data) => {
+        if (data.City !== undefined) {
+          return data.City;
+        }
+      });
+      //!indexOf只能判別純陣列內容（物件型別不能）
+      return cityDatas.filter(
+        (city, index, array) => array.indexOf(city) === index
+      );
     },
   },
   mutations: {
     ensureActivitiesAPI(state, apiData) {
-      console.log("接收到api:", apiData != null);
+      // console.log("mutation接收到資料：", apiData != null, apiData);
       state.activitiesData = apiData;
     },
     ensureRestaurantAPI(state, apiData) {
-      console.log("接收到api:", apiData != null);
+      // console.log("mutation接收到資料：", apiData != null, apiData);
       state.resturantData = apiData;
     },
     ensureScenicSpotAPI(state, apiData) {
-      console.log("接收到api:", apiData != null);
+      // console.log("mutation接收到資料：", apiData != null, apiData);
       state.scenicSpotData = apiData;
     },
   },
   actions: {
     async getActivitiesAPI({ commit }) {
       let apiData = await API.getActivitiesAPI().then((response) => {
-        console.log("23", response.data);
         return response.data;
       });
-      console.log("23", apiData);
+      // console.log("action接收到資料：", apiData);
       //呼叫mutation修改state
       commit("ensureActivitiesAPI", apiData);
       // return state.activitiesData;
@@ -59,6 +77,7 @@ export default createStore({
       let apiData = await API.getRestaurantAPI().then((response) => {
         return response.data;
       });
+      // console.log("action接收到資料：", apiData);
       //呼叫mutation修改state
       commit("ensureRestaurantAPI", apiData);
       return state.resturantData;
@@ -67,6 +86,7 @@ export default createStore({
       let apiData = await API.getScenicSpotAPI().then((response) => {
         return response.data;
       });
+      // console.log("action接收到資料：", apiData);
       //呼叫mutation修改state
       commit("ensureScenicSpotAPI", apiData);
       // return state.scenicSpotData;

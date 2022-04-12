@@ -5,32 +5,28 @@ export const activitiesDatas = {
   state: {
     activitiesData: [
       {
-        name: "自然風景類",
-        image: require("@/assets/image/activities/unsplash_pn5c-CLWGzY.png"),
+        name: "節慶活動",
+        image: require("@/assets/image/unsplash_qDZ-Xd8dX6w.svg"),
       },
       {
-        name: "觀光工廠類",
-        image: require("@/assets/image/Rectangle 93.svg"),
+        name: "自行車活動",
+        image: require("@/assets/image/unsplash_I8K-lIkvqYI.svg"),
       },
       {
-        name: "遊憩活動類",
-        image: require("@/assets/image/activities/Rectangle 94.png"),
+        name: "遊憩活動",
+        image: require("@/assets/image/Rectangle 94.svg"),
       },
       {
-        name: "休閒農業類",
-        image: require("@/assets/image/activities/Rectangle 95.svg"),
+        name: "產業文化活動",
+        image: require("@/assets/image/unsplash_qDBbM9Erwo4.svg"),
       },
       {
-        name: "生態類",
-        image: require("@/assets/image/activities/unsplash_7tvbRQ5AKs4.png"),
+        name: "年度活動",
+        image: require("@/assets/image/unsplash_qDZ-Xd8dX6w.png"),
       },
       {
-        name: "溫泉類",
-        image: require("@/assets/image/activities/unsplash_I8K-lIkvqYI.png"),
-      },
-      {
-        name: "古蹟類",
-        image: require("@/assets/image/activities/Rectangle 98.svg"),
+        name: "四季活動",
+        image: require("@/assets/image/unsplash_qDZ-Xd8dX6w.svg"),
       },
     ],
   },
