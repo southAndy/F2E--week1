@@ -10,12 +10,12 @@ const routes = [
   },
   {
     path: "/activities",
-    name: "Activities",
+    name: "Activity",
     component: () => import("../views/Activities.vue"),
   },
   {
-    path: "/festival",
-    name: "Festival",
+    path: "/scenicSpot",
+    name: "ScenicSpot",
     component: () => import("../views/Festival.vue"),
   },
   {
