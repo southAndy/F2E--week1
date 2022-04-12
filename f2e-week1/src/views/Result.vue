@@ -1,7 +1,8 @@
 <template>
   <div class="search_all" v-if="searchDatas">
+    <Loading v-if="getAPI" class="loading" />
     <Breadcrumb />
-    <Button />
+    <!-- <Button /> -->
     <div class="serach_amount">
       <h2>搜尋結果</h2>
       <span
@@ -9,6 +10,7 @@
         >筆結果
       </span>
     </div>
+    <!-- 渲染部分 -->
     <div class="result_container">
       <router-link
         :to="{
@@ -65,30 +67,34 @@
   </div>
 </template>
 <script>
-import Button from "@//components/Button.vue";
+// import Button from "@//components/Button.vue";
 import Breadcrumb from "../components/Breadcrumb.vue";
 import Pagination from "../components/Pagination.vue";
+import Loading from "../components/Loading.vue";
 
 import API from "@/service/getAPI";
 
 export default {
   name: "Result",
-  components: { Button, Breadcrumb, Pagination },
+  components: { Breadcrumb, Pagination, Loading },
   data() {
     return {
       searchDatas: null,
-      recivedDatas: null,
-      //每頁資料
       dataPerPage: 20,
       currentPage: 1,
+      selecedCity: this.$route.query.city || null,
+      inputedKeyword: this.$route.query.keyword || null,
+      previousPath: this.$route.query.path || null,
 
+      getAPI: true,
+
+      //沒有照片的圖檔資料
       noPictureImageUrl: require("@/assets/image/RestaurantPicture.png"),
       noPicAPIMobileSize: require("@/assets/image/RestaurantPicture＿mobile.png"),
-      //
-      // dataClassName: this.$$route.params.type,
     };
   },
   computed: {
+    //每頁拆分資料方式
     showDataAmounts() {
       //討論的解法
       const start = this.dataPerPage * (this.currentPage - 1);
@@ -104,7 +110,8 @@ export default {
     // },
     getTotalAmounts() {
       let arrayDatas = Array.from(this.searchDatas);
-      console.log(`此次取得的資料為${this.searchDatas.length}筆`);
+      console.log(arrayDatas);
+      console.log(`此次取得的資料數量為${this.searchDatas.length}筆`);
       return arrayDatas.length;
     },
   },
@@ -114,39 +121,84 @@ export default {
       console.log("get emit?", searchDatas);
       this.currentPage = searchDatas;
     },
-    async getAPIDatas(className) {
-      await API.activities.getDataByClass(className).then((response) => {
-        return (this.searchDatas = response.data);
-      });
-    },
   },
-  created() {
-    //!檢查透過router傳入的物件內容
-    console.log("router data", this.$route);
-    let dataID = this.$route.params.id;
-    let dataClass = this.$route.query.type;
-
-    console.log("資料類別：", dataClass);
-    if (dataID.includes("C1")) {
-      console.log("旅遊類型：spenicSpot");
-      //spenicSpot
-      API.scenicSpot.getDataByClass(dataClass).then((response) => {
-        return (this.searchDatas = response.data);
-      });
+  async created() {
+    //? 1.有關鍵字或縣市
+    console.log(
+      this.$route.query.city,
+      this.$route.query.keyword,
+      this.$route.params.path
+    );
+    if (this.selecedCity !== null || this.inputedKeyword !== null) {
+      console.log(`有縣市或是關鍵字`);
+      if (this.previousPath === "ScenicSpot") {
+        return await API.scenicSpot
+          .getFilteredDatas(this.selecedCity, this.inputedKeyword)
+          .then((response) => {
+            setTimeout(() => {
+              this.getAPI = false;
+            }, 2000);
+            return (this.searchDatas = response.data);
+          });
+      }
+      if (this.previousPath === "Restaurant") {
+        console.log("餐廳");
+        return await API.restaurant
+          .getFilteredDatas(this.selecedCity, this.inputedKeyword)
+          .then((response) => {
+            setTimeout(() => {
+              this.getAPI = false;
+            }, 2000);
+            return (this.searchDatas = response.data);
+          });
+      }
+      if (this.previousPath === "Activity") {
+        console.log("活動");
+        return await API.activities
+          .getFilteredDatas(this.selecedCity, this.inputedKeyword)
+          .then((response) => {
+            setTimeout(() => {
+              this.getAPI = false;
+            }, 2000);
+            return (this.searchDatas = response.data);
+          });
+      }
     }
-    if (dataID.includes("C2")) {
-      //activities
-      console.log("旅遊類型：activities");
-
-      API.activities.getDataByClass(dataClass).then((response) => {
-        return (this.searchDatas = response.data);
-      });
-    }
-    if (dataID.includes("C3")) {
-      //restaurant
-      API.restaurant.getDataByClass(dataClass).then((response) => {
-        return (this.searchDatas = response.data);
-      });
+    //? 2.單純的活動類別
+    //? 3.主題類別
+    console.log(this.$route.query.type);
+    if (this.$route.query.type !== "") {
+      console.log("got class");
+      if (this.$route.query.path === "ScenicSpot") {
+        return await API.scenicSpot
+          .getDataByClass(this.$route.query.type)
+          .then((response) => {
+            setTimeout(() => {
+              this.getAPI = false;
+            }, 2000);
+            return (this.searchDatas = response.data);
+          });
+      }
+      if (this.$route.query.path === "Activity") {
+        return await API.activities
+          .getDataByClass(this.$route.query.type)
+          .then((response) => {
+            setTimeout(() => {
+              this.getAPI = false;
+            }, 2000);
+            return (this.searchDatas = response.data);
+          });
+      }
+      if (this.$route.query.path === "Restaurant") {
+        return await API.restaurant
+          .getDataByClass(this.$route.query.type)
+          .then((response) => {
+            setTimeout(() => {
+              this.getAPI = false;
+            }, 2000);
+            return (this.searchDatas = response.data);
+          });
+      }
     }
   },
 };
@@ -156,9 +208,21 @@ export default {
 @use "../assets/sass/reset.scss";
 
 .search_all {
+  position: relative;
   width: 100%;
   @include breakpoints.desktop {
     padding: 0 45px;
+  }
+  .loading {
+    position: absolute;
+    z-index: 1;
+
+    height: 100%;
+    width: 100%;
+    background-color: aqua;
+    box-sizing: border-box;
+    left: -3px;
+    top: -25px;
   }
 }
 p {
