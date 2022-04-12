@@ -47,23 +47,22 @@ export default {
   },
   methods: {
     async getDataByClass(className) {
+      console.log(className);
       this.apiDataByClass = await this.$store.dispatch(
-        "activitiesDatas/sendData",
+        "festivalDatas/sendData",
         className
       );
-      console.log(this.apiDataByClass);
+      console.log(55, "類別", this.apiDataByClass);
       this.changeRouter(this.apiDataByClass);
     },
     changeRouter(apiData) {
+      console.log("觸發跳轉前");
+      console.log(this.$route.name);
       this.$router.push({
         name: "Result",
-        params: {
-          id: apiData[0].ScenicSpotID,
-          //景點類別
-          type: apiData[1].Class1,
-        },
         query: {
           type: apiData[1].Class1,
+          path: this.$route.name,
         },
       });
     },
@@ -90,6 +89,9 @@ export default {
         },
       });
     },
+  },
+  created() {
+    console.log("hi");
   },
   // async created() {
   //   await this.$store.dispatch("getActivitiesAPI");

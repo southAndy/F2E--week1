@@ -53,14 +53,12 @@ export default {
       this.changeRouter(this.apiDataByClass);
     },
     changeRouter(apiData) {
+      console.log("rest");
       this.$router.push({
         name: "Result",
-        params: {
-          id: apiData[0].RestaurantID,
-          type: apiData[1].Class,
-        },
         query: {
           type: apiData[1].Class,
+          path: this.$route.name,
         },
       });
     },
@@ -98,6 +96,9 @@ export default {
     //   //將資料傳入函式執行
     //   this.changeRouter(this.apiDataByClass);
     // },
+  },
+  created() {
+    console.log("rest");
   },
   // async created() {
   //   await this.$store.dispatch("getActivitiesAPI");
