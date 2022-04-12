@@ -1,22 +1,39 @@
 <template>
   <div class="serach_container">
     <!-- 下拉表單樣式優化 -->
-    <select name="請選擇縣市">
+    {{ getCurrentCity }}
+    <select @change="selectCity">
       <option value="">請選擇縣市</option>
-      <option value="">屏東</option>
-      <option value="">高雄</option>
-      <option value="">台南</option>
-      <option value="">嘉義</option>
+      <option :value="city" v-for="city in getCity" :key="city">
+        {{ city }}
+      </option>
     </select>
-    <input class="serach_time" type="date" placeholder="請選擇日期" />
+    {{ selectedDate }}
     <input
+      class="serach_time"
+      type="date"
+      placeholder="請選擇日期"
+      @change="selectDate"
+    />
+    {{ inputKeyWords }}
+
+    <input
+      v-model="inputKeyWords"
       class="serach_input"
       type="text"
       name=""
       id=""
-      placeholder="想找有趣的？請輸入搜尋"
+      placeholder="請輸入活動關鍵字："
     />
-    <button class="serach">
+    <button
+      class="serach"
+      @click="
+        pushSelectedDatas({
+          city: this.getCurrentCity,
+          keyword: this.inputKeyWords,
+        })
+      "
+    >
       <div class="serach_icon">
         <img src="@/assets/image/search.svg" alt="放大鏡" />
       </div>
@@ -25,8 +42,50 @@
   </div>
 </template>
 <script>
+import citiesList from "@/assets/data/citiesList.json";
+
 export default {
+  props: ["cityData"],
   name: "Button",
+  data() {
+    return {
+      apiData: this.cityData,
+      selecedCity: "請選擇縣市",
+      inputKeyWords: "",
+      selectedDate: "",
+      //透過router傳遞類別
+      // classedAPI: this.$router.query.class || "",
+    };
+  },
+  computed: {
+    citiesList() {
+      return citiesList;
+    },
+    getCurrentCity() {
+      if (this.selecedCity === "請選擇縣市") {
+        return;
+      }
+      //! 輸入值跟資料表進行比對，回傳對應值
+      return this.citiesList.find((city) => city.cityName === this.selecedCity)
+        .cityLink;
+    },
+    //todo 改為從views檔案傳資料
+    getCity() {
+      return this.$store.getters.filterRepeatCity;
+    },
+  },
+  methods: {
+    selectCity(el) {
+      this.selecedCity = el.target.value;
+    },
+    selectDate(el) {
+      this.selectedDate = el.target.value;
+    },
+    pushSelectedDatas({ city, keyword }) {
+      console.log(city, keyword);
+      this.$emit("getSelected", { city, keyword });
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>
@@ -59,9 +118,12 @@ export default {
     @include breakpoints.desktop {
       // flex-direction: row;
       // display: none;
-      flex: 0.5;
+      flex: 0.3;
 
       margin-right: 15px;
+    }
+    option {
+      text-align: center;
     }
   }
 

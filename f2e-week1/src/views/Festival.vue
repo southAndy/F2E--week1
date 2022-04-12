@@ -1,7 +1,7 @@
 <template>
   <div class="festival">
     <Breadcrumb />
-    <Button />
+    <Button @getSelected="sendSelectedDatas" />
     <div class="serach">
       <div class="topic_container">
         <h3 class="serach_theme">熱門主題</h3>
@@ -21,7 +21,7 @@ import Topic from "@/components/Topic.vue";
 import Button from "@/components/Button.vue";
 import Breadcrumb from "@/components/Breadcrumb.vue";
 
-// import API from "@/service/getAPI";
+import API from "@/service/getAPI";
 
 export default {
   name: "Festival",
@@ -64,6 +64,29 @@ export default {
       //     type: this.apiDataByClass[1].Class1,
       //   },
       // });
+    },
+    async sendSelectedDatas(data) {
+      console.log(data);
+      let currentRouter = this.$router.currentRoute.value.name;
+
+      console.log(
+        `當前路由為${currentRouter} 此次搜尋的城市是 ${data.city}，關鍵字為：${data.keyword}`
+      );
+      let recievedAPI = await API.scenicSpot
+        .getFilteredDatas(data.city, data.keyword)
+        .then((response) => {
+          return response.data;
+        });
+      console.log("節慶資料", recievedAPI);
+      console.log(this.$route.name);
+      this.$router.push({
+        name: "Result",
+        query: {
+          city: data.city,
+          keyword: data.keyword,
+          path: this.$route.name,
+        },
+      });
     },
     changeRouter(apiData) {
       this.$router.push({

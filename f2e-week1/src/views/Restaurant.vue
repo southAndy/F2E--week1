@@ -1,7 +1,7 @@
 <template>
   <div class="restaurant">
     <Breadcrumb />
-    <Button />
+    <Button @getSelected="sendSelectedDatas" />
     <!-- <Swiper /> -->
     <div class="serach">
       <div class="topic_container">
@@ -22,7 +22,7 @@ import Topic from "@/components/Topic.vue";
 import Button from "@/components/Button.vue";
 import Breadcrumb from "@/components/Breadcrumb.vue";
 // import Swiper from "@/components/Swiper.vue";
-// import API from "@/service/getAPI";
+import API from "@/service/getAPI";
 export default {
   name: "Restaurant",
   components: {
@@ -64,6 +64,30 @@ export default {
         },
       });
     },
+    async sendSelectedDatas(data) {
+      console.log(data);
+      let currentRouter = this.$router.currentRoute.value.name;
+
+      console.log(
+        `當前路由為${currentRouter} 此次搜尋的城市是 ${data.city}，關鍵字為：${data.keyword}`
+      );
+      let recievedAPI = await API.restaurant
+        .getFilteredDatas(data.city, data.keyword)
+        .then((response) => {
+          return response.data;
+        });
+      console.log("餐廳資料", recievedAPI);
+
+      this.$router.push({
+        name: "Result",
+        query: {
+          city: data.city,
+          keyword: data.keyword,
+          path: this.$route.name,
+        },
+      });
+    },
+
     // 原本在元件發API
     // async getDataByClass(className) {
     //   console.log("此次搜尋類別為：", className);
@@ -75,6 +99,11 @@ export default {
     //   this.changeRouter(this.apiDataByClass);
     // },
   },
+  // async created() {
+  //   await this.$store.dispatch("getActivitiesAPI");
+  //   this.apiData = this.$store.state.activitiesData;
+  //   console.log("query", this.$router.currentRoute.value.name);
+  // },
 };
 </script>
 <style lang="scss" scoped>
