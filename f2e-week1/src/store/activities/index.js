@@ -10,7 +10,7 @@ export const activitiesDatas = {
       },
       {
         name: "自行車活動",
-        image: require("@/assets/image/unsplash_I8K-lIkvqYI.svg"),
+        image: require("@/assets/image/unsplash_qDBbM9Erwo4.svg"),
       },
       {
         name: "遊憩活動",
@@ -18,15 +18,15 @@ export const activitiesDatas = {
       },
       {
         name: "產業文化活動",
-        image: require("@/assets/image/unsplash_qDBbM9Erwo4.svg"),
+        image: require("@/assets/image/Rectangle 95.png"),
       },
       {
         name: "年度活動",
-        image: require("@/assets/image/unsplash_qDZ-Xd8dX6w.png"),
+        image: require("@/assets/image/unsplash_kaDrFI9qNrU.png"),
       },
       {
         name: "四季活動",
-        image: require("@/assets/image/unsplash_qDZ-Xd8dX6w.svg"),
+        image: require("@/assets/image/unsplash_fS0zfcOYa4A.png"),
       },
     ],
   },

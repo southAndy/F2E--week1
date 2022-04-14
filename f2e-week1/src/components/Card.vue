@@ -95,6 +95,10 @@ export default {
     margin-right: 30px;
     // border: 1px solid #646464;
     border-radius: 16px;
+
+    &:hover {
+      background: linear-gradient(to right, #f9f9f9, #7f977b);
+    }
   }
   @include breakpoints.desktop {
     height: 160px;
@@ -139,6 +143,8 @@ export default {
       margin: 0;
       @include breakpoints.tablet {
         font-size: 15px;
+        height: 25px;
+        overflow: hidden;
       }
       @include breakpoints.desktop {
         font-size: 19px;
@@ -160,7 +166,7 @@ export default {
       color: #646464;
       @include breakpoints.tablet {
         font-size: 16px;
-        margin-top: 45px;
+        margin-top: 55px;
       }
     }
   }

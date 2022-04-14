@@ -6,27 +6,27 @@ export const restaurantDatas = {
     restaurantData: [
       {
         name: "地方特產",
-        image: require("@/assets/image/Rectangle 93.svg"),
+        image: require("@/assets/image/restaurant/unsplash_bRdRUUtbxO0.png"),
       },
       {
         name: "中式美食",
-        image: require("@/assets/image/unsplash_qDZ-Xd8dX6w.png"),
+        image: require("@/assets/image/restaurant/unsplash_jFu2L04tMBc.png"),
       },
       {
         name: "甜點冰品",
-        image: require("@/assets/image/unsplash_pn5c-CLWGzY.svg"),
+        image: require("@/assets/image/restaurant/unsplash_LI368L2RZno.png"),
       },
       {
         name: "異國料理",
-        image: require("@/assets/image/unsplash_qDBbM9Erwo4.svg"),
+        image: require("@/assets/image/restaurant/unsplash_b-2uxjTcxH0.png"),
       },
       {
         name: "伴手禮",
-        image: require("@/assets/image/unsplash_qDZ-Xd8dX6w.png"),
+        image: require("@/assets/image/restaurant/unsplash_CnrDuY0tFrg.png"),
       },
       {
         name: "素食",
-        image: require("@/assets/image/unsplash_qDZ-Xd8dX6w.svg"),
+        image: require("@/assets/image/restaurant/unsplash_4MEL9XS-3JQ.png"),
       },
     ],
     apiData: null,

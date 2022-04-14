@@ -25,7 +25,7 @@ export default {
   width: 160px;
 
   text-align: center;
-  border-radius: 24px;
+  border-radius: 40px;
 
   margin-bottom: 10px;
 
@@ -58,9 +58,8 @@ export default {
   &_image {
     width: 100%;
     height: 100%;
-
-    border-radius: 24px;
-    // opacity: 0.5;
+    object-fit: cover;
+    border-radius: 40px;
   }
   div {
     cursor: pointer;
