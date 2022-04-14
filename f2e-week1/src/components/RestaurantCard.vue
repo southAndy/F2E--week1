@@ -11,7 +11,10 @@
       },
     }"
   >
-    <div class="activities_image">
+    <div
+      class="activities_imagebox"
+      :class="{ skeleton: this.$store.state.isLoading }"
+    >
       <img :src="resturantData.Picture.PictureUrl1" alt="" />
     </div>
     <h4 class="activities_title">{{ resturantData.RestaurantName }}</h4>
@@ -30,6 +33,10 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+@use "../assets/sass/loading.scss";
+.skeleton {
+  @extend %skeleton-loading;
+}
 .activities {
   display: flex;
   flex-direction: column;
@@ -37,11 +44,15 @@ export default {
 
   margin-right: 16px;
 
-  &_image {
-    background-color: wheat;
+  &_imagebox {
+    // background-color: wheat;
     width: 220px;
     height: 160px;
     border-radius: 20px;
+    // opacity: 0.5;
+    &:hover {
+      opacity: 1;
+    }
     img {
       width: 100%;
       height: 100%;

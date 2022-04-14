@@ -10,10 +10,15 @@
       },
     }"
   >
-    <div class="activities_imagebox">
+    <div
+      class="activities_imagebox"
+      :class="{ skeleton: this.$store.state.isLoading }"
+    >
       <img :src="scenicSpotData.Picture.PictureUrl1" alt="" />
     </div>
-    <h4 class="activities_title">{{ scenicSpotData.ScenicSpotName }}</h4>
+    <h4 class="activities_title">
+      {{ scenicSpotData.ScenicSpotName }}
+    </h4>
     <span class="activities_location">{{ scenicSpotData.City }}</span>
   </router-link>
 </template>
@@ -29,6 +34,11 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+@use "../assets/sass/loading.scss";
+
+.skeleton {
+  @extend %skeleton-loading;
+}
 .activities {
   display: flex;
   flex-direction: column;
@@ -37,12 +47,11 @@ export default {
   margin-right: 16px;
 
   &_imagebox {
-    background-color: wheat;
     width: 220px;
     height: 160px;
     border-radius: 20px;
 
-    opacity: 0.5;
+    // opacity: 0.5;
     &:hover {
       opacity: 1;
     }

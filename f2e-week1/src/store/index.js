@@ -10,11 +10,19 @@ export default createStore({
     activitiesData: null,
     resturantData: null,
     scenicSpotData: null,
+
+    isLoading: true,
   },
   getters: {
+    getAPI(state) {
+      state.isLoading = false;
+      return state.isLoading;
+    },
     withPictureActivities(state) {
-      const arrAPI = Array.from(state.activitiesData);
-      return arrAPI.filter((data) => data.Picture.PictureUrl1 != undefined);
+      // const arrAPI = Array.from(state.activitiesData);
+      return state?.activitiesData?.filter(
+        (data) => data.Picture.PictureUrl1 != undefined
+      );
     },
     withCityData(state) {
       const arrAPI = Array.from(state.activitiesData);
@@ -52,14 +60,23 @@ export default createStore({
   mutations: {
     ensureActivitiesAPI(state, apiData) {
       // console.log("mutation接收到資料：", apiData != null, apiData);
+      setTimeout(() => {
+        state.isLoading = false;
+      }, 3000);
       state.activitiesData = apiData;
     },
     ensureRestaurantAPI(state, apiData) {
       // console.log("mutation接收到資料：", apiData != null, apiData);
+      setTimeout(() => {
+        state.isLoading = false;
+      }, 3000);
       state.resturantData = apiData;
     },
     ensureScenicSpotAPI(state, apiData) {
       // console.log("mutation接收到資料：", apiData != null, apiData);
+      setTimeout(() => {
+        state.isLoading = false;
+      }, 3000);
       state.scenicSpotData = apiData;
     },
   },

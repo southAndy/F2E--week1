@@ -1,19 +1,20 @@
-<template v-if="activities">
+<template>
   <router-link
     :to="{
       name: 'Content',
       params: {
-        city: activities.City,
-        id: activities.ActivityID,
-        name: activities.ActivityName,
+        city: activities?.City,
+        id: activities?.ActivityID,
+        name: activities?.ActivityName,
       },
     }"
     class="card"
+    :class="{ skeleton: this.$store.state.isLoading }"
   >
     <div class="card_image">
       <img
-        v-if="activities.Picture.PictureUrl1"
-        :src="activities.Picture.PictureUrl1"
+        v-if="activities?.Picture.PictureUrl1"
+        :src="activities?.Picture.PictureUrl1"
         alt="活動照片"
       />
       <img v-else src="@/assets/image/search.svg" alt="該資料沒有圖片顯示" />
@@ -23,11 +24,11 @@
         {{ convertStartTime }} -
         {{ convertEndTime }}
       </div>
-      <p class="title">{{ activities.ActivityName }}</p>
+      <p class="title">{{ activities?.ActivityName }}</p>
       <i></i>
       <a href="##" class="location">
         <img src="@/assets/image/Vector.png" alt="座標圖示" />
-        {{ activities.City }}
+        {{ activities?.City }}
       </a>
     </div>
     <p class="card_more">詳細介紹</p>
@@ -71,6 +72,10 @@ export default {
 </script>
 <style lang="scss" scoped>
 @use "../assets/sass/breakpoints.scss";
+@use "../assets/sass/loading.scss";
+.skeleton {
+  @extend %skeleton-loading;
+}
 
 .card {
   display: flex;
@@ -82,15 +87,17 @@ export default {
   //card's distance
   margin-bottom: 16px;
 
-  border:none;
-  @include breakpoints.desktop {
+  border: none;
+  @include breakpoints.tablet {
     flex-direction: row;
     width: 45%;
-    height: 160px;
     background-color: #f9f9f9;
     margin-right: 30px;
-    border:1px solid #646464;
+    // border: 1px solid #646464;
     border-radius: 16px;
+  }
+  @include breakpoints.desktop {
+    height: 160px;
   }
 
   &_image {
@@ -98,7 +105,6 @@ export default {
     height: 100%;
     @include breakpoints.desktop {
       flex: 1;
-
       width: 160px;
       height: 160px;
     }
@@ -132,6 +138,9 @@ export default {
 
       margin: 0;
       @include breakpoints.tablet {
+        font-size: 15px;
+      }
+      @include breakpoints.desktop {
         font-size: 19px;
       }
     }
