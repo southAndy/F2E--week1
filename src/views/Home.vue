@@ -12,40 +12,42 @@
       </div>
       <Serach />
     </div>
-
-    <!-- fix -->
-    <div class="carousel" v-if="getScenicSpotCity">
+    <div class="carousel" :class="{ skeleton: this.$store.state.isLoading }">
       <Carousel :placeData="getScenicSpotCity" />
     </div>
-
-    <!-- <div class="recent" v-if="apiData">
+    <div class="recent">
       <div>
         <h2 class="recent_title">近期活動</h2>
         <router-link
-          :to="{ name: 'Festival' }"
+          :to="{ name: 'Activity' }"
           class="recent_link"
           @click="dropMenu"
           >查看更多活動
           <img src="@/assets/image/Vector.svg" alt="方向鍵>" />
         </router-link>
       </div>
-      <!<div class="container">
+      <!-- fix -->
+      <div class="container">
         <Card
           v-for="(activitiesData, index) in filterActitivties"
           :key="index"
           :activitiesData="activitiesData"
         />
-      </div> -->
-    <!-- </div>  -->
-    <div class="recent" v-if="getScenicSpotCity">
+      </div>
+    </div>
+    <div class="recent">
       <div>
         <h2 class="recent_title">熱門打卡景點</h2>
-        <router-link :to="{ name: 'Activities' }" class="recent_link"
+        <router-link
+          :to="{
+            name: 'ScenicSpot',
+          }"
+          class="recent_link"
           >查看更多景點
           <img src="@/assets/image/Vector.svg" alt="方向鍵>" />
         </router-link>
       </div>
-      <div class="recent_search" v-if="getScenicSpotCity">
+      <div class="recent_search">
         <ScenicSpotCard
           v-for="data in getScenicSpotCity"
           :key="data"
@@ -53,7 +55,7 @@
         />
       </div>
     </div>
-    <div class="recent" v-if="getResturantCity">
+    <div class="recent">
       <div>
         <h2 class="recent_title">一再回訪的美食</h2>
         <router-link :to="{ name: 'Restaurant' }" class="recent_link"
@@ -75,10 +77,11 @@
 <script>
 // @ is an alias to /src
 import Serach from "@/components/Serach.vue";
-// import Card from "@/components/Card.vue";
+import Card from "@/components/Card.vue";
 import ScenicSpotCard from "@/components/ScenicSpotCard.vue";
 import RestaurantCard from "@/components/RestaurantCard.vue";
 import Carousel from "@/components/Carousel.vue";
+// import Loading from "@/components/Loading.vue";
 
 import API from "@/service/getAPI";
 // import Swiper from "@/components/Swiper.vue";
@@ -87,17 +90,19 @@ export default {
   name: "Home",
   components: {
     Serach,
-    // Card,
     RestaurantCard,
-    // Swiper,
     Carousel,
     ScenicSpotCard,
+    Card,
   },
   data() {
     return {
+      //todo
       allTouristData: [],
       apiData: null,
       resturantData: null,
+
+      isLoading: true,
     };
   },
   methods: {
@@ -141,7 +146,6 @@ export default {
       // return this.allTouristData.filter((data) => data.City != undefined);
     },
     getResturantCity() {
-      console.log("get resturant city .....");
       return this.$store.getters.restaurantDataWithCity;
 
       //元件篩選
@@ -159,12 +163,13 @@ export default {
   },
 
   async created() {
+    //todo 加入處理loading效果
     await this.$store.dispatch("getActivitiesAPI");
     await this.$store.dispatch("getScenicSpotAPI");
     await this.$store.dispatch("getRestaurantAPI");
 
     // let x = this.$store.getters.withPictureActivities;
-    // this.$store.actions.getAPI();
+    // this.$store.actions.waitAPI();
     // console.log(157, x);
     //取得特定API資料
     // API.getActivitiesAPI().then((response) => {
@@ -181,6 +186,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 @use "../assets/sass/breakpoints.scss";
+@use "../assets/sass/loading.scss";
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300&display=swap");
 a {
   text-decoration: none;
@@ -191,6 +197,9 @@ a {
   @include breakpoints.desktop {
     padding: 0 45px 120px 45px;
   }
+}
+.skeleton {
+  @extend %skeleton-loading;
 }
 
 %activtity {
@@ -290,7 +299,7 @@ a {
     }
     &_search {
       display: flex;
-      overflow: hidden;
+      overflow: scroll;
     }
   }
   .container {
@@ -299,10 +308,16 @@ a {
     width: 100%;
     height: 340px;
 
-    overflow: hidden;
+    overflow: scroll;
+    @include breakpoints.tablet {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 5px;
+    }
 
     @include breakpoints.desktop {
-      flex-wrap: wrap;
+      flex-direction: unset;
       height: 350px;
       justify-content: center;
     }

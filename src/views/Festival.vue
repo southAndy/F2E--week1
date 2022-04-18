@@ -42,6 +42,7 @@ export default {
   },
   methods: {
     async getDataByClass(className) {
+      console.log(className);
       this.apiDataByClass = await this.$store.dispatch(
         "activitiesDatas/sendData",
         className
@@ -84,6 +85,7 @@ export default {
       });
     },
     changeRouter(apiData) {
+      console.log(apiData);
       this.$router.push({
         name: "Result",
         query: {

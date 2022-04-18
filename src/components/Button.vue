@@ -1,22 +1,19 @@
 <template>
   <div class="serach_container">
     <!-- 下拉表單樣式優化 -->
-    {{ getCurrentCity }}
     <select @change="selectCity">
       <option value="">請選擇縣市</option>
       <option :value="city" v-for="city in getCity" :key="city">
         {{ city }}
       </option>
     </select>
-    {{ selectedDate }}
+    <!-- {{ selectedDate }}
     <input
       class="serach_time"
       type="date"
       placeholder="請選擇日期"
       @change="selectDate"
-    />
-    {{ inputKeyWords }}
-
+    /> -->
     <input
       v-model="inputKeyWords"
       class="serach_input"
@@ -69,7 +66,7 @@ export default {
       return this.citiesList.find((city) => city.cityName === this.selecedCity)
         .cityLink;
     },
-    //todo 改為從views檔案傳資料
+    //todo 改為從views檔案props資料
     getCity() {
       return this.$store.getters.filterRepeatCity;
     },

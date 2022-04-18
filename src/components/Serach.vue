@@ -1,17 +1,12 @@
 <template>
   <div class="serach">
     <select class="select" @change="getTest">
-      <option value="">請選擇活動類型</option>
+      <option value="請選擇活動類別">請選擇活動類別</option>
       <option value="探索景點">探索景點</option>
       <option value="節慶活動">節慶活動</option>
       <option value="品嚐美食">品嚐美食</option>
     </select>
-    <input
-      class="serach_input"
-      type="text"
-      placeholder="你想去哪？請輸入關鍵字"
-    />
-
+    {{ inputKeyword }}
     <button class="serach_click" @click="searchResult">
       <div>
         <img src="@/assets/image/search.svg" alt="放大鏡" />
@@ -29,6 +24,9 @@ export default {
     return {
       selectClass: "",
       eventDatas: null,
+      inputKeyword: null,
+      isSearch: true,
+      isInput: true,
     };
   },
   methods: {
@@ -37,20 +35,17 @@ export default {
       this.selectClass = selected.target.value;
     },
     async searchResult() {
-      console.log("seraching");
-      if (this.selectClass === "") {
-        console.log("沒指定，全部搜尋");
-        this.$router.push({ name: "Result" });
-      }
       if (this.selectClass === "探索景點") {
-        console.log("探索景點");
+        console.log("探索景點", this.selectClass);
         await API.getScenicSpotAPI().then((response) => {
           return (this.eventDatas = response.data);
         });
+        console.log(this.eventDatas);
         this.$router.push({
           name: "Result",
-          params: { id: this.eventDatas[0].ScenicSpotID },
-          query: { serach: this.selectClass },
+          query: {
+            id: this.eventDatas[0].ScenicSpotID,
+          },
         });
       }
       if (this.selectClass === "節慶活動") {
@@ -60,7 +55,7 @@ export default {
         });
         this.$router.push({
           name: "Result",
-          params: { id: this.eventDatas[0].ActivityID },
+          query: { id: this.eventDatas[0].ActivityID },
         });
       }
       if (this.selectClass === "品嚐美食") {
@@ -70,7 +65,9 @@ export default {
         });
         this.$router.push({
           name: "Result",
-          params: { id: this.eventDatas[0].RestaurantID },
+          query: {
+            id: this.eventDatas[0].RestaurantID,
+          },
         });
       }
     },
@@ -79,6 +76,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+@use "../assets/sass/breakpoints.scss";
 $primary-color: #7f977b;
 %serach_input {
   width: 100%;
@@ -89,22 +87,33 @@ $primary-color: #7f977b;
   border: 1px solid #e6e6e6;
 }
 .serach {
-  width: 345px;
+  @include breakpoints.tablet {
+    width: 345px;
+  }
   margin: 0px auto;
   .select {
     @extend %serach_input;
-    padding: 15px 11px;
+    padding: 10px 11px;
+    @include breakpoints.desktop {
+      padding: 15px 11px;
+    }
     color: $primary-color;
 
     font-weight: 500;
     text-align: center;
     background-color: #ffff;
   }
+  .isInput {
+    border: 1px solid red;
+  }
 
   &_input {
     @extend %serach_input;
     background-color: #f9f9f9;
-    padding: 15px;
+    padding: 10px;
+    @include breakpoints.desktop {
+      padding: 15px;
+    }
 
     font-size: 15px;
     font-weight: 400;

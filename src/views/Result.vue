@@ -1,6 +1,6 @@
 <template>
   <div class="search_all" v-if="searchDatas">
-    <Loading v-if="getAPI" class="loading" />
+    <!-- <Loading v-if="getAPI" class="loading" /> -->
     <Breadcrumb />
     <!-- <Button /> -->
     <div class="serach_amount">
@@ -28,7 +28,7 @@
         :key="amount"
         class="result"
       >
-        <div class="result_image">
+        <div class="result_image" :class="{ skeleton: getAPI }">
           <img
             class="mobile"
             :src="
@@ -70,13 +70,13 @@
 // import Button from "@//components/Button.vue";
 import Breadcrumb from "../components/Breadcrumb.vue";
 import Pagination from "../components/Pagination.vue";
-import Loading from "../components/Loading.vue";
+// import Loading from "../components/Loading.vue";
 
 import API from "@/service/getAPI";
 
 export default {
   name: "Result",
-  components: { Breadcrumb, Pagination, Loading },
+  components: { Breadcrumb, Pagination },
   data() {
     return {
       searchDatas: null,
@@ -123,48 +123,80 @@ export default {
     },
   },
   async created() {
-    //? 1.有關鍵字或縣市
     console.log(
       this.$route.query.city,
       this.$route.query.keyword,
-      this.$route.params.path
+      this.$route.query.path,
+      this.$route.query.id
     );
-    if (this.selecedCity !== null || this.inputedKeyword !== null) {
+    //? 1.有關鍵字或縣市
+    if (
+      this.$route.query.city !== undefined ||
+      this.$route.query.keyword !== undefined
+    ) {
       console.log(`有縣市或是關鍵字`);
       if (this.previousPath === "ScenicSpot") {
+        console.log("景點");
         return await API.scenicSpot
-          .getFilteredDatas(this.selecedCity, this.inputedKeyword)
+          .getFilteredDatas(this.$route.query.city, this.$route.query.keyword)
           .then((response) => {
             setTimeout(() => {
               this.getAPI = false;
-            }, 2000);
+            }, 8000);
             return (this.searchDatas = response.data);
           });
       }
       if (this.previousPath === "Restaurant") {
         console.log("餐廳");
         return await API.restaurant
-          .getFilteredDatas(this.selecedCity, this.inputedKeyword)
+          .getFilteredDatas(this.$route.query.city, this.$route.query.keyword)
           .then((response) => {
             setTimeout(() => {
               this.getAPI = false;
-            }, 2000);
+            }, 8000);
             return (this.searchDatas = response.data);
           });
       }
       if (this.previousPath === "Activity") {
         console.log("活動");
         return await API.activities
-          .getFilteredDatas(this.selecedCity, this.inputedKeyword)
+          .getFilteredDatas(this.$route.query.city, this.$route.query.keyword)
           .then((response) => {
             setTimeout(() => {
               this.getAPI = false;
-            }, 2000);
+            }, 8000);
             return (this.searchDatas = response.data);
           });
       }
     }
     //? 2.單純的活動類別
+    if (this.$route.query.id?.includes("C1")) {
+      console.log("C1 getScenicSpotAPI");
+      return await API.getScenicSpotAPI().then((response) => {
+        setTimeout(() => {
+          this.getAPI = false;
+        }, 8000);
+        return (this.searchDatas = response.data);
+      });
+    }
+    if (this.$route.query.id?.includes("C2")) {
+      console.log("C2 getActivitiesAPI");
+      return await API.getActivitiesAPI().then((response) => {
+        setTimeout(() => {
+          this.getAPI = false;
+        }, 8000);
+        return (this.searchDatas = response.data);
+      });
+    }
+    if (this.$route.query.id?.includes("C3")) {
+      console.log("C3 getRestaurantAPI");
+      return await API.getRestaurantAPI().then((response) => {
+        setTimeout(() => {
+          this.getAPI = false;
+        }, 8000);
+        return (this.searchDatas = response.data);
+      });
+    }
     //? 3.主題類別
     console.log(this.$route.query.type);
     if (this.$route.query.type !== "") {
@@ -175,8 +207,8 @@ export default {
           .then((response) => {
             setTimeout(() => {
               this.getAPI = false;
-            }, 2000);
-            return (this.searchDatas = response.data);
+              return (this.searchDatas = response.data);
+            }, 20000);
           });
       }
       if (this.$route.query.path === "Activity") {
@@ -185,7 +217,7 @@ export default {
           .then((response) => {
             setTimeout(() => {
               this.getAPI = false;
-            }, 2000);
+            }, 8000);
             return (this.searchDatas = response.data);
           });
       }
@@ -195,7 +227,7 @@ export default {
           .then((response) => {
             setTimeout(() => {
               this.getAPI = false;
-            }, 2000);
+            }, 8000);
             return (this.searchDatas = response.data);
           });
       }
@@ -206,6 +238,11 @@ export default {
 <style lang="scss" scoped>
 @use "../assets/sass/breakpoints.scss";
 @use "../assets/sass/reset.scss";
+@use "../assets/sass/loading.scss";
+
+.skeleton {
+  @extend %skeleton-loading;
+}
 
 .search_all {
   position: relative;

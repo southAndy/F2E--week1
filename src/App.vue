@@ -3,7 +3,7 @@
     <Navbar />
     <router-view />
     <footer @click="filterActitivtiess">
-      <p>台灣走走 Code:南國安迪同學 /Desgin: Breakfast</p>
+      <p>台灣走走 Desgin: Breakfast/ Code:南國安迪同學 </p>
     </footer>
   </div>
 </template>
@@ -21,9 +21,6 @@ export default {
 
 $primary-color: #7f977b;
 
-* {
-  // outline: 1px solid red;
-}
 body {
   margin: 0;
   padding: 15px;
@@ -60,7 +57,7 @@ footer {
 
   p {
     margin: 0px;
-    font-size: 14 px;
+    font-size: 14px;
     font-weight: 600;
   }
 }

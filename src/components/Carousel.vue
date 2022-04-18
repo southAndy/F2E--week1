@@ -1,12 +1,15 @@
 <template>
   <!-- <pre>{{ placeData[1] }}</pre> -->
-  <div class="cool" v-if="placeData">
+  <div class="cool" :class="{ skeleton: this.$store.state.isLoading }">
     <div
       id="carouselExampleIndicators"
       class="carousel slide"
       data-bs-ride="carousel"
     >
-      <div class="carousel-indicators justify-content-end me-6">
+      <div
+        class="carousel-indicators justify-content-end me-6"
+        :class="{ skeleton: this.$store.state.isLoading }"
+      >
         <button
           type="button"
           data-bs-target="#carouselExampleIndicators"
@@ -31,6 +34,7 @@
       <div
         class="carousel-inner container p-0 carousel_layout"
         v-if="placeData"
+        :class="{ skeleton: this.$store.state.isLoading }"
       >
         <router-link
           :to="{
@@ -49,7 +53,7 @@
           <img
             :src="placeData?.[1]?.Picture.PictureUrl1"
             class="d-block w-100"
-            alt="..."
+            alt=""
           />
         </router-link>
         <router-link
@@ -69,7 +73,7 @@
           <img
             :src="placeData?.[19]?.Picture.PictureUrl1"
             class="d-block w-100"
-            alt="..."
+            alt=""
           />
         </router-link>
         <router-link
@@ -89,7 +93,7 @@
           <img
             :src="placeData?.[26]?.Picture.PictureUrl1"
             class="d-block w-100 h-100"
-            alt="..."
+            alt=""
           />
         </router-link>
       </div>
@@ -128,6 +132,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 @use "../assets/sass/breakpoints.scss";
+@use "../assets/sass/loading.scss";
 
 .container {
   position: relative;
@@ -155,5 +160,8 @@ export default {
 }
 div.carousel_layout {
   border-radius: 20px;
+}
+.skeleton {
+  @extend %skeleton-loading;
 }
 </style>

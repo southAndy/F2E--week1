@@ -31,13 +31,13 @@
         <div class="carousel_item w-100 h-100 active">
           <p class="carousel_title">
             {{
-              placeData.ScenicSpotName ||
-              placeData.ActivityName ||
-              placeData.RestaurantName
+              placeData?.ScenicSpotName ||
+              placeData?.ActivityName ||
+              placeData?.RestaurantName
             }}
           </p>
           <img
-            :src="placeData.Picture.PictureUrl1"
+            :src="placeData?.Picture.PictureUrl1"
             class="d-block w-100"
             alt="..."
           />
@@ -45,13 +45,13 @@
         <div class="carousel_item h-100 w-100">
           <p class="carousel_title">
             {{
-              placeData.ScenicSpotName ||
-              placeData.ActivityName ||
-              placeData.RestaurantName
+              placeData?.ScenicSpotName ||
+              placeData?.ActivityName ||
+              placeData?.RestaurantName
             }}
           </p>
           <img
-            :src="placeData.Picture.PictureUrl2"
+            :src="placeData?.Picture.PictureUrl2"
             class="d-block w-100"
             alt="..."
           />
@@ -59,13 +59,13 @@
         <div class="carousel_item h-100 w-100">
           <p class="carousel_title">
             {{
-              placeData.ScenicSpotName ||
-              placeData.ActivityName ||
-              placeData.RestaurantName
+              placeData?.ScenicSpotName ||
+              placeData?.ActivityName ||
+              placeData?.RestaurantName
             }}
           </p>
           <img
-            :src="placeData.Picture.PictureUrl3"
+            :src="placeData?.Picture?.PictureUrl3"
             class="d-block w-100 h-100"
             alt="..."
           />

@@ -22,13 +22,13 @@
     <nav class="navigation" :class="{ drop: isDropNavbar }">
       <router-link
         class="navigation_link"
-        :to="{ name: 'Activities' }"
+        :to="{ name: 'ScenicSpot' }"
         @click="dropMenu"
         >探索景點</router-link
       >
       <router-link
         class="navigation_link"
-        :to="{ name: 'Festival' }"
+        :to="{ name: 'Activity' }"
         @click="dropMenu"
         >節慶活動</router-link
       >
@@ -46,7 +46,7 @@ export default {
   name: "Navbar",
   data() {
     return {
-      isDropNavbar: true,
+      isDropNavbar: false,
     };
   },
   methods: {
