@@ -11,6 +11,7 @@ const touristAPI = axios.create({
     ...getAuthorizationHeader(),
   },
 });
+//test
 
 export default {
   getScenicSpotAPI() {
