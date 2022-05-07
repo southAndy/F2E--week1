@@ -46,7 +46,7 @@ export default {
   name: "Navbar",
   data() {
     return {
-      isDropNavbar: false,
+      isDropNavbar: true,
     };
   },
   methods: {
