@@ -44,17 +44,27 @@ export default createStore({
         state?.scenicSpotData ||
         state?.resturantData ||
         [];
-
+      console.log("test:收到什麼資料", data);
+      //todo:只保留不重複的縣市名稱
       //todo：map會回傳全部的資料（包括undefined的資料
       let cityDatas = data?.map((data) => {
         if (data.City !== undefined) {
           return data.City;
         }
       });
+      let temp = cityDatas.filter((city) => city !== undefined);
+      console.log("test:filtered", temp);
+      console.log(new Set(temp));
+      return new Set(temp);
+      //篩選掉重複的值
+      // let noRepeatCities = new Set(cityDatas);
       //!indexOf只能判別純陣列內容（物件型別不能）
-      return cityDatas.filter(
-        (city, index, array) => array.indexOf(city) === index
-      );
+      // let filterRepeat = cityDatas.filter(
+      //   (city, index, array) => array.indexOf(city) === index
+      // );
+      // console.log("after filtered", filterRepeat);
+      // console.log(filterRepeat.splice(0, 1));
+      // return filterRepeat.splice(0, 1);
     },
   },
   mutations: {
