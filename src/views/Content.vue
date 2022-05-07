@@ -1,5 +1,6 @@
 <template v-if="event">
   <div class="content">
+    {{ filterEvent }}
     <Breadcrumb />
     <div class="content_image">
       <img :src="filterEvent?.Picture?.PictureUrl1" />
@@ -23,7 +24,9 @@
       <div class="detail">
         <p class="detail_title">
           活動時間：
-          <span class="detail_content">{{ "假資料" }}</span>
+          <span class="detail_content">{{
+            "假資料" || filterEvent.Cycle
+          }}</span>
         </p>
         <p class="detail_title">
           聯絡電話：
@@ -257,6 +260,8 @@ export default {
     &_content {
       font-weight: 400;
       font-size: 16px;
+
+      line-height: 22px;
     }
   }
 
