@@ -1,6 +1,5 @@
 <template v-if="event">
   <div class="content">
-    {{ filterEvent }}
     <Breadcrumb />
     <div class="content_image">
       <img :src="filterEvent?.Picture?.PictureUrl1" />
