@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="topic">
     <p class="topic_name">{{ festivalList.name }}</p>
     <div>
       <img class="topic_image" :src="festivalList.image" alt="cool" />
@@ -22,13 +22,12 @@ export default {
   display: flex;
   background: black;
   height: 80px;
-  width: 160px;
+  width: 100%;
+  // width: 160px;
 
   text-align: center;
   border-radius: 40px;
-
   margin-bottom: 10px;
-
   position: relative;
 
   @include breakpoints.desktop {
@@ -63,6 +62,7 @@ export default {
   }
   div {
     cursor: pointer;
+    width: 100%;
   }
 }
 </style>
