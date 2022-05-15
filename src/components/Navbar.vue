@@ -174,7 +174,7 @@ header {
   }
   .drop {
     display: none;
-    @include breakpoints.tablet {
+    @include breakpoints.desktop {
       display: flex;
     }
   }
