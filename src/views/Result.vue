@@ -1,16 +1,15 @@
 <template>
-  <div class="search_all" v-if="searchDatas">
-    <!-- <Loading v-if="getAPI" class="loading" /> -->
-    <Breadcrumb />
-    <!-- <Button /> -->
-    <div class="serach_amount">
+  <div class="search_all" :class="{ skeleton: getAPI }">
+    <Loading v-if="getAPI" class="skeleton" />
+    <Breadcrumb v-if="recievedAPI" />
+    <div class="serach_amount" v-if="recievedAPI">
       <h2>搜尋結果</h2>
       <span
         >共有<strong>{{ getTotalAmounts }}</strong
         >筆結果
       </span>
     </div>
-    <!-- 渲染部分 -->
+    <!-- 渲染API部分 -->
     <div class="result_container">
       <router-link
         :to="{
@@ -63,29 +62,33 @@
         </div>
       </router-link>
     </div>
-    <Pagination :dataLength="searchDatas" @getss="getSearchDatas" />
+    <Pagination
+      v-if="recievedAPI"
+      :dataLength="searchDatas"
+      @getss="getSearchDatas"
+    />
   </div>
 </template>
 <script>
 // import Button from "@//components/Button.vue";
 import Breadcrumb from "../components/Breadcrumb.vue";
 import Pagination from "../components/Pagination.vue";
-// import Loading from "../components/Loading.vue";
+import Loading from "../components/Loading.vue";
 
 import API from "@/service/getAPI";
 
 export default {
   name: "Result",
-  components: { Breadcrumb, Pagination },
+  components: { Breadcrumb, Pagination, Loading },
   data() {
     return {
-      searchDatas: null,
+      searchDatas: [],
       dataPerPage: 20,
       currentPage: 1,
       selecedCity: this.$route.query.city || null,
       inputedKeyword: this.$route.query.keyword || null,
       previousPath: this.$route.query.path || null,
-
+      recievedAPI: false,
       getAPI: true,
 
       //沒有照片的圖檔資料
@@ -109,10 +112,11 @@ export default {
     //   return Math.ceil(arrayDatas.length / 20);
     // },
     getTotalAmounts() {
-      let arrayDatas = Array.from(this.searchDatas);
-      console.log(arrayDatas);
-      console.log(`此次取得的資料數量為${this.searchDatas.length}筆`);
-      return arrayDatas.length;
+      // let arrayDatas = Array?.from(this.searchDatas);
+      // console.log(arrayDatas);
+      console.log(`此次取得的資料數量為${this.searchDatas?.length}筆`);
+      // return arrayDatas.length;
+      return this.searchDatas.length;
     },
   },
   methods: {
@@ -207,8 +211,9 @@ export default {
           .then((response) => {
             setTimeout(() => {
               this.getAPI = false;
+              this.recievedAPI = true;
               return (this.searchDatas = response.data);
-            }, 20000);
+            }, 4000);
           });
       }
       if (this.$route.query.path === "Activity") {
@@ -217,7 +222,8 @@ export default {
           .then((response) => {
             setTimeout(() => {
               this.getAPI = false;
-            }, 8000);
+              this.recievedAPI = true;
+            }, 1000);
             return (this.searchDatas = response.data);
           });
       }
@@ -227,7 +233,8 @@ export default {
           .then((response) => {
             setTimeout(() => {
               this.getAPI = false;
-            }, 8000);
+              this.recievedAPI = true;
+            }, 1000);
             return (this.searchDatas = response.data);
           });
       }
@@ -250,17 +257,17 @@ export default {
   @include breakpoints.desktop {
     padding: 0 45px;
   }
-  .loading {
-    position: absolute;
-    z-index: 1;
+  // .loading {
+  //   position: absolute;
+  //   z-index: 1;
 
-    height: 100%;
-    width: 100%;
-    background-color: aqua;
-    box-sizing: border-box;
-    left: -3px;
-    top: -25px;
-  }
+  //   height: 100%;
+  //   width: 100%;
+  //   background-color: aqua;
+  //   box-sizing: border-box;
+  //   left: -3px;
+  //   top: -25px;
+  // }
 }
 p {
   margin: 0;
