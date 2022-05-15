@@ -128,6 +128,7 @@ header {
     top: 60px;
     bottom: 0;
     right: 0;
+    z-index: 1;
 
     // animation: ease-in 1s 2 reverse both paused slidein;
     @include breakpoints.desktop {
@@ -174,7 +175,7 @@ header {
   }
   .drop {
     display: none;
-    @include breakpoints.tablet {
+    @include breakpoints.desktop {
       display: flex;
     }
   }
