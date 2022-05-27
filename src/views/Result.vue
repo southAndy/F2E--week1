@@ -1,6 +1,6 @@
 <template>
-  <div class="search_all" :class="{ skeleton: getAPI }">
-    <Loading v-if="getAPI" class="skeleton" />
+  <div class="search_all">
+    <!-- <Loading v-if="getAPI" class="skeleton" /> -->
     <Breadcrumb v-if="recievedAPI" />
     <div class="serach_amount" v-if="recievedAPI">
       <h2>搜尋結果</h2>
@@ -27,8 +27,9 @@
         :key="amount"
         class="result"
       >
-        <div class="result_image" :class="{ skeleton: getAPI }">
+        <div :class="['result_image', { skeleton: getAPI }]">
           <img
+            v-if="recievedAPI"
             class="mobile"
             :src="
               amount.Picture.PictureUrl1 ||
@@ -70,16 +71,19 @@
   </div>
 </template>
 <script>
-// import Button from "@//components/Button.vue";
 import Breadcrumb from "../components/Breadcrumb.vue";
 import Pagination from "../components/Pagination.vue";
-import Loading from "../components/Loading.vue";
+// import Loading from "../components/Loading.vue";
 
 import API from "@/service/getAPI";
 
 export default {
   name: "Result",
-  components: { Breadcrumb, Pagination, Loading },
+  components: {
+    Breadcrumb,
+    Pagination,
+    // Loading,
+  },
   data() {
     return {
       searchDatas: [],
@@ -146,6 +150,7 @@ export default {
           .then((response) => {
             setTimeout(() => {
               this.getAPI = false;
+              this.recievedAPI = true;
             }, 8000);
             return (this.searchDatas = response.data);
           });
@@ -157,6 +162,7 @@ export default {
           .then((response) => {
             setTimeout(() => {
               this.getAPI = false;
+              this.recievedAPI = true;
             }, 8000);
             return (this.searchDatas = response.data);
           });
@@ -168,6 +174,7 @@ export default {
           .then((response) => {
             setTimeout(() => {
               this.getAPI = false;
+              this.recievedAPI = true;
             }, 8000);
             return (this.searchDatas = response.data);
           });
@@ -179,7 +186,8 @@ export default {
       return await API.getScenicSpotAPI().then((response) => {
         setTimeout(() => {
           this.getAPI = false;
-        }, 8000);
+          this.recievedAPI = true;
+        }, 4000);
         return (this.searchDatas = response.data);
       });
     }
@@ -188,7 +196,8 @@ export default {
       return await API.getActivitiesAPI().then((response) => {
         setTimeout(() => {
           this.getAPI = false;
-        }, 8000);
+          this.recievedAPI = true;
+        }, 4000);
         return (this.searchDatas = response.data);
       });
     }
@@ -197,7 +206,8 @@ export default {
       return await API.getRestaurantAPI().then((response) => {
         setTimeout(() => {
           this.getAPI = false;
-        }, 8000);
+          this.recievedAPI = true;
+        }, 4000);
         return (this.searchDatas = response.data);
       });
     }
@@ -213,7 +223,7 @@ export default {
               this.getAPI = false;
               this.recievedAPI = true;
               return (this.searchDatas = response.data);
-            }, 4000);
+            }, 8000);
           });
       }
       if (this.$route.query.path === "Activity") {
@@ -223,7 +233,7 @@ export default {
             setTimeout(() => {
               this.getAPI = false;
               this.recievedAPI = true;
-            }, 1000);
+            }, 8000);
             return (this.searchDatas = response.data);
           });
       }
@@ -234,7 +244,7 @@ export default {
             setTimeout(() => {
               this.getAPI = false;
               this.recievedAPI = true;
-            }, 1000);
+            }, 8000);
             return (this.searchDatas = response.data);
           });
       }
@@ -247,6 +257,9 @@ export default {
 @use "../assets/sass/reset.scss";
 @use "../assets/sass/loading.scss";
 
+.loading_place {
+  position: absolute;
+}
 .skeleton {
   @extend %skeleton-loading;
 }
