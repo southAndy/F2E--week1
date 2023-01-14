@@ -1,5 +1,5 @@
 <template>
-  <div class="home" v-if="apiData || resturantData || allTouristData">
+  <div class="home">
     <div class="title_container">
       <div>
         <p class="home_title decorate_line">探索台灣之美</p>
@@ -81,8 +81,6 @@ import ScenicSpotCard from "@/components/ScenicSpotCard.vue";
 import RestaurantCard from "@/components/RestaurantCard.vue";
 import Carousel from "@/components/Carousel.vue";
 
-import API from "@/service/getAPI";
-
 export default {
   name: "Home",
   components: {
@@ -93,30 +91,9 @@ export default {
     Card,
   },
   data() {
-    return {
-      //todo
-      allTouristData: [],
-      apiData: null,
-      resturantData: null,
-
-      isLoading: true,
-    };
+    return {};
   },
-  methods: {
-    filterActitivtiess() {
-      const x = Array.from(this.apiData);
-      console.log(
-        58,
-        x.filter((data) => data.Picture.PictureUrl1 != undefined)
-      );
-      return x.filter((data) => data.Picture.PictureUrl1 != undefined);
-    },
-    test(className) {
-      API.scenicSpot.getDataByClass(className).then((response) => {
-        console.log(response);
-      });
-    },
-  },
+  methods: {},
   computed: {
     filterActitivties() {
       return this.$store.getters.withPictureActivities;
