@@ -75,16 +75,13 @@
 </template>
 
 <script>
-// @ is an alias to /src
 import Serach from "@/components/Serach.vue";
 import Card from "@/components/Card.vue";
 import ScenicSpotCard from "@/components/ScenicSpotCard.vue";
 import RestaurantCard from "@/components/RestaurantCard.vue";
 import Carousel from "@/components/Carousel.vue";
-// import Loading from "@/components/Loading.vue";
 
 import API from "@/service/getAPI";
-// import Swiper from "@/components/Swiper.vue";
 
 export default {
   name: "Home",
@@ -123,42 +120,12 @@ export default {
   computed: {
     filterActitivties() {
       return this.$store.getters.withPictureActivities;
-
-      //元件寫法
-      // const x = Array.from(this.apiData);
-      // // console.log("57", this.apiData);
-      // console.log(
-      //   58,
-      //   x.filter((data) => data.Picture != {})
-      // );
-      // return x.filter((data) => data.Picture.PictureUrl1 != undefined);
     },
     getScenicSpotCity() {
       return this.$store.getters.scenicSpotDataWithCity;
-
-      //元件篩選
-
-      // const x = Array.from(this.allTouristData);
-      // console.log(
-      //   "有城市的資料為",
-      //   this.allTouristData.filter((data) => data.City != undefined)
-      // );
-      // return this.allTouristData.filter((data) => data.City != undefined);
     },
     getResturantCity() {
       return this.$store.getters.restaurantDataWithCity;
-
-      //元件篩選
-
-      // return this.$store.getters.withCityData;
-
-      // const x = Array.from(this.resturantData);
-      // // console.log("57", this.apiData);
-      // console.log(
-      //   58,
-      //   x.filter((data) => data.City != undefined)
-      // );
-      // return x.filter((data) => data.City != undefined);
     },
   },
 
@@ -167,20 +134,6 @@ export default {
     await this.$store.dispatch("getActivitiesAPI");
     await this.$store.dispatch("getScenicSpotAPI");
     await this.$store.dispatch("getRestaurantAPI");
-
-    // let x = this.$store.getters.withPictureActivities;
-    // this.$store.actions.waitAPI();
-    // console.log(157, x);
-    //取得特定API資料
-    // API.getActivitiesAPI().then((response) => {
-    //   return (this.apiData = response.data);
-    // });
-    // API.getRestaurantAPI().then((response) => {
-    //   return (this.resturantData = response.data);
-    // });
-    // API.getScenicSpotAPI().then((response) => {
-    //   return (this.allTouristData = response.data);
-    // });
   },
 };
 </script>
