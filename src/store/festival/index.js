@@ -1,4 +1,11 @@
 import API from "@/service/getAPI";
+import natureImg from "@/assets/image/activities/unsplash_pn5c-CLWGzY.png"
+import factoryImg from "@/assets/image/Rectangle93.svg"
+import recreationImg from "@/assets/image/activities/Rectangle94.png"
+import farmImg from "@/assets/image/activities/Rectangle95.svg"
+import ecologyImg from "@/assets/image/activities/unsplash_7tvbRQ5AKs4.png"
+import hotSpringImg from "@/assets/image/activities/unsplash_I8K-lIkvqYI.png"
+import historicImg from "@/assets/image/activities/Rectangle98.svg"
 
 export const festivalDatas = {
   namespaced: true,
@@ -6,31 +13,31 @@ export const festivalDatas = {
     festivalData: [
       {
         name: "自然風景類",
-        image: require("@/assets/image/activities/unsplash_pn5c-CLWGzY.png"),
+        image: natureImg,
       },
       {
         name: "觀光工廠類",
-        image: require("@/assets/image/Rectangle 93.svg"),
+        image: factoryImg,
       },
       {
         name: "遊憩活動類",
-        image: require("@/assets/image/activities/Rectangle 94.png"),
+        image: recreationImg,
       },
       {
         name: "休閒農業類",
-        image: require("@/assets/image/activities/Rectangle 95.svg"),
+        image: farmImg,
       },
       {
         name: "生態類",
-        image: require("@/assets/image/activities/unsplash_7tvbRQ5AKs4.png"),
+        image: ecologyImg,
       },
       {
         name: "溫泉類",
-        image: require("@/assets/image/activities/unsplash_I8K-lIkvqYI.png"),
+        image: hotSpringImg,
       },
       {
         name: "古蹟類",
-        image: require("@/assets/image/activities/Rectangle 98.svg"),
+        image: historicImg,
       },
       // dd
     ],
