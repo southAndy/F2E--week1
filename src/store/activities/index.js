@@ -1,4 +1,10 @@
 import API from "@/service/getAPI";
+import festivalImg from "@/assets/image/unsplash_qDZ-Xd8dX6w.svg"
+import bikeImg from "@/assets/image/unsplash_qDBbM9Erwo4.svg"
+import recreationImg from "@/assets/image/Rectangle94.svg"
+import cultureImg from "@/assets/image/Rectangle95.png"
+import yearlyImg from "@/assets/image/unsplash_kaDrFI9qNrU.png"
+import seasonalImg from "@/assets/image/unsplash_fS0zfcOYa4A.png"
 
 export const activitiesDatas = {
   namespaced: true,
@@ -6,27 +12,27 @@ export const activitiesDatas = {
     activitiesData: [
       {
         name: "節慶活動",
-        image: require("@/assets/image/unsplash_qDZ-Xd8dX6w.svg"),
+        image: festivalImg,
       },
       {
         name: "自行車活動",
-        image: require("@/assets/image/unsplash_qDBbM9Erwo4.svg"),
+        image: bikeImg,
       },
       {
         name: "遊憩活動",
-        image: require("@/assets/image/Rectangle 94.svg"),
+        image: recreationImg,
       },
       {
         name: "產業文化活動",
-        image: require("@/assets/image/Rectangle 95.png"),
+        image: cultureImg,
       },
       {
         name: "年度活動",
-        image: require("@/assets/image/unsplash_kaDrFI9qNrU.png"),
+        image: yearlyImg,
       },
       {
         name: "四季活動",
-        image: require("@/assets/image/unsplash_fS0zfcOYa4A.png"),
+        image: seasonalImg,
       },
     ],
   },

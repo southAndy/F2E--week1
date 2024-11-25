@@ -1,4 +1,10 @@
 import API from "@/service/getAPI";
+import localSpecialty from "@/assets/image/restaurant/unsplash_bRdRUUtbxO0.png";
+import chineseFood from "@/assets/image/restaurant/unsplash_jFu2L04tMBc.png";
+import dessert from "@/assets/image/restaurant/unsplash_LI368L2RZno.png";
+import foreignFood from "@/assets/image/restaurant/unsplash_b-2uxjTcxH0.png";
+import souvenir from "@/assets/image/restaurant/unsplash_CnrDuY0tFrg.png";
+import vegetarian from "@/assets/image/restaurant/unsplash_4MEL9XS-3JQ.png";
 
 export const restaurantDatas = {
   namespaced: true,
@@ -6,27 +12,27 @@ export const restaurantDatas = {
     restaurantData: [
       {
         name: "地方特產",
-        image: require("@/assets/image/restaurant/unsplash_bRdRUUtbxO0.png"),
+        image: localSpecialty,
       },
       {
         name: "中式美食",
-        image: require("@/assets/image/restaurant/unsplash_jFu2L04tMBc.png"),
+        image: chineseFood,
       },
       {
         name: "甜點冰品",
-        image: require("@/assets/image/restaurant/unsplash_LI368L2RZno.png"),
+        image: dessert,
       },
       {
         name: "異國料理",
-        image: require("@/assets/image/restaurant/unsplash_b-2uxjTcxH0.png"),
+        image: foreignFood,
       },
       {
         name: "伴手禮",
-        image: require("@/assets/image/restaurant/unsplash_CnrDuY0tFrg.png"),
+        image: souvenir,
       },
       {
         name: "素食",
-        image: require("@/assets/image/restaurant/unsplash_4MEL9XS-3JQ.png"),
+        image: vegetarian,
       },
     ],
     apiData: null,
