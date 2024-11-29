@@ -13,20 +13,19 @@
   >
     <div class="card_image">
       <img
-        v-if="activities?.Picture.PictureUrl1"
-        :src="activities?.Picture.PictureUrl1"
+        v-if="activities?.Picture?.PictureUrl1"
+        :src="activities?.Picture?.PictureUrl1"
         alt="活動照片"
       />
-      <img v-else src="@/assets/image/search.svg" alt="該資料沒有圖片顯示" />
     </div>
     <div class="card_body">
       <div class="time">
-        {{ convertStartTime }} -
-        {{ convertEndTime }}
+        {{ convertStartTime??'' }} -
+        {{ convertEndTime??'' }}
       </div>
       <p class="title">{{ activities?.ActivityName }}</p>
       <i></i>
-      <a href="##" class="location">
+      <a v-if="activities.City" href="##" class="location">
         <img src="@/assets/image/Vector.png" alt="座標圖示" />
         {{ activities?.City }}
       </a>
@@ -39,33 +38,31 @@
 export default {
   name: "Card",
   props: ["activitiesData"],
-  data() {
-    return {
-      activities: this.activitiesData,
-
-      //todo 亂數取得
-      // randomNumber: Number(),
-    };
-  },
   methods: {
     // getRandom() {},
   },
   computed: {
     convertStartTime() {
-      let activitiesTime = new Date(this.activities.StartTime);
-      let activityYear = activitiesTime.getFullYear();
-      let activityMonth = activitiesTime.getMonth();
-      let activityDate = activitiesTime.getDate();
-      // console.log(activityYear, activityMonth, activityDate);
-      return `${activityYear}/${activityMonth}/${activityDate}`;
+      if(this.activities.StartTime){
+        let activitiesTime = new Date(this.activities.StartTime);
+        let activityYear = activitiesTime.getFullYear();
+        let activityMonth = activitiesTime.getMonth();
+        let activityDate = activitiesTime.getDate();
+        // console.log(activityYear, activityMonth, activityDate);
+        return `${activityYear}/${activityMonth}/${activityDate}`;
+
+      }
     },
     convertEndTime() {
-      let activitiesTime = new Date(this.activities.EndTime);
-      let activityYear = activitiesTime.getFullYear();
-      let activityMonth = activitiesTime.getMonth();
-      let activityDate = activitiesTime.getDate();
-      // console.log(activityYear, activityMonth, activityDate);
-      return `${activityYear}/${activityMonth}/${activityDate}`;
+      if(this.activities.EndTime){
+        let activitiesTime = new Date(this.activities.EndTime);
+        let activityYear = activitiesTime.getFullYear();
+        let activityMonth = activitiesTime.getMonth();
+        let activityDate = activitiesTime.getDate();
+        // console.log(activityYear, activityMonth, activityDate);
+        return `${activityYear}/${activityMonth}/${activityDate}`;
+
+      }
     },
   },
 };

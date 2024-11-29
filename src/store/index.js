@@ -6,11 +6,9 @@ import { festivalDatas } from "./festival/index.js";
 import { activitiesDatas } from "./activities/index.js";
 export default createStore({
   state: {
-    //接收API的容器
-    activitiesData: null,
+    apiData: null,
     resturantData: null,
-    scenicSpotData: null,
-
+    scenicSpotData: [],
     isLoading: true,
   },
   getters: {
@@ -20,9 +18,13 @@ export default createStore({
     },
     withPictureActivities(state) {
       // const arrAPI = Array.from(state.activitiesData);
-      return state?.activitiesData?.filter(
-        (data) => data.Picture.PictureUrl1 != undefined
-      );
+      if(state.length>0){
+        return state?.activitiesData?.filter(
+          (data) => data.Picture.PictureUrl1 != undefined
+        );
+      }else{
+        return [{},{},{},{}]
+      }
     },
     withCityData(state) {
       const arrAPI = Array.from(state.activitiesData);
@@ -68,12 +70,11 @@ export default createStore({
     },
   },
   mutations: {
-    ensureActivitiesAPI(state, apiData) {
-      // console.log("mutation接收到資料：", apiData != null, apiData);
-      setTimeout(() => {
-        state.isLoading = false;
-      }, 3000);
-      state.activitiesData = apiData;
+    ensureActivitiesAPI(state, payload) {
+      state.apiData = payload;
+    },
+    setLoading(state,payload){
+      state.isLoading = payload
     },
     ensureRestaurantAPI(state, apiData) {
       // console.log("mutation接收到資料：", apiData != null, apiData);
@@ -92,13 +93,18 @@ export default createStore({
   },
   actions: {
     async getActivitiesAPI({ commit }) {
-      let apiData = await API.getActivitiesAPI().then((response) => {
-        return response.data;
-      });
-      // console.log("action接收到資料：", apiData);
-      //呼叫mutation修改state
-      commit("ensureActivitiesAPI", apiData);
-      // return state.activitiesData;
+      try{
+        commit('setLoading',true)
+        let apiData = await API.getActivitiesAPI().then((response) => {
+          return response.data;
+        });
+
+        commit("ensureActivitiesAPI", apiData);
+        commit('setLoading',false)
+      }catch(e){
+        console.log(e);
+
+      }
     },
     async getRestaurantAPI({ commit, state }) {
       let apiData = await API.getRestaurantAPI().then((response) => {
