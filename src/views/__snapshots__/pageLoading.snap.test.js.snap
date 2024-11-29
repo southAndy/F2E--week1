@@ -1,0 +1,5 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Card.vue > renders correctly when not loading 1`] = `"<router-link-stub data-v-c6c3362a="" to="[object Object]" class="card"></router-link-stub>"`;
+
+exports[`Card.vue > renders correctly with Vuex and activitiesData 1`] = `"<router-link-stub data-v-c6c3362a="" to="[object Object]" class="card"></router-link-stub>"`;
