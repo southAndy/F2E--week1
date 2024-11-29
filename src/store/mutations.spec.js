@@ -1,5 +1,5 @@
-import { describe, expect, test } from "vitest";
-import store from "../store";
+import { beforeEach, describe, expect, test } from "vitest";
+import store from ".";
 
 describe("apiData in the vuex store is null", () => {
     describe("don't commit any mutation",()=>{

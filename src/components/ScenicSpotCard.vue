@@ -4,9 +4,9 @@
     :to="{
       name: 'Content',
       params: {
-        city: scenicSpotData.City,
-        id: scenicSpotData.ScenicSpotID,
-        name: scenicSpotData.ScenicSpotName,
+        city: scenicSpotData?.City,
+        id: scenicSpotData?.ScenicSpotID,
+        name: scenicSpotData?.ScenicSpotName,
       },
     }"
   >

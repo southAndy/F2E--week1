@@ -21,7 +21,6 @@
         <router-link
           :to="{ name: 'Activity' }"
           class="recent_link"
-          @click="dropMenu"
           >查看更多活動
           <img src="@/assets/image/Vector.svg" alt="方向鍵>" />
         </router-link>
@@ -108,9 +107,13 @@ export default {
 
   async created() {
     //todo 加入處理loading效果
-    await this.$store.dispatch("getActivitiesAPI");
-    await this.$store.dispatch("getScenicSpotAPI");
-    await this.$store.dispatch("getRestaurantAPI");
+    try{
+      await this.$store.dispatch("getActivitiesAPI");
+      await this.$store.dispatch("getScenicSpotAPI");
+      await this.$store.dispatch("getRestaurantAPI");
+    }catch(e){
+      console.log(e);
+    }
   },
 };
 </script>
