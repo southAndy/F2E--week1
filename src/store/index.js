@@ -10,6 +10,7 @@ export default createStore({
     resturantData: null,
     scenicSpotData: [],
     isLoading: true,
+    accessToken:"",
   },
   getters: {
     getAPI(state) {
@@ -73,6 +74,9 @@ export default createStore({
     ensureActivitiesAPI(state, payload) {
       state.apiData = payload;
     },
+    setToken(state,payload){
+      state.accessToken = payload
+    },
     setLoading(state,payload){
       state.isLoading = payload
     },
@@ -116,9 +120,13 @@ export default createStore({
       return state.resturantData;
     },
     async getScenicSpotAPI({ commit }) {
-      let apiData = await API.getScenicSpotAPI().then((response) => {
-        return response.data;
-      });
+      let apiData = await API.getScenicSpotAPI().then((res)=>{
+        console.log(res);
+        return res.data
+      })
+      // let apiData = await API.cgetScenicSpotAPI().then((response) => {
+      //   return response.data;
+      // });
       // console.log("action接收到資料：", apiData);
       //呼叫mutation修改state
       commit("ensureScenicSpotAPI", apiData);
