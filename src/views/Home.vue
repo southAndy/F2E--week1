@@ -27,11 +27,11 @@
       </div>
       <!-- fix -->
       <div class="container">
-        <Card
+        <!-- <Card
           v-for="(activitiesData, index) in filterActitivties"
           :key="index"
           :activitiesData="activitiesData"
-        />
+        /> -->
       </div>
     </div>
     <div class="recent">
@@ -74,13 +74,14 @@
 </template>
 
 <script>
+import { defineComponent } from "vue";
 import Serach from "@/components/Serach.vue";
 import Card from "@/components/Card.vue";
 import ScenicSpotCard from "@/components/ScenicSpotCard.vue";
 import RestaurantCard from "@/components/RestaurantCard.vue";
 import Carousel from "@/components/Carousel.vue";
 
-export default {
+export default defineComponent( {
   name: "Home",
   components: {
     Serach,
@@ -108,14 +109,14 @@ export default {
   async created() {
     //todo 加入處理loading效果
     try{
-      await this.$store.dispatch("getActivitiesAPI");
+      // await this.$store.dispatch("getActivitiesAPI");
       await this.$store.dispatch("getScenicSpotAPI");
-      await this.$store.dispatch("getRestaurantAPI");
+      // await this.$store.dispatch("getRestaurantAPI");
     }catch(e){
       console.log(e);
     }
   },
-};
+});
 </script>
 <style lang="scss" scoped>
 @use "../assets/sass/breakpoints.scss";

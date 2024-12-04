@@ -93,7 +93,7 @@ import Breadcrumb from "../components/Breadcrumb.vue";
 // import CarouselContent from "@/components/CarouselContent.vue";
 import Category from "../components/Category.vue";
 
-import API from "@/service/getAPI";
+import API from "@/service/getApi";
 
 export default {
   name: "Content",

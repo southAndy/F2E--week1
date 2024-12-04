@@ -75,7 +75,7 @@ import Breadcrumb from "../components/Breadcrumb.vue";
 import Pagination from "../components/Pagination.vue";
 // import Loading from "../components/Loading.vue";
 
-import API from "@/service/getAPI";
+import API from "@/service/getApi";
 
 export default {
   name: "Result",

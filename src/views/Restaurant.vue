@@ -22,7 +22,7 @@ import Topic from "@/components/Topic.vue";
 import Button from "@/components/Button.vue";
 import Breadcrumb from "@/components/Breadcrumb.vue";
 // import Swiper from "@/components/Swiper.vue";
-import API from "@/service/getAPI";
+import API from "@/service/getApi";
 export default {
   name: "Restaurant",
   components: {

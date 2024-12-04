@@ -21,7 +21,7 @@ import Topic from "@/components/Topic.vue";
 import Button from "@/components/Button.vue";
 import Breadcrumb from "@/components/Breadcrumb.vue";
 
-import API from "@/service/getAPI.js";
+import API from "@/service/getApi.js";
 
 export default {
   name: "Activities",
