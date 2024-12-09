@@ -3,69 +3,70 @@
     :to="{
       name: 'Content',
       params: {
-        city: activities?.City,
-        id: activities?.ActivityID,
-        name: activities?.ActivityName,
+        city: dataCity,
+        id: dataId,
+        name: dataName,
       },
     }"
     class="card"
-    :class="{ skeleton: this.$store.state.isLoading }"
+    :class="{ skeleton:isLoading }"
   >
     <div class="card_image">
       <img
-        v-if="activities?.Picture?.PictureUrl1"
-        :src="activities?.Picture?.PictureUrl1"
+        v-if="dataPicture"
+        :src="dataPicture"
         alt="活動照片"
       />
     </div>
     <div class="card_body">
       <div class="time">
-        {{ convertStartTime??'' }} -
-        {{ convertEndTime??'' }}
+        {{ convertStartTime ?? '' }} -
+        {{ convertEndTime ?? '' }}
       </div>
-      <p class="title">{{ activities?.ActivityName }}</p>
+      <p class="title">{{ dataName }}</p>
       <i></i>
-      <a v-if="activities.City" href="##" class="location">
+      <a v-if="dataCity" href="##" class="location">
         <img src="@/assets/image/Vector.png" alt="座標圖示" />
-        {{ activities?.City }}
+        {{ dataCity }}
       </a>
     </div>
     <p class="card_more">詳細介紹</p>
   </router-link>
 </template>
 
-<script>
-export default {
-  name: "Card",
-  props: ["activitiesData"],
-  methods: {
-    // getRandom() {},
-  },
-  computed: {
-    convertStartTime() {
-      if(this.activities.StartTime){
-        let activitiesTime = new Date(this.activities.StartTime);
-        let activityYear = activitiesTime.getFullYear();
-        let activityMonth = activitiesTime.getMonth();
-        let activityDate = activitiesTime.getDate();
-        // console.log(activityYear, activityMonth, activityDate);
-        return `${activityYear}/${activityMonth}/${activityDate}`;
+<script setup lang="ts">
+import { defineProps, computed } from 'vue';
 
-      }
-    },
-    convertEndTime() {
-      if(this.activities.EndTime){
-        let activitiesTime = new Date(this.activities.EndTime);
-        let activityYear = activitiesTime.getFullYear();
-        let activityMonth = activitiesTime.getMonth();
-        let activityDate = activitiesTime.getDate();
-        // console.log(activityYear, activityMonth, activityDate);
-        return `${activityYear}/${activityMonth}/${activityDate}`;
+interface Props {
+  dataId:string,
+  dataName:string,
+  dataCity:string,
+  dataPicture:string | undefined
+  dataStartTime:string | undefined,
+  dataEndTime:string | undefined
+  isLoading:boolean
+}
+const props = defineProps<Props>();
 
-      }
-    },
-  },
-};
+const convertStartTime = computed(() => {
+  if (props.dataStartTime) {
+    let activitiesTime = new Date(props.dataStartTime);
+    let activityYear = activitiesTime.getFullYear();
+    let activityMonth = activitiesTime.getMonth() + 1; 
+    let activityDate = activitiesTime.getDate();
+    return `${activityYear}/${activityMonth}/${activityDate}`;
+  }
+});
+
+const convertEndTime = computed(() => {
+  if (props.dataEndTime) {
+    let activitiesTime = new Date(props.dataEndTime);
+    let activityYear = activitiesTime.getFullYear();
+    let activityMonth = activitiesTime.getMonth() + 1;
+    let activityDate = activitiesTime.getDate();
+    return `${activityYear}/${activityMonth}/${activityDate}`;
+  }
+});
 </script>
 <style lang="scss" scoped>
 @use "../assets/sass/breakpoints.scss";

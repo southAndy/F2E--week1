@@ -27,11 +27,17 @@
       </div>
       <!-- fix -->
       <div class="container">
-        <!-- <Card
-          v-for="(activitiesData, index) in filterActitivties"
+        <Card
+          v-for="(data, index) in getScenicSpotCity"
           :key="index"
-          :activitiesData="activitiesData"
-        /> -->
+          :dataId='data.ScenicSpotID'
+          :dataName="data.ScenicSpotName"
+          :dataCity="data.City"
+          :dataPicture="data.Picture.PictureUrl1"
+          :dataStartTime="data.StartTime"
+          :dataEndTime="data.EndTime"
+          :isLoading="getLoadingState"
+        />
       </div>
     </div>
     <div class="recent">
@@ -47,11 +53,11 @@
         </router-link>
       </div>
       <div class="recent_search">
-        <ScenicSpotCard
+        <!-- <ScenicSpotCard
           v-for="data in getScenicSpotCity"
           :key="data"
           :scenicSpotAPI="data"
-        />
+        /> -->
       </div>
     </div>
     <div class="recent">
@@ -63,11 +69,11 @@
         </router-link>
       </div>
       <div class="recent_search">
-        <RestaurantCard
+        <!-- <RestaurantCard
           v-for="datas in getResturantCity"
           :key="datas"
           :resturantData="datas"
-        />
+        /> -->
       </div>
     </div>
   </div>
@@ -104,6 +110,9 @@ export default defineComponent( {
     getResturantCity() {
       return this.$store.getters.restaurantDataWithCity;
     },
+    getLoadingState(){
+      return this.$store.state.isLoading
+    }
   },
 
   async created() {
