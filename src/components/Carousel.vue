@@ -1,6 +1,5 @@
 <template>
-  <!-- <pre>{{ placeData[1] }}</pre> -->
-  <div class="cool" :class="{ skeleton: this.$store.state.isLoading }">
+  <div class="cool" >
     <div
       id="carouselExampleIndicators"
       class="carousel slide"
@@ -8,7 +7,7 @@
     >
       <div
         class="carousel-indicators justify-content-end me-6"
-        :class="{ skeleton: this.$store.state.isLoading }"
+        
       >
         <button
           type="button"
@@ -34,65 +33,26 @@
       <div
         class="carousel-inner container p-0 carousel_layout"
         v-if="placeData"
-        :class="{ skeleton: this.$store.state.isLoading }"
+        :class="{ skeleton: isLoading }"
       >
         <router-link
+          v-for="data,index in placeData" :key="index"
           :to="{
             name: 'Content',
             params: {
-              city: placeData?.[1]?.City,
-              id: placeData?.[1]?.ScenicSpotID,
-              name: placeData?.[1]?.ScenicSpotName,
+              city: data.City,
+              id: data.ScenicSpotID,
+              name: data.ScenicSpotName,
             },
           }"
           class="carousel-item w-100 h-100 active"
         >
           <p class="carousel_title">
-            {{ placeData?.[1]?.ScenicSpotName }}
+            {{ data.ScenicSpotName }}
           </p>
           <img
-            :src="placeData?.[1]?.Picture.PictureUrl1"
+            :src="data.Picture.PictureUrl1"
             class="d-block w-100"
-            alt=""
-          />
-        </router-link>
-        <router-link
-          :to="{
-            name: 'Content',
-            params: {
-              city: placeData?.[19]?.City,
-              id: placeData?.[19]?.ScenicSpotID,
-              name: placeData?.[19]?.ScenicSpotName,
-            },
-          }"
-          class="carousel-item h-100 w-100"
-        >
-          <p class="carousel_title">
-            {{ placeData?.[19]?.ScenicSpotName }}
-          </p>
-          <img
-            :src="placeData?.[19]?.Picture.PictureUrl1"
-            class="d-block w-100"
-            alt=""
-          />
-        </router-link>
-        <router-link
-          :to="{
-            name: 'Content',
-            params: {
-              city: placeData?.[26]?.City,
-              id: placeData?.[26]?.ScenicSpotID,
-              name: placeData?.[26]?.ScenicSpotName,
-            },
-          }"
-          class="carousel-item h-100"
-        >
-          <p class="carousel_title">
-            {{ placeData?.[26]?.ScenicSpotName }}
-          </p>
-          <img
-            :src="placeData?.[26]?.Picture.PictureUrl1"
-            class="d-block w-100 h-100"
             alt=""
           />
         </router-link>
@@ -118,17 +78,17 @@
     </div>
   </div>
 </template>
-<script>
-export default {
-  name: "Carousel",
-  props: ["placeData"],
-  data() {
-    return {
-      placeDetail: this.$store.state.scenicSpotData || [],
-      fakeImage: "@/assets/image/ScenicSpotPicture.png",
-    };
-  },
-};
+<script setup lang="ts">
+import { DefineProps,withDefaults } from 'vue';
+import { ScenicSpotApi } from '@/types/api';
+
+interface Props{
+  placeData:ScenicSpotApi[]
+  isLoading:boolean
+}
+
+withDefaults(defineProps<Props>(),{})
+
 </script>
 <style lang="scss" scoped>
 @use "../assets/sass/breakpoints.scss";

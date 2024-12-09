@@ -12,8 +12,8 @@
       </div>
       <Serach />
     </div>
-    <div class="carousel" :class="{ skeleton: this.$store.state.isLoading }">
-      <Carousel :placeData="getScenicSpotCity" />
+    <div class="carousel">
+        <Carousel :placeData="test" :isLoading="getLoadingState" />
     </div>
     <div class="recent">
       <div>
@@ -108,6 +108,13 @@ export default defineComponent( {
     },
     getLoadingState(){
       return this.$store.state.isLoading
+    },
+    test() {
+      const scenicSpots = this.$store.getters.scenicSpotDataWithCity;
+      if (scenicSpots.length > 0) {
+        return scenicSpots.slice(0, 3);
+      }
+      return [];
     }
   },
 
