@@ -61,7 +61,7 @@ export default {
   createAxios,
   async getScenicSpotAPI() {
     const touristAPI= await createAxios()
-    return touristAPI.get('/ScenicSpot');
+    return touristAPI.get('/ScenicSpot?$top=1000');
     //
   },
   getActivitiesAPI() {
