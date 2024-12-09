@@ -13,7 +13,7 @@
       <Serach />
     </div>
     <div class="carousel">
-        <Carousel :placeData="test" :isLoading="getLoadingState" />
+        <Carousel :placeData="test" :isLoading="loadingState" />
     </div>
     <div class="recent">
       <div>
@@ -27,7 +27,7 @@
       </div>
       <div class="container">
         <Card
-          v-for="(data, index) in getScenicSpotCity"
+          v-for="(data, index) in scenicSpotCity"
           :key="index"
           :dataId='data.ScenicSpotID'
           :dataName="data.ScenicSpotName"
@@ -35,7 +35,7 @@
           :dataPicture="data.Picture.PictureUrl1"
           :dataStartTime="data.StartTime"
           :dataEndTime="data.EndTime"
-          :isLoading="getLoadingState"
+          :isLoading="loadingState"
         />
       </div>
     </div>
@@ -64,70 +64,41 @@
         </router-link>
       </div>
       <div class="recent_search">
-       <ScenicSpotCard v-for="data,index in getScenicSpotCity" :key="data.ScenicSpotID" :dataId='data.ScenicSpotID'
+       <ScenicSpotCard v-for="data,index in scenicSpotCity" :key="data.ScenicSpotID" :dataId='data.ScenicSpotID'
           :dataName="data.ScenicSpotName"
           :dataCity="data.City"
           :dataPicture="data.Picture.PictureUrl1"
           :dataStartTime="data.StartTime"
           :dataEndTime="data.EndTime"
-          :isLoading="getLoadingState" />
+          :isLoading="loadingState" />
       </div>
     </div>
   </div>
 </template>
 
-<script>
-import { defineComponent } from "vue";
+<script setup lang="ts">
+import { ref, computed, onMounted } from "vue";
 import Serach from "@/components/Serach.vue";
 import Card from "@/components/Card.vue";
 import Carousel from "@/components/Carousel.vue";
-import ScenicSpotCard from "@/components/ScenicSpotCard.vue"
+import ScenicSpotCard from "@/components/ScenicSpotCard.vue";
+import { useStore } from "vuex";
 
-export default defineComponent( {
-  name: "Home",
-  components: {
-    Serach,
-    // RestaurantCard,
-    Carousel,
-    ScenicSpotCard,
-    Card,
-  },
-  data() {
-    return {};
-  },
-  methods: {},
-  computed: {
-    filterActitivties() {
-      return this.$store.getters.withPictureActivities;
-    },
-    getScenicSpotCity() {
-      return this.$store.getters.scenicSpotDataWithCity;
-    },
-    getResturantCity() {
-      return this.$store.getters.restaurantDataWithCity;
-    },
-    getLoadingState(){
-      return this.$store.state.isLoading
-    },
-    test() {
-      const scenicSpots = this.$store.getters.scenicSpotDataWithCity;
-      if (scenicSpots.length > 0) {
-        return scenicSpots.slice(0, 3);
-      }
-      return [];
-    }
-  },
+const store = useStore();
 
-  async created() {
-    //todo 加入處理loading效果
-    try{
-      // await this.$store.dispatch("getActivitiesAPI");
-      await this.$store.dispatch("getScenicSpotAPI");
-      // await this.$store.dispatch("getRestaurantAPI");
-    }catch(e){
-      console.log(e);
-    }
-  },
+const loadingState = computed(() => store.state.isLoading);
+const scenicSpotCity = computed(() => store.getters.scenicSpotDataWithCity);
+const test = computed(() => {
+  const scenicSpots = store.getters.scenicSpotDataWithCity;
+  return scenicSpots.length > 0 ? scenicSpots.slice(0, 3) : [];
+});
+
+onMounted(async () => {
+  try {
+    await store.dispatch("getScenicSpotAPI");
+  } catch (e) {
+    console.log(e);
+  }
 });
 </script>
 <style lang="scss" scoped>
