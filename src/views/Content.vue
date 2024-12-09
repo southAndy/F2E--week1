@@ -4,7 +4,6 @@
     <div class="content_image">
       <img :src="filterEvent?.Picture?.PictureUrl1" />
     </div>
-    <!-- <CarouselContent :placeData="filterEvent" /> -->
     <h2>
       {{
         filterEvent?.ActivityName ||
@@ -90,7 +89,6 @@
 </template>
 <script>
 import Breadcrumb from "../components/Breadcrumb.vue";
-// import CarouselContent from "@/components/CarouselContent.vue";
 import Category from "../components/Category.vue";
 
 import API from "@/service/getApi";
@@ -107,8 +105,6 @@ export default {
   },
   components: {
     Breadcrumb,
-    // Carousel,
-    // CarouselContent,
     Category,
   },
   computed: {
