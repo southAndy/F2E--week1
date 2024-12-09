@@ -4,34 +4,38 @@
     :to="{
       name: 'Content',
       params: {
-        city: scenicSpotData?.City,
-        id: scenicSpotData?.ScenicSpotID,
-        name: scenicSpotData?.ScenicSpotName,
+        city: dataCity,
+        id: dataId,
+        name: dataName,
       },
     }"
   >
     <div
       class="activities_imagebox"
-      :class="{ skeleton: this.$store.state.isLoading }"
+      :class="{ skeleton: isLoading }"
     >
-      <img :src="scenicSpotData.Picture.PictureUrl1" alt="" />
+      <img :src="dataPicture" alt="" />
     </div>
     <h4 class="activities_title">
-      {{ scenicSpotData.ScenicSpotName }}
+      {{ dataName }}
     </h4>
-    <span class="activities_location">{{ scenicSpotData.City }}</span>
+    <span class="activities_location">{{ dataCity }}</span>
   </router-link>
 </template>
-<script>
-export default {
-  name: "ScenicSpotCard",
-  props: ["scenicSpotAPI"],
-  data() {
-    return {
-      scenicSpotData: this.scenicSpotAPI,
-    };
-  },
-};
+<script setup lang="ts">
+import { DefineProps } from 'vue';
+
+interface Props {
+  dataId:string,
+  dataName:string,
+  dataCity:string,
+  dataPicture:string | undefined
+  dataStartTime:string | undefined,
+  dataEndTime:string | undefined
+  isLoading:boolean
+}
+
+defineProps<Props>()
 </script>
 <style lang="scss" scoped>
 @use "../assets/sass/loading.scss";

@@ -25,7 +25,6 @@
           <img src="@/assets/image/Vector.svg" alt="方向鍵>" />
         </router-link>
       </div>
-      <!-- fix -->
       <div class="container">
         <Card
           v-for="(data, index) in getScenicSpotCity"
@@ -53,11 +52,7 @@
         </router-link>
       </div>
       <div class="recent_search">
-        <!-- <ScenicSpotCard
-          v-for="data in getScenicSpotCity"
-          :key="data"
-          :scenicSpotAPI="data"
-        /> -->
+
       </div>
     </div>
     <div class="recent">
@@ -69,11 +64,13 @@
         </router-link>
       </div>
       <div class="recent_search">
-        <!-- <RestaurantCard
-          v-for="datas in getResturantCity"
-          :key="datas"
-          :resturantData="datas"
-        /> -->
+       <ScenicSpotCard v-for="data,index in getScenicSpotCity" :key="data.ScenicSpotID" :dataId='data.ScenicSpotID'
+          :dataName="data.ScenicSpotName"
+          :dataCity="data.City"
+          :dataPicture="data.Picture.PictureUrl1"
+          :dataStartTime="data.StartTime"
+          :dataEndTime="data.EndTime"
+          :isLoading="getLoadingState" />
       </div>
     </div>
   </div>
@@ -83,15 +80,14 @@
 import { defineComponent } from "vue";
 import Serach from "@/components/Serach.vue";
 import Card from "@/components/Card.vue";
-import ScenicSpotCard from "@/components/ScenicSpotCard.vue";
-import RestaurantCard from "@/components/RestaurantCard.vue";
 import Carousel from "@/components/Carousel.vue";
+import ScenicSpotCard from "@/components/ScenicSpotCard.vue"
 
 export default defineComponent( {
   name: "Home",
   components: {
     Serach,
-    RestaurantCard,
+    // RestaurantCard,
     Carousel,
     ScenicSpotCard,
     Card,

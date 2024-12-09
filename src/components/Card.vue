@@ -91,7 +91,6 @@ const convertEndTime = computed(() => {
     width: 45%;
     background-color: #f9f9f9;
     margin-right: 30px;
-    // border: 1px solid #646464;
     border-radius: 16px;
 
     &:hover {
