@@ -1,19 +1,25 @@
 <template>
-  <div class="topic">
-    <p class="topic_name">{{ festivalList.name }}</p>
+  <div class="topic" v-if="list">
+    <p class="topic_name">{{ list.name }}</p>
     <div>
-      <img class="topic_image" :src="festivalList.image" alt="cool" />
+      <img class="topic_image" :src="list.image" alt="cool" />
     </div>
   </div>
 </template>
-<script>
-export default {
-  name: "Topic",
-  props: ["festivalList"],
-  data() {
-    return {};
-  },
-};
+<script setup lang="ts">
+import { DefineProps,withDefaults } from 'vue';
+
+interface List {
+  name:string
+  image:string
+}
+
+interface Props {
+  list:List
+}
+
+withDefaults(defineProps<Props>(),{})
+
 </script>
 <style lang="scss" scoped>
 @use "../assets/sass/breakpoints.scss";
@@ -23,7 +29,6 @@ export default {
   background: black;
   height: 80px;
   width: 100%;
-  // width: 160px;
 
   text-align: center;
   border-radius: 40px;

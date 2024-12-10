@@ -8,7 +8,7 @@
         <Topic
           v-for="topic in getFestivalNames"
           :key="topic"
-          :festivalList="topic"
+          :list="topic"
           class="topic"
           @click="getDataByClass(topic.name)"
         />
@@ -18,10 +18,9 @@
 </template>
 <script>
 import Topic from "@/components/Topic.vue";
-import Button from "@/components/Button.vue";
+import Button from "@/components/Selector.vue";
 import Breadcrumb from "@/components/Breadcrumb.vue";
 
-// import API from "@/service/getAPI";
 
 export default {
   name: "Festival",
