@@ -1,16 +1,28 @@
 import { createStore } from "vuex";
 import API from "@/service/getAPI";
+import { ApiResponse,RestaurantApi,ScenicSpotApi,ActivitiesApi } from "@/types/api.js";
 
-import { restaurantDatas } from "./restaurant/index.js";
-import { festivalDatas } from "./festival/index.js";
-import { activitiesDatas } from "./activities/index.js";
+// import { restaurantDatas } from "./restaurant/index.js";
+// import { festivalDatas } from "./festival/index.js";
+// import { activitiesDatas } from "./activities/index.js";
+
+
+interface State {
+  resturantData: RestaurantApi[]; //餐廳資料
+  activitiesData: ActivitiesApi[]; //活動資料
+  scenicSpotData: ScenicSpotApi[]; //景點資料
+  isLoading: boolean;
+  accessToken: string;
+  
+}
+
 export default createStore({
-  state: {
-    apiData: null,
-    resturantData: null,
+  state:<State> {
+    resturantData: [],
     scenicSpotData: [],
     isLoading: true,
     accessToken:"",
+    activitiesData: []
   },
   getters: {
     getAPI(state) {
@@ -18,8 +30,7 @@ export default createStore({
       return state.isLoading;
     },
     withPictureActivities(state) {
-      // const arrAPI = Array.from(state.activitiesData);
-      if(state.length>0){
+      if(state.activitiesData.length > 0){
         return state?.activitiesData?.filter(
           (data) => data.Picture.PictureUrl1 != undefined
         );
@@ -32,47 +43,33 @@ export default createStore({
       return arrAPI.filter((data) => data.City != undefined);
     },
     scenicSpotDataWithCity(state) {
-      let data = state.scenicSpotData || [];
+      let data = state.scenicSpotData ;
       return data.filter((data) => data.City != undefined);
     },
     restaurantDataWithCity(state) {
       let data = state.resturantData || [];
       return data.filter((data) => data.City != undefined);
     },
-    //? (module) activities
     filterRepeatCity(state) {
       //[]:等待3種API資料回來前避免報錯
       let data =
-        state?.activitiesData ||
+        // state?.activitiesData ||
         state?.scenicSpotData ||
         state?.resturantData ||
         [];
       console.log("test:收到什麼資料", data);
-      //todo:只保留不重複的縣市名稱
-      //todo：map會回傳全部的資料（包括undefined的資料
       let cityDatas = data?.map((data) => {
         if (data.City !== undefined) {
           return data.City;
         }
       });
       let temp = cityDatas.filter((city) => city !== undefined);
-      console.log("test:filtered", temp);
-      console.log(new Set(temp));
       return new Set(temp);
-      //篩選掉重複的值
-      // let noRepeatCities = new Set(cityDatas);
-      //!indexOf只能判別純陣列內容（物件型別不能）
-      // let filterRepeat = cityDatas.filter(
-      //   (city, index, array) => array.indexOf(city) === index
-      // );
-      // console.log("after filtered", filterRepeat);
-      // console.log(filterRepeat.splice(0, 1));
-      // return filterRepeat.splice(0, 1);
     },
   },
   mutations: {
     ensureActivitiesAPI(state, payload) {
-      state.apiData = payload;
+      state.activitiesData = payload;
     },
     setToken(state,payload){
       state.accessToken = payload
@@ -81,14 +78,12 @@ export default createStore({
       state.isLoading = payload
     },
     ensureRestaurantAPI(state, apiData) {
-      // console.log("mutation接收到資料：", apiData != null, apiData);
       setTimeout(() => {
         state.isLoading = false;
       }, 3000);
       state.resturantData = apiData;
     },
     ensureScenicSpotAPI(state, apiData) {
-      // console.log("mutation接收到資料：", apiData != null, apiData);
       setTimeout(() => {
         state.isLoading = false;
       }, 3000);
@@ -102,9 +97,8 @@ export default createStore({
         let apiData = await API.getActivitiesAPI().then((response) => {
           return response.data;
         });
-
-        commit("ensureActivitiesAPI", apiData);
         commit('setLoading',false)
+        commit("ensureActivitiesAPI", apiData);
       }catch(e){
         console.log(e);
 
@@ -114,28 +108,21 @@ export default createStore({
       let apiData = await API.getRestaurantAPI().then((response) => {
         return response.data;
       });
-      // console.log("action接收到資料：", apiData);
       //呼叫mutation修改state
       commit("ensureRestaurantAPI", apiData);
       return state.resturantData;
     },
     async getScenicSpotAPI({ commit }) {
       let apiData = await API.getScenicSpotAPI().then((res)=>{
-        console.log(res);
         return res.data
       })
-      // let apiData = await API.cgetScenicSpotAPI().then((response) => {
-      //   return response.data;
-      // });
-      // console.log("action接收到資料：", apiData);
       //呼叫mutation修改state
       commit("ensureScenicSpotAPI", apiData);
-      // return state.scenicSpotData;
     },
   },
-  modules: {
-    restaurantDatas,
-    festivalDatas,
-    activitiesDatas,
-  },
+  // modules: {
+  //   restaurantDatas,
+  //   festivalDatas,
+  //   activitiesDatas,
+  // },
 });
