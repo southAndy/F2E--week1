@@ -5,6 +5,7 @@
       "@/*": ["src/*"]
     },
     "target": "ESNext",
+    "allowJs": true,
     "module": "ESNext",
     "moduleResolution": "Node",
     "strict": true,
@@ -17,6 +18,6 @@
     "useDefineForClassFields": true,
     "lib": ["ESNext", "DOM"]
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "src/service/getApi.js"],
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "src/service/getAPI.js", "src/store/activities/index.ts", "src/main.js"],
   "exclude": ["node_modules"]
 }
