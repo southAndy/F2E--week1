@@ -11,7 +11,7 @@ const routes = [
   {
     path: "/scenicSpot",
     name: "ScenicSpot",
-    component: () => import("../views/Festival.vue"),
+    component: () => import("../views/ScenicSpot.vue"),
   },
   {
     path: "/activities",
