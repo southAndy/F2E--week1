@@ -12,6 +12,8 @@ interface ApiResponse {
     UpdateTime: string,
     ZipCode:string
     City:string //to confirm
+    StartTime:string
+    EndTime:string
 
 }
 
@@ -37,7 +39,7 @@ interface ApiDataPosition {
     GeoHash:string
 }
 interface ApiImage {
-    PictureUrl1?:string,
+    PictureUrl1:string | null,
     PictureDescription1?:string,
     PictureUrl2?:string,
     PictureDescription2?:string,
