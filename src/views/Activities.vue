@@ -18,10 +18,10 @@
 </template>
 <script>
 import Topic from "@/components/Topic.vue";
-import Button from "@/components/Button.vue";
+import Button from "@/components/Selector.vue";
 import Breadcrumb from "@/components/Breadcrumb.vue";
 
-import API from "@/service/getApi.js";
+import API from "@/service/getAPI.ts";
 
 export default {
   name: "Activities",
@@ -39,7 +39,7 @@ export default {
   },
   computed: {
     getActivitiyNames() {
-      return this.$store.state.activitiesDatas.activitiesData;
+      return this.$store.state.activitiesData;
     },
     getRouter() {
       return this.$router.query;
