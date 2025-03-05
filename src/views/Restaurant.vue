@@ -2,7 +2,6 @@
   <div class="restaurant">
     <Breadcrumb />
     <Button @getSelected="sendSelectedDatas" />
-    <!-- <Swiper /> -->
     <div class="serach">
       <div class="topic_container">
         <h3 class="serach_theme">熱門主題</h3>
@@ -19,10 +18,10 @@
 </template>
 <script>
 import Topic from "@/components/Topic.vue";
-import Button from "@/components/Button.vue";
+import Button from "@/components/Selector.vue";
 import Breadcrumb from "@/components/Breadcrumb.vue";
 // import Swiper from "@/components/Swiper.vue";
-import API from "@/service/getApi";
+import API from "@/service/getAPI";
 export default {
   name: "Restaurant",
   components: {
@@ -39,7 +38,7 @@ export default {
   computed: {
     getRestaurantName() {
       //取得餐飲的資料
-      return this.$store.state.restaurantDatas.restaurantData;
+      return this.$store.state.restaurantData;
     },
   },
   methods: {

@@ -91,7 +91,7 @@
 import Breadcrumb from "../components/Breadcrumb.vue";
 import Category from "../components/Category.vue";
 
-import API from "@/service/getApi";
+import API from "@/service/getAPI";
 
 export default {
   name: "Content",

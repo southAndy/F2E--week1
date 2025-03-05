@@ -17,7 +17,7 @@
 </template>
 <script setup lang="ts">
 import { ref } from 'vue';
-import API from "@/service/getApi.js";
+import API from "@/service/getAPI.js";
 import { useRouter } from 'vue-router';
 
 // 定義狀態的類型
