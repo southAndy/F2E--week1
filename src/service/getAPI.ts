@@ -1,6 +1,6 @@
 import axios, { AxiosError, AxiosInstance, AxiosResponse } from "axios";
 import store from "@/store/index.ts"
-import { ScenicSpotApi } from "@/types/api";
+import { ActivitiesApi, ScenicSpotApi,RestaurantApi } from "@/types/api";
 import auth from "@/utils/auth.ts";
 
 
@@ -46,7 +46,6 @@ export default {
     const touristAPI = await createAxios();
     return touristAPI.get("/Restaurant?%24top=500&%24format=JSON");
   },
-  //todo 重新設計觸發API函式：https://motc-ptx-api-documentation.gitbook.io/motc-ptx-api-documentation/api-te-se/odata
   scenicSpot: {
     async getDataByClass(className = "") {
       const touristAPI = await createAxios();
@@ -69,6 +68,10 @@ export default {
     },
   },
   activities: {
+    async getActivitiesAPI(): Promise<AxiosResponse<ActivitiesApi>> {
+      const touristAPI = await createAxios();
+      return touristAPI.get("/Activity?%24top=500&%24format=JSON");
+    },
     async getDataByClass(className = "") {
       const touristAPI = await createAxios();
       let ASCIIClassName = encodeURI(className);

@@ -39,7 +39,7 @@ interface ApiDataPosition {
     GeoHash:string
 }
 interface ApiImage {
-    PictureUrl1:string | null,
+    PictureUrl1:string,
     PictureDescription1?:string,
     PictureUrl2?:string,
     PictureDescription2?:string,
